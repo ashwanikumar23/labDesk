@@ -39,7 +39,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function PatientScreen() {
+export default function PatientScreen(props:any) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -55,7 +55,7 @@ export default function PatientScreen() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <PatientForm />
+        <PatientForm getData={props.getData} />
       </CustomTabPanel>
     </Box>
   );

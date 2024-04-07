@@ -36,8 +36,8 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     padding: theme.spacing(1),
   },
 }));
-function PatientForm() {
-  const [Patient, setPatient] = React.useState({});
+function PatientForm(props:any) {
+  const [Patient, setPatient] = React.useState<any>({});
   const [Name , setName ] = React.useState('');
   const [DATE , setDate ] = React.useState<string>(formatDate(new Date));
   //setDate(formatDate(new Date));
@@ -72,6 +72,7 @@ function PatientForm() {
   const [  CBC, setCBC] = React.useState({});
   const [  STOOL, setSTOOL] = React.useState({});
 
+
   function formatDate(dateObj:Date) {
     const year = dateObj.getFullYear();
     const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // Adding 1 because getMonth returns zero-based index
@@ -79,47 +80,77 @@ function PatientForm() {
     return `${day}-${month}-${year}`;
   }
   function save_Print(){
-    setPatient(prevState => {
-      if (Object.keys(prevState).length === 0 && prevState.constructor === Object) {
+    debugger
+    // setPatient(prevState => {
+    //   if (Object.keys(prevState).length === 0 && prevState.constructor === Object) {
         
-        const uniqueId = generateUniqueId();
-        return {
-          ...prevState,
-          id: uniqueId,
-          'DATE': DATE,
-          'RecivedDate':ReciveData,
-          'Time':time,
-          'Lab NO':LabNO,
-          'M_no':M_no,
-          'Age':Age,
-          'Gender':Gender,
-          'Materials':Materials,
-          'referredby':referredby,
-          "Address":Address,
-          'Preg Test':PREG,
-          'Iron Test':IRON,
-          'Drugs Test':DRUGABUSE
+    //     const uniqueId = generateUniqueId();
+    //     return {
+          
+    //       id: uniqueId,
+    //       'DATE': DATE,
+    //       'Name':Name,
+    //       'RecivedDate':ReciveData,
+    //       'Time':time,
+    //       'Lab NO':LabNO,
+    //       'M_no':M_no,
+    //       'Age':Age,
+    //       'Gender':Gender,
+    //       'Materials':Materials,
+    //       'referredby':referredby,
+    //       "Address":Address,
+    //       'Preg Test':PREG,
+    //       'Iron Test':IRON,
+    //       'Drugs Test':DRUGABUSE
            
-        };
-      } else {
-        return {
-          ...prevState,
-          'DATE': DATE,
-          'RecivedDate':ReciveData,
-          'Time':time,
-          'Lab NO':LabNO,
-          'M_no':M_no,
-          'Age':Age,
-          'Gender':Gender,
-          'Materials':Materials,
-          'referredby':referredby,
-          "Address":Address,
-          'Preg Test':PREG,
-          'Iron Test':IRON,
-          'Drugs Test':DRUGABUSE
-        };
+    //     };
+    //   } else {
+    //     return {
+          
+    //       'DATE': DATE,
+    //       'RecivedDate':ReciveData,
+    //       'Time':time,
+    //       'Name':Name,
+    //       'Lab NO':LabNO,
+    //       'M_no':M_no,
+    //       'Age':Age,
+    //       'Gender':Gender,
+    //       'Materials':Materials,
+    //       'referredby':referredby,
+    //       "Address":Address,
+    //       'Preg Test':PREG,
+    //       'Iron Test':IRON,
+    //       'Drugs Test':DRUGABUSE
+    //     };
+    //   }
+    // });
+    setPatient((prevState: { constructor?: any; }) => {
+      let newState:any = { ...prevState }; // Make a copy of the previous state
+    
+      if (Object.keys(prevState).length === 0 && prevState.constructor === Object) {
+        const uniqueId = generateUniqueId();
+        newState.id = uniqueId; // Set the ID if it's the first time setting state
       }
+    
+      // Set other properties
+      newState['DATE'] = DATE;
+      newState['Name'] = Name;
+      newState['RecivedDate'] = ReciveData;
+      newState['Time'] = time;
+      newState['Lab NO'] = LabNO;
+      newState['M_no'] = M_no;
+      newState['Age'] = Age;
+      newState['Gender'] = Gender;
+      newState['Materials'] = Materials;
+      newState['referredby'] = referredby;
+      newState['Address'] = Address;
+      newState['Preg Test'] = PREG;
+      newState['Iron Test'] = IRON;
+      newState['Drugs Test'] = DRUGABUSE;
+    
+      return newState; // Return the updated state
     });
+    
     console.log("patient",Patient)
   }
 
@@ -135,7 +166,7 @@ function DrugsTestClick(IRONData:any){
   
   setDRUGABUSE(IRONData);
 }
-  
+
   
 
   function generateUniqueId() {
@@ -521,7 +552,7 @@ function DrugsTestClick(IRONData:any){
         <Button className='btn' variant="contained" onClick={handleHBA1c2ClickOpen}>HB A1c 2</Button>
       </div>
       <div>
-        <Footer  save={save_Print} Patient={Patient}/>
+        <Footer  save={save_Print} getData={props.getData}  Patient={Patient}/>
       </div>
 
       <Dialog

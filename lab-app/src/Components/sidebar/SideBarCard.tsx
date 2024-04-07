@@ -34,12 +34,32 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   }),
 }));
 
-export default function SideBarCard() {
+export default function SideBarCard(props:any) {
+  console.log("hello",props.GetData);
   const [expanded, setExpanded] = React.useState(false);
-
+  const [PatientArray, setPatientArray] = React.useState<any[]>([]);
+  console.log("PatientArray",PatientArray);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+// console.log("PatientArray",PatientArray);
+  // React.useEffect(()=>{
+  //   debugger
+  //   //const P = localStorage.getItem('Patient');
+  //   console.log(PatientArray);
+  //   console.log("PatientArray",PatientArray);
+  //   props.GetData.forEach((ele:any) => {
+  //     if( Object.keys(ele).length !== 0){
+  //       PatientArray.push(ele);
+         
+  //     }
+  // });
+
+    // if(P !== null){
+    //   PatientArray=JSON.parse( P );
+    // }
+  // },[])
 
   return (
     <Card sx={{width:"100%", maxWidth: "500px",background:"#ececf8",height:"100%", maxHeight:"590px" }}>
@@ -70,9 +90,9 @@ export default function SideBarCard() {
             position: 'relative',
             overflow: 'auto',
             maxHeight: '350px', }}>
-      {[1, 2, 3,4,5,6,7,8,9].map((value) => (<>
+      {PatientArray.map((value:any) => (<>
         <ListItem
-          key={value}
+          key={value.id}
           disableGutters
           secondaryAction={
             <IconButton aria-label="comment">
@@ -81,7 +101,7 @@ export default function SideBarCard() {
             </IconButton>
           }
         >
-          <ListItemText primary={`Ashwani kumar no ${value}`} />
+          <ListItemText primary={`Ashwani kumar no ${value.Name}`} />
           
         </ListItem>
         <Divider />
