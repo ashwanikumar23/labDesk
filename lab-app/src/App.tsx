@@ -13,6 +13,7 @@ const theme = createTheme({
 });
 function App() {
   const [  GetData, setGetData] = React.useState<any[]>([]);
+  const [  editPatient, setEditPatient] = React.useState<any>({});
   function getData(){
     const P = localStorage.getItem('Patient');
     if(P!== null && P!==""){
@@ -23,6 +24,12 @@ function App() {
             }
         }
       }
+  }
+  //let editPatient:any;
+  function EditCall(id:any){
+    debugger
+    let filter = GetData.filter((obj:any) => obj.id === id);
+    setEditPatient(filter[0]);
   }
   useEffect(()=>{
     const P = localStorage.getItem('Patient');
@@ -40,10 +47,10 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
       <div className='Enter-Area'>
-      <PatientScreen getData={getData} />
+      <PatientScreen getData={getData} editPatient={editPatient} />
       </div>
       <div className='side-Area'>
-        <SideBarCard GetData={GetData} />
+        <SideBarCard GetData={GetData} EditCall={EditCall}/>
       </div >
         
       </div>

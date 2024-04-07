@@ -10,6 +10,8 @@ function Footer(props:any){
     let data:any[] =[]
     console.log("footer",props.Patient);
     function saveData(){
+        debugger
+        props.save();
         const P = localStorage.getItem('Patient');
         if(P!== null && P!==""){
             let PP=JSON.parse( P );
@@ -58,6 +60,11 @@ function Footer(props:any){
         }else{
             localStorage.setItem('Patient', JSON.stringify([props.Patient]));
         }
+        }else{
+            if(Object.values(props.Patient).length !== 0){
+                localStorage.setItem('Patient', JSON.stringify([props.Patient]));
+
+            }
         }
         props.getData();
     }
@@ -65,7 +72,7 @@ function Footer(props:any){
     return(
         <>
         <div className='Footer'>
-        <Button variant="outlined" onClick={()=>{props.save();saveData();}}  startIcon={<SaveIcon />}>
+        <Button variant="outlined" onClick={()=>{saveData();}}  startIcon={<SaveIcon />}>
         SAVE
         </Button>
         <Button variant="contained" startIcon={<PrintIcon />}>

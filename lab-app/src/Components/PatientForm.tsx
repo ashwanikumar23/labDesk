@@ -37,6 +37,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 function PatientForm(props:any) {
+
   const [Patient, setPatient] = React.useState<any>({});
   const [Name , setName ] = React.useState('');
   const [DATE , setDate ] = React.useState<string>(formatDate(new Date));
@@ -72,6 +73,10 @@ function PatientForm(props:any) {
   const [  CBC, setCBC] = React.useState({});
   const [  STOOL, setSTOOL] = React.useState({});
 
+  // if(Object.keys(props.editPatient).length !==0){
+  //   setName(props.editPatient.Name.toString());
+  // }
+  // console.log(props.editPatient.Name);
 
   function formatDate(dateObj:Date) {
     const year = dateObj.getFullYear();
@@ -80,50 +85,7 @@ function PatientForm(props:any) {
     return `${day}-${month}-${year}`;
   }
   function save_Print(){
-    debugger
-    // setPatient(prevState => {
-    //   if (Object.keys(prevState).length === 0 && prevState.constructor === Object) {
-        
-    //     const uniqueId = generateUniqueId();
-    //     return {
-          
-    //       id: uniqueId,
-    //       'DATE': DATE,
-    //       'Name':Name,
-    //       'RecivedDate':ReciveData,
-    //       'Time':time,
-    //       'Lab NO':LabNO,
-    //       'M_no':M_no,
-    //       'Age':Age,
-    //       'Gender':Gender,
-    //       'Materials':Materials,
-    //       'referredby':referredby,
-    //       "Address":Address,
-    //       'Preg Test':PREG,
-    //       'Iron Test':IRON,
-    //       'Drugs Test':DRUGABUSE
-           
-    //     };
-    //   } else {
-    //     return {
-          
-    //       'DATE': DATE,
-    //       'RecivedDate':ReciveData,
-    //       'Time':time,
-    //       'Name':Name,
-    //       'Lab NO':LabNO,
-    //       'M_no':M_no,
-    //       'Age':Age,
-    //       'Gender':Gender,
-    //       'Materials':Materials,
-    //       'referredby':referredby,
-    //       "Address":Address,
-    //       'Preg Test':PREG,
-    //       'Iron Test':IRON,
-    //       'Drugs Test':DRUGABUSE
-    //     };
-    //   }
-    // });
+  
     setPatient((prevState: { constructor?: any; }) => {
       let newState:any = { ...prevState }; // Make a copy of the previous state
     
@@ -134,18 +96,18 @@ function PatientForm(props:any) {
     
       // Set other properties
       newState['DATE'] = DATE;
-      newState['Name'] = Name;
+      newState['Name'] = (Name!==''?Name:(props.editPatient.Name?props.editPatient.Name:'Name'));
       newState['RecivedDate'] = ReciveData;
-      newState['Time'] = time;
-      newState['Lab NO'] = LabNO;
-      newState['M_no'] = M_no;
-      newState['Age'] = Age;
-      newState['Gender'] = Gender;
-      newState['Materials'] = Materials;
-      newState['referredby'] = referredby;
-      newState['Address'] = Address;
-      newState['Preg Test'] = PREG;
-      newState['Iron Test'] = IRON;
+      newState['Time'] = (time!==''?time:(props.editPatient.time?props.editPatient.time:'time'));
+      newState['Lab NO'] = (LabNO!==''?LabNO:(props.editPatient.LabNO?props.editPatient.LabNO:'LabNO'));
+      newState['M_no'] =  (M_no!==''?M_no:(props.editPatient.M_no?props.editPatient.M_no:'888888888'));
+      newState['Age'] =  (Age!==''?Age:(props.editPatient.Age?props.editPatient.Age:'23'));
+      newState['Gender'] =  (Gender!==''?Gender:(props.editPatient.Gender?props.editPatient.Gender:'23'));
+      newState['Materials'] = (Materials!==''?Materials:(props.editPatient.Materials?props.editPatient.Materials:'23'));
+      newState['referredby'] =  (referredby!==''?referredby:(props.editPatient.referredby?props.editPatient.referredby:'23'));
+      newState['Address'] =  (Address!==''?Address:(props.editPatient.Address?props.editPatient.Address:'23'));
+      // newState['Preg Test'] =  (Object.keys(PREG).length!==0?PREG:(Object.keys(props.editPatient['Preg Tes']).length!==0?props.editPatient['Preg Tes']:{}));
+      // newState['Iron Test'] =  (Object.keys(IRON).length!==0?IRON:(Object.keys(props.editPatient['Iron Test']).length!==0?props.editPatient['Iron Test']:{}));
       newState['Drugs Test'] = DRUGABUSE;
     
       return newState; // Return the updated state
@@ -350,7 +312,7 @@ function DrugsTestClick(IRONData:any){
             id="outlined-size-small"
             type='date'
             defaultValue={"02-04-2024"}
-            value={DATE|| formatDate(new Date)}
+            value={DATE}
             size="small"
             onChange={(e)=>{setDate(e.target.value)}}
           />
@@ -391,7 +353,7 @@ function DrugsTestClick(IRONData:any){
           <TextField
             label="TIME"
             id="outlined-size-small"
-            value={time}
+            value={props.editPatient.time?props.editPatient.time:time}
             onChange={(e)=>{setTime(e.target.value)}}
             size="small"
           />
@@ -405,7 +367,7 @@ function DrugsTestClick(IRONData:any){
           <TextField
             label="PATIENT NAME"
             id="outlined-size-small"
-            value={Name}
+            value={props.editPatient.Name?props.editPatient.Name:Name}
             onChange={(e)=>{setName(e.target.value)}}
             size="small"
           />
@@ -418,7 +380,7 @@ function DrugsTestClick(IRONData:any){
               style={{'background':'#ececf8'}}
               className='Gender'
               id="demo-select-small"
-              value={Gender}
+              value={ props.editPatient.Gender?props.editPatient.Gender:Gender}
               label="GENDER"
               onChange={(e)=>{setGender(e.target.value)}}
             >
@@ -441,7 +403,7 @@ function DrugsTestClick(IRONData:any){
           <TextField
             label="AGE"
             id="outlined-size-small"
-            value={Age}
+            value={ props.editPatient.Age?props.editPatient.Age:Age}
             onChange={(e)=>{setAge(e.target.value)}}
             size="small"
           />
@@ -455,7 +417,7 @@ function DrugsTestClick(IRONData:any){
           <TextField
             label="Addres"
             id="outlined-size-small"
-            value={Address}
+            value={ props.editPatient.Address?props.editPatient.Address:Address}
             onChange={(e)=>{setAddress(e.target.value)}}
             size="small"
           />
@@ -464,7 +426,7 @@ function DrugsTestClick(IRONData:any){
           <TextField
             label="Mobile"
             id="outlined-size-small"
-            value={M_no}
+            value={ props.editPatient.M_no?props.editPatient.M_no:M_no}
             onChange={(e)=>{setM_no(e.target.value)}}
             size="small"
           />
@@ -480,7 +442,7 @@ function DrugsTestClick(IRONData:any){
             <Select
               labelId="demo-select-small-label"
               id="demo-select-small"
-              value={Materials}
+              value={ props.editPatient.Materials?props.editPatient.Materials:Materials}
               label="Materials"
               className='Materials'
               onChange={handleChange}
@@ -500,7 +462,7 @@ function DrugsTestClick(IRONData:any){
             <Select
               labelId="demo-select-small-label"
               id="demo-select-small"
-              value={referredby}
+              value={ props.editPatient.referredby?props.editPatient.referredby:referredby}
               label="REFERRED BY"
               className='REFERRED'
               onChange={handleReferreChange}

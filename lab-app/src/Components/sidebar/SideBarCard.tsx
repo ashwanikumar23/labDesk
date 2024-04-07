@@ -80,7 +80,7 @@ export default function SideBarCard(props:any) {
           key={value.id}
           disableGutters
           secondaryAction={
-            <IconButton aria-label="comment">
+            <IconButton aria-label="comment" onClick={()=>{props.EditCall(value.id)}}>
               <EditIcon />
               
             </IconButton>

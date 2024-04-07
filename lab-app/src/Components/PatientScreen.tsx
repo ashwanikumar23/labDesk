@@ -55,7 +55,7 @@ export default function PatientScreen(props:any) {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <PatientForm getData={props.getData} />
+        <PatientForm getData={props.getData} editPatient={props.editPatient} />
       </CustomTabPanel>
     </Box>
   );
