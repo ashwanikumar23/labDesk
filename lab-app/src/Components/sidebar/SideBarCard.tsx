@@ -37,29 +37,14 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 export default function SideBarCard(props:any) {
   console.log("hello",props.GetData);
   const [expanded, setExpanded] = React.useState(false);
-  const [PatientArray, setPatientArray] = React.useState<any[]>([]);
-  console.log("PatientArray",PatientArray);
+  //const [PatientArray, setPatientArray] = React.useState<any[]>([]);
+  
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
-// console.log("PatientArray",PatientArray);
-  // React.useEffect(()=>{
-  //   debugger
-  //   //const P = localStorage.getItem('Patient');
-  //   console.log(PatientArray);
-  //   console.log("PatientArray",PatientArray);
-  //   props.GetData.forEach((ele:any) => {
-  //     if( Object.keys(ele).length !== 0){
-  //       PatientArray.push(ele);
-         
-  //     }
-  // });
-
-    // if(P !== null){
-    //   PatientArray=JSON.parse( P );
-    // }
-  // },[])
+  const nonEmptyArray = props.GetData.filter((obj:any) => Object.keys(obj).length !== 0);
+  
+//console.log("PatientArray",PatientArray);
 
   return (
     <Card sx={{width:"100%", maxWidth: "500px",background:"#ececf8",height:"100%", maxHeight:"590px" }}>
@@ -90,7 +75,7 @@ export default function SideBarCard(props:any) {
             position: 'relative',
             overflow: 'auto',
             maxHeight: '350px', }}>
-      {PatientArray.map((value:any) => (<>
+      {[...nonEmptyArray].map((value:any) => (<>
         <ListItem
           key={value.id}
           disableGutters
@@ -101,7 +86,7 @@ export default function SideBarCard(props:any) {
             </IconButton>
           }
         >
-          <ListItemText primary={`Ashwani kumar no ${value.Name}`} />
+          <ListItemText primary={`${value.Name}`} />
           
         </ListItem>
         <Divider />
