@@ -17,6 +17,7 @@ import './layout.css';
 import PatientList from './PatientList';
 
 const { Header, Content, Footer, Sider } = Layout;
+const { Title } = Typography;
 
 const items: MenuProps['items'] = [
   UserOutlined,
@@ -33,7 +34,6 @@ const items: MenuProps['items'] = [
   label: `nav ${index + 1}`,
 }));
 
-const { Title } = Typography;
 const DashBoard: React.FC = () => {
     // form use state 
     const [Dr,setDr]=useState([{
@@ -98,7 +98,10 @@ const DashBoard: React.FC = () => {
         {/* <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} /> */}
       </Sider>
       <Layout style={{ marginLeft: 200 }}>
-        {/* <Header style={{ padding: 0, background: colorBgContainer }} /> */}
+        {/* <Header style={{ padding: 0, background: colorBgContainer }} >
+        <div style={{padding:'3px'}}>Patient screen</div>
+        </Header> */}
+
         <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
           <div
             style={{
@@ -106,10 +109,9 @@ const DashBoard: React.FC = () => {
               textAlign: 'center',
               background: colorBgContainer,
               borderRadius: borderRadiusLG,
-              height: '90vh'
+              height: '88vh'
             }}
           >
-            <p>long content</p>
             <HomeFormAndDialog />
            
           </div>

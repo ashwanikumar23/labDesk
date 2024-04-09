@@ -13,8 +13,12 @@ import {
     TimePicker,
     TimePickerProps,
     TreeSelect,
+    Typography,
 } from 'antd';
 import dayjs from 'dayjs';
+import PregnancyModal from './Modal/PregnancyModal';
+import ModalGrid from './Modal/ModalGrid';
+
 
 type SizeType = Parameters<typeof Form>[0]['size'];
 const baseStyle: React.CSSProperties = {
@@ -22,6 +26,9 @@ const baseStyle: React.CSSProperties = {
 };
 const baseStyle2: React.CSSProperties = {
     width: '25%',
+};
+const baseStyle3: React.CSSProperties = {
+    width: '16%',
 };
 const HomeFormAndDialog: React.FC = () => {
     const [componentSize, setComponentSize] = useState<SizeType | 'default'>('default');
@@ -154,6 +161,43 @@ const HomeFormAndDialog: React.FC = () => {
            
            
             {/* All dialog box  */}
+            {/* <div style={{
+                padding:'4px',
+                background:'#dbdada'
+            }}>
+            <Flex vertical={false} wrap="wrap" gap="small" style={{marginBottom:'10px'}}>
+                <div style={{...baseStyle3}}><PregnancyModal /></div>
+                <div style={{...baseStyle3}}><PregnancyModal /></div>
+                <div style={{...baseStyle3}}><PregnancyModal /></div>
+                <div style={{...baseStyle3}}><PregnancyModal /></div>
+                <div style={{...baseStyle3}}><PregnancyModal /></div>
+            </Flex>
+            <Flex vertical={false} gap={'small'}>
+                <div style={{width:'20%'}}><PregnancyModal /></div>
+                <div style={{width:'20%'}}><PregnancyModal /></div>
+                <div style={{width:'20%'}}><PregnancyModal /></div>
+                <div style={{width:'20%'}}><PregnancyModal /></div>
+            </Flex>
+            <Flex vertical={false} gap={'small'}>
+                <div style={{width:'20%'}}><PregnancyModal /></div>
+                <div style={{width:'20%'}}><PregnancyModal /></div>
+                <div style={{width:'20%'}}><PregnancyModal /></div>
+                <div style={{width:'20%'}}><PregnancyModal /></div>
+            </Flex>
+            <Flex vertical={false} gap={'small'}>
+                <div style={{width:'20%'}}><PregnancyModal /></div>
+                <div style={{width:'20%'}}><PregnancyModal /></div>
+                <div style={{width:'20%'}}><PregnancyModal /></div>
+                <div style={{width:'20%'}}><PregnancyModal /></div>
+            </Flex>
+            <Flex vertical={false} gap={'small'}>
+                <div style={{width:'20%'}}><PregnancyModal /></div>
+                <div style={{width:'20%'}}><PregnancyModal /></div>
+                <div style={{width:'20%'}}><PregnancyModal /></div>
+                <div style={{width:'20%'}}><PregnancyModal /></div>
+            </Flex>
+            </div> */}
+            <ModalGrid />
             
             
             {/* <Form.Item label="Button">
