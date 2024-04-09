@@ -2,13 +2,15 @@ body{
   background: #ececf8 !important;
 }
 .App{
-  padding-top: 5px;
+  overflow: hidden !important;
+}
+  /* padding-top: 5px;
   display: flex;
   justify-content: baseline;
   gap: 2px;
   background: #ececf8;
 
-}
+} */
 .Gender,.REFERRED, .Materials{
   height: 40px !important;
 }

@@ -3,6 +3,7 @@ import './App.css';
 import PatientScreen from './Components/PatientScreen';
 import SideBarCard from './Components/sidebar/SideBarCard';
 import React, { useEffect, useState } from 'react';
+import DashBoard from './Components/Layout/Dashboard';
 
 const theme = createTheme({
   palette:{
@@ -44,7 +45,8 @@ function App() {
   },[]);
   return (
     <>
-    <ThemeProvider theme={theme}>
+    <DashBoard />
+    {/* <ThemeProvider theme={theme}>
       <div className="App">
       <div className='Enter-Area'>
       <PatientScreen getData={getData} editPatient={editPatient} />
@@ -55,7 +57,7 @@ function App() {
         
       </div>
 
-    </ThemeProvider>
+    </ThemeProvider> */}
     </>
   );
 }
