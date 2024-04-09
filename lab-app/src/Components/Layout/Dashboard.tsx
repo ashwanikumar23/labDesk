@@ -1,4 +1,3 @@
-// import '../Layout/Layout.css'
 import React, { useState } from 'react';
 import {
   AppstoreOutlined,
@@ -11,9 +10,10 @@ import {
   VideoCameraOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Layout, Menu, theme } from 'antd';
+import { Layout, Menu, Typography, theme } from 'antd';
 import { AnyNaptrRecord } from 'dns';
 import HomeFormAndDialog from './HomeFormAndDialog';
+import './layout.css';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -32,6 +32,7 @@ const items: MenuProps['items'] = [
   label: `nav ${index + 1}`,
 }));
 
+const { Title } = Typography;
 const DashBoard: React.FC = () => {
     // form use state 
     const [Dr,setDr]=useState([{
@@ -91,7 +92,8 @@ const DashBoard: React.FC = () => {
         style={{ overflow: 'hidden', height: '100vh', position: 'fixed', left: 0, top: 0, bottom: 0 }}
       >
         <div className="demo-logo-vertical" />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} />
+        <h3  style={{color:'#f5f5f5 !important'}} >Patient list</h3>
+        {/* <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} /> */}
       </Sider>
       <Layout style={{ marginLeft: 200 }}>
         {/* <Header style={{ padding: 0, background: colorBgContainer }} /> */}
