@@ -13,6 +13,7 @@ import {
 import type { MenuProps } from 'antd';
 import { Layout, Menu, theme } from 'antd';
 import { AnyNaptrRecord } from 'dns';
+import HomeFormAndDialog from './HomeFormAndDialog';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -55,7 +56,9 @@ const DashBoard: React.FC = () => {
     }]);
     const [object,setObject]=useState({
         date: '',
+        time:'',
         RecivedDate:'',
+        Recivedtime:'',
         prefix:'',
         name: '',
         address: '',
@@ -99,10 +102,11 @@ const DashBoard: React.FC = () => {
               textAlign: 'center',
               background: colorBgContainer,
               borderRadius: borderRadiusLG,
-              height: '98vh'
+              height: '90vh'
             }}
           >
             <p>long content</p>
+            <HomeFormAndDialog />
            
           </div>
         </Content>
