@@ -10,7 +10,7 @@ import {
   VideoCameraOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Layout, Menu, Typography, theme } from 'antd';
+import { Divider, Layout, Menu, Typography, theme } from 'antd';
 import { AnyNaptrRecord } from 'dns';
 import HomeFormAndDialog from './HomeFormAndDialog';
 import './layout.css';
@@ -89,7 +89,7 @@ const DashBoard: React.FC = () => {
 
   return (
     <Layout hasSider>
-      <Sider
+      <Sider width='250px'
         style={{ overflow: 'hidden', height: '100vh', position: 'fixed', left: 0, top: 0, bottom: 0 }}
       >
         <div className="demo-logo-vertical" />
@@ -97,7 +97,7 @@ const DashBoard: React.FC = () => {
         <PatientList />
         {/* <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} /> */}
       </Sider>
-      <Layout style={{ marginLeft: 200 }}>
+      <Layout style={{ marginLeft: 250 }}>
         {/* <Header style={{ padding: 0, background: colorBgContainer }} >
         <div style={{padding:'3px'}}>Patient screen</div>
         </Header> */}
@@ -112,6 +112,8 @@ const DashBoard: React.FC = () => {
               height: '88vh'
             }}
           >
+            <div style={{height:'10px',widows:'70%'}} />
+            <Divider />
             <HomeFormAndDialog />
            
           </div>
