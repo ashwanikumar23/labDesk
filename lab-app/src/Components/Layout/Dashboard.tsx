@@ -9,6 +9,7 @@ import {
   UserOutlined,
   VideoCameraOutlined,
 } from '@ant-design/icons';
+import patientsDB from './DB/PatientDB.json'
 import type { MenuProps } from 'antd';
 import { Divider, Layout, Menu, Typography, theme } from 'antd';
 import { AnyNaptrRecord } from 'dns';
@@ -35,6 +36,7 @@ const items: MenuProps['items'] = [
 }));
 
 const DashBoard: React.FC = () => {
+  console.log("p",patientsDB);
     // form use state 
     const [Dr,setDr]=useState([{
         id:1,
