@@ -128,7 +128,7 @@ function PregnancyDilaog(props:any){
                 <InputLabel id="date-picker-label" style={{ width: '35%' }}>
                 Expected Date
                 </InputLabel>
-                <TextField type="date" style={{"width":"70%"}} size="small" value={expectedDate || props.formatDate(new Date)} onChange={(event) => handleChange(event, "expectedDate")}></TextField>
+                {/* <TextField type="date" style={{"width":"70%"}} size="small" value={expectedDate || props.formatDate(new Date)} onChange={(event) => handleChange(event, "expectedDate")}></TextField> */}
             </Stack>
             <Stack direction="row" alignItems="center" spacing={2}  sx={{ mt: 2 }}>
                 <InputLabel id="beta-scg-label" style={{"width":"35%"}}>Beta HCG</InputLabel>
