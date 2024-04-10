@@ -14,6 +14,7 @@ import {
     TimePickerProps,
     TreeSelect,
     Typography,
+    Divider
 } from 'antd';
 import dayjs from 'dayjs';
 import PregnancyModal from './Modal/PregnancyModal';
@@ -38,6 +39,7 @@ const HomeFormAndDialog: React.FC = () => {
     };
     const dateFormatList = 'DD/MM/YYYY';
     return (
+        
         <Form
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 14 }}
@@ -197,7 +199,21 @@ const HomeFormAndDialog: React.FC = () => {
                 <div style={{width:'20%'}}><PregnancyModal /></div>
             </Flex>
             </div> */}
+            <Divider />
             <ModalGrid />
+            <Divider />
+            <Flex gap="small" wrap="wrap">
+                <Button type="dashed">NEW</Button>
+                <Button type="dashed">EDIT</Button>
+                <Button type="dashed">DELETE</Button>
+                <Button type="dashed">NEXT</Button>
+                <Button type="dashed">PREV</Button>
+                <Button type="dashed">Cancel</Button>
+                <Button type="dashed">Search by Name</Button>
+                <Button type="dashed">Search by Date</Button>
+                <Button type="dashed">PRINT</Button>
+                {/* <Button type="link">Link Button</Button> */}
+            </Flex>
             
             
             {/* <Form.Item label="Button">
