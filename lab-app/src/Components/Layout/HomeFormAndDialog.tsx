@@ -208,9 +208,10 @@ const HomeFormAndDialog: React.FC = () => {
                 <Button type="dashed">DELETE</Button>
                 <Button type="dashed">NEXT</Button>
                 <Button type="dashed">PREV</Button>
-                <Button type="dashed">Cancel</Button>
                 <Button type="dashed">Search by Name</Button>
                 <Button type="dashed">Search by Date</Button>
+                 <Button type="dashed">SAVE</Button>
+                <Button type="dashed">Cancel</Button>
                 <Button type="dashed">PRINT</Button>
                 {/* <Button type="link">Link Button</Button> */}
             </Flex>
