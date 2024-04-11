@@ -38,5 +38,25 @@
         
 
 
+    },
+    {
+        "id":3,
+        "date": "23-09-2023",
+        "time":"12:00",
+        "RecivedDate":"23-09-2023",
+        "Recivedtime":"01:01",
+        "prefix":"MR",
+        "name": "Krishna",
+        "address": "HSP",
+        "age": "23",
+        "gender": "M",
+        "mobileNumber": "7978457821",
+        "labNumber": "114",
+        "materials":"BLOOD",
+        "referance":"ashwani"
+        
+        
+
+
     }
 ]

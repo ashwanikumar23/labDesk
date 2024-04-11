@@ -82,6 +82,7 @@ const DashBoard: React.FC = () => {
           ...prevState,
           [name]: value, // Update the right field in state
         }));
+        console.log(object);
       };
 
 //  end
@@ -96,7 +97,7 @@ const DashBoard: React.FC = () => {
       >
         <div className="demo-logo-vertical" />
         <h3  style={{color:'#f5f5f5 !important'}} >Patient list</h3>
-        <PatientList />
+        <PatientList patientsDB={patientsDB} />
         {/* <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} /> */}
       </Sider>
       <Layout style={{ marginLeft: 250 }}>
@@ -116,7 +117,7 @@ const DashBoard: React.FC = () => {
           >
             <div style={{height:'10px',widows:'70%'}} />
             <Divider />
-            <HomeFormAndDialog />
+            <HomeFormAndDialog object={object} handleChange={handleChange}/>
            
           </div>
         </Content>
