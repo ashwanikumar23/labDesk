@@ -51,13 +51,15 @@ const HAEMATOLOGYDialog = (props: any) => {
           <Form
             form={form}
             onFinish={onFinish}
-            layout="vertical"
+           // labelCol={{ span: 4 }}
+           // wrapperCol={{ span: 14 }}
+            layout="horizontal"
             initialValues={{ remember: true }}
           >
             <Row gutter={16}>
               <Col span={8}>
                 <Form.Item name="HB" label="Input 1">
-                  <Input />
+                  <Input style={{width:'60px'}} />
                 </Form.Item>
                 <Form.Item name="input1" label="Input 1">
                   <Input />
