@@ -1,589 +1,111 @@
-// import FormGroup from '@mui/material/FormGroup';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-//import Checkbox from '@mui/material/Checkbox';
-// import Stack from '@mui/material/Stack';
-// import MenuItem from '@mui/material/MenuItem';
-// import Select, { SelectChangeEvent } from '@mui/material/Select';
-import React, { useState } from 'react';
-// import InputLabel from '@mui/material/InputLabel';
-// import TextField from '@mui/material/TextField';
-import { AppBar, Button, Dialog, DialogActions, DialogContent, DialogTitle, List, ListItemButton, ListItemText, Slide, Toolbar, Typography, styled } from '@mui/material';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import { TransitionProps } from '@mui/material/transitions';
-import { Divider, Checkbox, Flex, Input, Space, CheckboxProps, Select } from 'antd';
+import React, { useState } from "react";
+import {
+  Divider,
+  Checkbox,
+  Button,
+  Flex,
+  Input,
+  Space,
+  CheckboxProps,
+  Select,
+  Form,
+  Row,
+  Col,
+  Modal,
+} from "antd";
 
-const Transition = React.forwardRef(function Transition(
-    props: TransitionProps & {
-      children: React.ReactElement;
-    },
-    ref: React.Ref<unknown>,
-  ) {
-    return <Slide direction="up" ref={ref} {...props} />;
-  });
-  
-  const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-    '& .MuiDialogContent-root': {
-      padding: theme.spacing(2),
-    },
-    '& .MuiDialogActions-root': {
-      padding: theme.spacing(1),
-    },
-  }));
-const HAEMATOLOGYDialog = (props:any) => {
-    const [openHAEMATOLOGY, setOpenHAEMATOLOGY] = React.useState(false);
-    const handleClickOpen = () => {
-      setOpenHAEMATOLOGY(true);
-    };
-  
-    const handleClose = () => {
-      setOpenHAEMATOLOGY(false);
-    };
-    const [totalIron, setTotalIron] = React.useState('');
-    const [tibc, setTibc] = React.useState('');
-    const [tstat, setStat] = React.useState('');
-    const [print, setPrint] = React.useState(false);
-    const [printAll, setPrintAll] = React.useState(false);
-    const handleChange = (event: any , key:string) => {
-        if (key === "totalIron") {
-            setTotalIron(event.target.value);
-        } else if (key === "tibc") {
-            setTibc(event.target.value);
-        } else if (key === "tstat") {
-            setStat(event.target.value);
-        }else if (key === "print") {
-            setPrint(!print);
-        } else if (key === "printAll") {
-            setPrintAll(!printAll);
-        }
-    };
-    function submit(){
-        let data={
-            "totalIron":totalIron,
-            "tibc":tibc,
-            'tstat':tstat,
-            'print':print,
-            'printAll':printAll
-        }
-        console.log("Iron test ",data);
-        props.onSaveClick(data);
-        // handleIRONClose();
-    }
-    const onChange: CheckboxProps['onChange'] = (e:any) => {
-      console.log(`checked = ${e.target.checked}`);
-    };
-    const handleSelectChange = (value: string) => {
-      console.log(`selected ${value}`);
-    };
+const { Option } = Select;
+const HAEMATOLOGYDialog = (props: any) => {
+  const [open, setOpen] = useState(false);
+  const [openHAEMATOLOGY, setOpenHAEMATOLOGY] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpenHAEMATOLOGY(true);
+  };
+
+  const [form] = Form.useForm();
+  const [formData, setFormData] = useState(null);
+
+  const onFinish = (values: any) => {
+    console.log("Form values:", values);
+    setFormData(values);
+  };
+
+
+
   return (
     <>
-    <Button className='btn' variant="contained" onClick={handleClickOpen}>HAEMATOLOGY</Button>
-          {/* small dialog IRON box */}
-          <Dialog
-        fullScreen
-        open={openHAEMATOLOGY}
-        onClose={handleClose}
-        TransitionComponent={Transition}
+      <Button className="btn" type="primary" onClick={() => setOpen(true)}>
+        HAEMATOLOGY
+      </Button>
+      <Modal
+        title="HAEMATOLOGY"
+        centered
+        
+        open={open}
+        footer={null} 
+        //onOk={() => setOpen(false)}
+       onCancel={() => setOpen(false)}
+        width={1000}
       >
-        <AppBar sx={{ position: 'relative' }}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={handleClose}
-              aria-label="close"
-            >
-              <CloseIcon />
-            </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              HAEMATOLOGY
-            </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
-              save
-            </Button>
-          </Toolbar>
-        </AppBar>
-        <div style={{ margin:'10px 40px'}}>
-          {/* <h3>Head</h3> */}
-          <Flex vertical={false} gap='large'>
-            <div style={{width:'40%',alignItems:'center',justifyContent:'center',justifyItems:'center'}}>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              name='HB'
-              onInput={(e:any) => {
-                console.log('HB click',e.target.value,e.target.name);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Divider />
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
+        <div>
+          <Form
+            form={form}
+            onFinish={onFinish}
+            layout="vertical"
+            initialValues={{ remember: true }}
+          >
+            <Row gutter={16}>
+              <Col span={8}>
+                <Form.Item name="HB" label="Input 1">
+                  <Input />
+                </Form.Item>
+                <Form.Item name="input1" label="Input 1">
+                  <Input />
+                </Form.Item>
+                <Form.Item name="input1" label="Input 1">
+                  <Input />
+                </Form.Item>
+              </Col>
+              {/* Repeat Form.Item for each input */}
+              {/* Example Select */}
+              <Col span={8}>
+                <Form.Item name="select1" label="Select 1">
+                  <Select>
+                    <Option value="option1">Option 1</Option>
+                    <Option value="option2">Option 2</Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+            </Row>
+            {/* Repeat Row and Col for additional inputs */}
+            {/* Add more Form.Items as needed */}
 
+            <Form.Item>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
 
+          {/* Display the form data in a grid form */}
+          {formData && (
+            <div>
+              <h2>Form Data</h2>
+              <Row gutter={16}>
+                {Object.entries(formData).map(([key, value]) => (
+                  <Col span={8} key={key}>
+                    <p>
+                      <strong>{key}:</strong>{formData[key]}
+                    </p>
+                  </Col>
+                ))}
+              </Row>
             </div>
-            <div  style={{width:'40%'}}>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-            <Input
-              
-              onInput={(e) => {
-                console.log('click',e);}}
-              type='number'
-              style={{width:'60px'}}
-              placeholder="Basic usage"
-            />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-              <Select
-                defaultValue="lucy"
-                style={{ width: 120 }}
-                onChange={handleSelectChange}
-                options={[
-                  { value: 'jack', label: 'Jack' },
-                  { value: 'lucy', label: 'Lucy' },
-                  { value: 'Yiminghe', label: 'yiminghe' },
-                  { value: 'disabled', label: 'Disabled', disabled: true },
-                ]}
-               />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-              <Select
-                defaultValue="lucy"
-                style={{ width: 120 }}
-                onChange={handleSelectChange}
-                options={[
-                  { value: 'jack', label: 'Jack' },
-                  { value: 'lucy', label: 'Lucy' },
-                  { value: 'Yiminghe', label: 'yiminghe' },
-                  { value: 'disabled', label: 'Disabled', disabled: true },
-                ]}
-               />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            <Space style={{marginBottom:'15px'}}>
-              <span>HB</span>
-              <Select
-                defaultValue="lucy"
-                style={{ width: 120 }}
-                onChange={handleSelectChange}
-                options={[
-                  { value: 'jack', label: 'Jack' },
-                  { value: 'lucy', label: 'Lucy' },
-                  { value: 'Yiminghe', label: 'yiminghe' },
-                  { value: 'disabled', label: 'Disabled', disabled: true },
-                ]}
-               />
-            <span>gm/dl</span>
-            
-            </Space>
-            <br/>
-            
-            </div>
-            <div  style={{width:'20%'}}>
-              <Space>
-              <Checkbox onChange={onChange}>Checkbox</Checkbox>
-              <Checkbox onChange={onChange}>Checkbox</Checkbox>
-              </Space>
-            </div>
-            
-          </Flex>
+          )}
         </div>
-      </Dialog>
-
+      </Modal>
     </>
-  )
-}
+  );
+};
 
 export default HAEMATOLOGYDialog;
