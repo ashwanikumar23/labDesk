@@ -1,134 +1,117 @@
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Stack from '@mui/material/Stack';
-import MenuItem from '@mui/material/MenuItem';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import React, { useState } from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import TextField from '@mui/material/TextField';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, styled } from '@mui/material';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import { TransitionProps } from '@mui/material/transitions';
+import React, { useState } from "react";
+import {
+  Divider,
+  Checkbox,
+  Button,
+  Flex,
+  Input,
+  Space,
+  CheckboxProps,
+  Select,
+  Form,
+  Row,
+  Col,
+  Modal,
+  Radio,
+  RadioChangeEvent,
+} from "antd";
 
-const Transition = React.forwardRef(function Transition(
-    props: TransitionProps & {
-      children: React.ReactElement;
-    },
-    ref: React.Ref<unknown>,
-  ) {
-    return <Slide direction="up" ref={ref} {...props} />;
-  });
-  
-  const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-    '& .MuiDialogContent-root': {
-      padding: theme.spacing(2),
-    },
-    '& .MuiDialogActions-root': {
-      padding: theme.spacing(1),
-    },
-  }));
+const { Option } = Select;
+
+
 const IronDialog = (props:any) => {
-    const [openIRON, setOpenIRON] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [form] = Form.useForm();
+  const [formData, setFormData] = useState(null);
 
-    const handleIRONClickOpen = () => {
-      setOpenIRON(true);
-    };
-    const handleIRONClose = () => {
-      setOpenIRON(false);
-    };
-    const [totalIron, setTotalIron] = React.useState('');
-    const [tibc, setTibc] = React.useState('');
-    const [tstat, setStat] = React.useState('');
-    const [print, setPrint] = React.useState(false);
-    const [printAll, setPrintAll] = React.useState(false);
-    const handleChange = (event: any , key:string) => {
-        if (key === "totalIron") {
-            setTotalIron(event.target.value);
-        } else if (key === "tibc") {
-            setTibc(event.target.value);
-        } else if (key === "tstat") {
-            setStat(event.target.value);
-        }else if (key === "print") {
-            setPrint(!print);
-        } else if (key === "printAll") {
-            setPrintAll(!printAll);
-        }
-    };
-    function submit(){
-        let data={
-            "totalIron":totalIron,
-            "tibc":tibc,
-            'tstat':tstat,
-            'print':print,
-            'printAll':printAll
-        }
-        console.log("Iron test ",data);
-        props.onSaveClick(data);
-        handleIRONClose();
-    }
+  const onFinish = (values: any) => {
+    console.log("Form values:", values);
+    setFormData(values);
+  };
+
+  const [value, setValue] = useState(1);
+
+  const onChange = (e: RadioChangeEvent) => {
+    console.log('radio checked', e.target.value);
+    setValue(e.target.value);
+  };
   return (
     <>
-    <Button className='btn' variant="contained" onClick={handleIRONClickOpen}>IRON</Button>
-          {/* small dialog IRON box */}
-          <BootstrapDialog
-        onClose={handleIRONClose}
-        aria-labelledby="customized-dialog-title"
-        open={openIRON}
-      >
-        <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-          IRON Test
-        </DialogTitle>
-        <IconButton
-          aria-label="close"
-          onClick={handleIRONClose}
-          sx={{
-            position: 'absolute',
-            right: 8,
-            top: 8,
-            color: (theme) => theme.palette.grey[500],
-          }}
+    <Button className="btn" type="primary" onClick={() => setOpen(true)}>
+    IRON 
+    </Button>
+    <Modal
+      title="IRON TEST"
+      centered
+      
+      open={open}
+      footer={null} 
+      //onOk={() => setOpen(false)}
+     onCancel={() => setOpen(false)}
+      width={400}
+    >
+      <div>
+      <Radio.Group onChange={onChange} value={value}>
+    <Radio value={"PRINT"}>PRINT</Radio>
+    <Radio value={"PRINT-ALL"}>PRINT ALL</Radio>
+  </Radio.Group>
+        <Form
+          form={form}
+          onFinish={onFinish}
+         // labelCol={{ span: 4 }}
+         // wrapperCol={{ span: 14 }}
+          layout="horizontal"
+          initialValues={{ remember: true }}
         >
-          <CloseIcon />
-        </IconButton>
-        <DialogContent dividers>
-        <div style={{"width":"500px","height":"300px"}}>
-        <FormGroup>
-            <Stack direction="row">
-                <FormControlLabel control={<Checkbox value={print} onChange={(event) => handleChange(event, "print")} />} label="PRINT" />
-                <FormControlLabel control={<Checkbox value={printAll} onChange={(event) => handleChange(event, "printAll")} />} label="PRINT ALL" />
-            </Stack>
-            <Stack direction="row" alignItems="center" spacing={2} sx={{ mt: 2 }}>
-                <InputLabel id="date-picker-label" style={{ width: '35%' }}>
-                Total Iron
-                </InputLabel>
-                <TextField type="number" style={{"width":"70%"}} size="small" value={totalIron} onChange={(event) => handleChange(event, "totalIron")}></TextField>
-            </Stack>
-            <Stack direction="row" alignItems="center" spacing={2} sx={{ mt: 2 }}>
-                <InputLabel id="date-picker-label" style={{ width: '35%' }}>
-                TIBC
-                </InputLabel>
-                <TextField type="number" style={{"width":"70%"}} size="small" value={tibc} onChange={(event) => handleChange(event, "tibc")}></TextField>
-            </Stack>
-            <Stack direction="row" alignItems="center" spacing={2} sx={{ mt: 2 }}>
-                <InputLabel id="date-picker-label" style={{ width: '35%' }}>
-                TSTAT
-                </InputLabel>
-                <TextField type="number" style={{"width":"70%"}} size="small" value={tstat} onChange={(event) => handleChange(event, "tstat")}></TextField>
-            </Stack>
+          <Row gutter={22}>
+          <Col span={4}></Col>
+            <Col span={18}>
+            <Form.Item name="TotalIron" label="Total Iron" style={{marginBottom: '7px'}}>
+                  <Space>
+                    <Input /><span>ug/dL</span> 
+                  </Space>
+              </Form.Item>
+              <Form.Item name="TIBC" label="TIBC" style={{marginBottom: '7px'}}>
+                  <Space>
+                    <Input /><span>ug/dL</span> 
+                  </Space>
+              </Form.Item>
+              <Form.Item name="TSAT" label="TSAT" style={{marginBottom: '7px'}}>
+                  <Space>
+                    <Input /><span>ug/dL</span> 
+                  </Space>
+              </Form.Item>
+            </Col>
             
-        </FormGroup>
-        </div>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={()=>{submit()}}>
-            Save changes
-          </Button>
-        </DialogActions>
-      </BootstrapDialog>
+          </Row>
+          <Form.Item style={{marginBottom: '4px'}}>
+            <div style={{display:"flex",justifyContent:'end',alignItems:"end",gap:'2px'}}>
+            <Button type="dashed">Cancel</Button>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+            </div>
+          </Form.Item>
+        </Form>
 
-    </>
+        {/* Display the form data in a grid form */}
+        {formData && (
+          <div>
+            <h2>Form Data</h2>
+            <Row gutter={16}>
+              {Object.entries(formData).map(([key, value]) => (
+                <Col span={8} key={key}>
+                  <p>
+                    <strong>{key}:</strong>{formData[key]}
+                  </p>
+                </Col>
+              ))}
+            </Row>
+          </div>
+        )}
+      </div>
+    </Modal>
+  </>
   )
 }
 

@@ -12,9 +12,11 @@ import {
   Row,
   Col,
   Modal,
+  Typography,
 } from "antd";
 
 const { Option } = Select;
+const { Text, Link } = Typography;
 const HAEMATOLOGYDialog = (props: any) => {
   const [open, setOpen] = useState(false);
   const [openHAEMATOLOGY, setOpenHAEMATOLOGY] = React.useState(false);
@@ -57,21 +59,187 @@ const HAEMATOLOGYDialog = (props: any) => {
             initialValues={{ remember: true }}
           >
             <Row gutter={16}>
-              <Col span={8}>
-                <Form.Item name="HB" label="Input 1">
-                  <Input style={{width:'60px'}} />
+              <Col span={7} style={{paddingLeft:'30px'}}>
+                <Form.Item name="HB" label="HB" style={{marginBottom: '7px'}}>
+                  <Space>
+                    <Input /><span>gm/dl</span> 
+                  </Space>
                 </Form.Item>
-                <Form.Item name="input1" label="Input 1">
-                  <Input />
+                <Form.Item name="TLC" label="TLC" style={{marginBottom: '7px'}}>
+                  <Space>
+                    <Input  /><span>/cumm</span> 
+                  </Space>
                 </Form.Item>
-                <Form.Item name="input1" label="Input 1">
-                  <Input />
+                <Text code>DLC --</Text>
+                <Divider style={{margin:"7px 0px"}} />
+                <Form.Item name="Polymorphs" label="Polymorphs" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>%</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="Lymphocytes" label="Lymphocytes" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>%</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="Monocytes" label="Monocytes" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>%</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="Eosinophils" label="Eosinophils" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>%</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="Basophils" label="Basophils" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>%</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="Description" label="Other Description" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  />
+                  </Space>
+                </Form.Item>
+                <Form.Item name="AbnormalCell" label="any Abnormal Cell" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  />
+                  </Space>
+                </Form.Item>
+                <Form.Item name="ESR" label="ESR" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>mm at first hr.(W.G.)</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="BGrouping" label="B. Grouping" style={{marginBottom: '7px'}}>
+                  <Select >
+                    <Option value="option1">Option 1</Option>
+                    <Option value="option2">Option 2</Option>
+                  </Select>
+                </Form.Item>
+                <Form.Item name="RhTyping" label="Rh Typing" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  />
+                  </Space>
+                </Form.Item>
+                <Form.Item name="MaterialParasite" label="Material Parasite" style={{marginBottom: '7px'}}>
+                  <Select >
+                    <Option value="option1">Option 1</Option>
+                    <Option value="option2">Option 2</Option>
+                  </Select>
+                </Form.Item>
+                <Form.Item name="PTIControl" label="P.T.I.  Control" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>sec(100%)</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="Test" label="Test" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>sec</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="Index" label="Index" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>%</span> 
+                  </Space>
+                </Form.Item>
+                <Space>
+                <Form.Item name="INR" label="INR" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="APTT" label="APTT" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>sec</span> 
+                  </Space>
+                </Form.Item>
+                </Space>
+                <Space>
+                <Form.Item name="Bleeding-Time" label="Bleeding-Time" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /> 
+                  </Space>
+                </Form.Item>
+                
+
+                </Space>
+                <Form.Item name="clotting-Time" label="clotting-Time" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /> 
+                  </Space>
                 </Form.Item>
               </Col>
               {/* Repeat Form.Item for each input */}
               {/* Example Select */}
+              <Col span={4}></Col>
               <Col span={8}>
-                <Form.Item name="select1" label="Select 1">
+              <Form.Item name="PTTK" label="PTTK" style={{marginBottom: '7px'}}>
+                  <Space>
+                    <Input /><span>sec</span> 
+                  </Space>
+              </Form.Item>
+              <Form.Item name="TotalRBCCount" label="Total RBC Count" style={{marginBottom: '7px'}}>
+                  <Space>
+                    <Input /><span>million/Cumm</span> 
+                  </Space>
+              </Form.Item>
+              <Form.Item name="Platelets_L" label="Platelets" style={{marginBottom: '7px'}}>
+                  <Space>
+                    <Input /><span>lakh/cumm</span> 
+                  </Space>
+              </Form.Item>
+              <Form.Item name="Platelets_T" label="" style={{marginBottom: '7px'}}>
+                  <Space>
+                    <Input /><span>Throusands/cumm</span> 
+                  </Space>
+              </Form.Item>
+              <Form.Item name="PCV" label="PCV" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>%</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="Reticulocyte" label="Reticulocyte Count" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>%</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="MCV" label="MCV" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>tl</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="MCH" label="MCH" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>pG</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="MCHC" label="MCHC" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>%</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="A-Eosinophil-Count" label="A. Eosinophil Count" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>/Cumm</span> 
+                  </Space>
+                </Form.Item>
+
+
+                <Form.Item name="LECell" label="L. E; Cell">
+                  <Select>
+                    <Option value="option1">Option 1</Option>
+                    <Option value="option2">Option 2</Option>
+                  </Select>
+                </Form.Item>
+                <Form.Item name="Coombs-Test(D)" label="Coombs Test(D)">
+                  <Select>
+                    <Option value="option1">Option 1</Option>
+                    <Option value="option2">Option 2</Option>
+                  </Select>
+                </Form.Item>
+                <Form.Item name="Coombs-Test(I)" label="Coombs Test(I)">
                   <Select>
                     <Option value="option1">Option 1</Option>
                     <Option value="option2">Option 2</Option>
