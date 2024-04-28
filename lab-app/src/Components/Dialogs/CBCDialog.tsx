@@ -1,232 +1,406 @@
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Stack from '@mui/material/Stack';
-import MenuItem from '@mui/material/MenuItem';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import React, { useState } from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import TextField from '@mui/material/TextField';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, styled } from '@mui/material';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import { TransitionProps } from '@mui/material/transitions';
+import React, { useState } from "react";
+import {
+  Divider,
+  Checkbox,
+  Button,
+  Flex,
+  Input,
+  Space,
+  CheckboxProps,
+  Select,
+  Form,
+  Row,
+  Col,
+  Modal,
+  Typography,
+} from "antd";
 
-const Transition = React.forwardRef(function Transition(
-    props: TransitionProps & {
-      children: React.ReactElement;
-    },
-    ref: React.Ref<unknown>,
-  ) {
-    return <Slide direction="up" ref={ref} {...props} />;
-  });
-  
-  const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-    '& .MuiDialogContent-root': {
-      padding: theme.spacing(2),
-    },
-    '& .MuiDialogActions-root': {
-      padding: theme.spacing(1),
-    },
-  }));
-const CBCDialog = (props:any) => {
-    const [openIRON, setOpenIRON] = React.useState(false);
+const { Option } = Select;
+const { Text, Link } = Typography;
+const CBCDialog = (props: any) => {
+  const [open, setOpen] = useState(false);
+  const [openHAEMATOLOGY, setOpenHAEMATOLOGY] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpenHAEMATOLOGY(true);
+  };
 
-    const handleIRONClickOpen = () => {
-      setOpenIRON(true);
-    };
-    const handleIRONClose = () => {
-      setOpenIRON(false);
-    };
-    const [Cocaine, setCocaine] = React.useState('');
-    const [Benzodiazepines, setBenzodiazepines] = React.useState('');
-    const [Morphine, setMorphine] = React.useState('');
-    const [Amphetamine, setAmphetamine] = React.useState(false);
-    const [barbiturates, setbarbiturates] = React.useState(false);
-    const [Merijuana, setMerijuana] = React.useState(false);
-    const [OPiates, setOPiates] = React.useState(false);
-    const [print, setPrint] = React.useState(false);
-    const [printAll, setPrintAll] = React.useState(false);
+  const [form] = Form.useForm();
+  const [formData, setFormData] = useState(null);
 
-    const handleChange = (event: any , key:string) => {
-        if (key === "Cocaine") {
-            setCocaine(event.target.value);
-        } else if (key === "Benzodiazepines") {
-            setBenzodiazepines(event.target.value);
-        } else if (key === "Morphine") {
-            setMorphine(event.target.value);
-        } else if (key === "Amphetamine") {
-            setAmphetamine(event.target.value);
-        } else if (key === "barbiturates") {
-            setbarbiturates(event.target.value);
-        } else if (key === "Merijuana") {
-            setMerijuana(event.target.value);
-        } else if (key === "OPiates") {
-            setOPiates(event.target.value);
-        }else if (key === "print") {
-            setPrint(!print);
-        } else if (key === "printAll") {
-            setPrintAll(!printAll);
-        }
-    };
-    function submit(){
-        let data={
-            "OPiates":OPiates,
-            "barbiturates":barbiturates,
-            'Amphetamine':Amphetamine,
-            "Morphine":Morphine,
-            "Merijuana":Merijuana,
-            'Benzodiazepines':Benzodiazepines,
-            'Cocaine':Cocaine,
-            'print':print,
-            'printAll':printAll
-        }
-        console.log("Iron test ",data);
-        props.onSaveClick(data);
-        handleIRONClose();
-    }
+  const onFinish = (values: any) => {
+    console.log("Form values:", values);
+    setFormData(values);
+  };
+
+
+
   return (
     <>
-    <Button className='btn' variant="contained" onClick={handleIRONClickOpen}>DRUG ABUSE</Button>
-          {/* small dialog IRON box */}
-          <BootstrapDialog
-        onClose={handleIRONClose}
-        aria-labelledby="customized-dialog-title"
-        open={openIRON}
+      <Button className="btn" type="primary" onClick={() => setOpen(true)}>
+        CBC
+      </Button>
+      <Modal
+        title="CBC TEST"
+        centered
+        
+        open={open}
+        footer={null} 
+        //onOk={() => setOpen(false)}
+       onCancel={() => setOpen(false)}
+        width={600}
       >
-        <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-          IRON Test
-        </DialogTitle>
-        <IconButton
-          aria-label="close"
-          onClick={handleIRONClose}
-          sx={{
-            position: 'absolute',
-            right: 8,
-            top: 8,
-            color: (theme) => theme.palette.grey[500],
-          }}
-        >
-          <CloseIcon />
-        </IconButton>
-        <DialogContent dividers>
-        <div style={{"width":"500px","height":"300px"}}>
-        <FormGroup>
-            <Stack direction="row">
-                <FormControlLabel control={<Checkbox value={print} onChange={(event) => handleChange(event, "print")} />} label="PRINT" />
-                <FormControlLabel control={<Checkbox value={printAll} onChange={(event) => handleChange(event, "printAll")} checked={printAll} />} label="PRINT ALL" />
-                {/* <FormControlLabel control={<Checkbox  value={comments} onChange={(event) => handleChange(event, "comments")}  />} label="COMMENTS" /> */}
-            </Stack>
-            <Stack direction="row" alignItems="center" spacing={2}  sx={{ mt: 2 }}>
-                <InputLabel id="sample-brought-label" style={{"width":"35%"}}>Sample Brought from</InputLabel>
-                <Select
-                labelId="sample-brought-select-label"
-                id="sample-brought-select"
-                value={Cocaine}
-                onChange={(event) => handleChange(event, "Cocaine")}
-                style={{"width":"70%", "height":"30px"}}
-                >
-                <MenuItem value={10}>sample 1</MenuItem>
-                <MenuItem value={20}>sample 2</MenuItem>
-                <MenuItem value={30}>sample 3</MenuItem>
-                </Select>
-            </Stack>
-            <Stack direction="row" alignItems="center" spacing={2}  sx={{ mt: 2 }}>
-                <InputLabel id="sample-brought-label" style={{"width":"35%"}}>Sample Brought from</InputLabel>
-                <Select
-                labelId="sample-brought-select-label"
-                id="sample-brought-select"
-                value={Benzodiazepines}
-                onChange={(event) => handleChange(event, "Benzodiazepines")}
-                style={{"width":"70%", "height":"30px"}}
-                >
-                <MenuItem value={10}>sample 1</MenuItem>
-                <MenuItem value={20}>sample 2</MenuItem>
-                <MenuItem value={30}>sample 3</MenuItem>
-                </Select>
-            </Stack>
-            <Stack direction="row" alignItems="center" spacing={2}  sx={{ mt: 2 }}>
-                <InputLabel id="sample-brought-label" style={{"width":"35%"}}>Sample Brought from</InputLabel>
-                <Select
-                labelId="sample-brought-select-label"
-                id="sample-brought-select"
-                value={Merijuana}
-                onChange={(event) => handleChange(event, "Merijuana")}
-                style={{"width":"70%", "height":"30px"}}
-                >
-                <MenuItem value={10}>sample 1</MenuItem>
-                <MenuItem value={20}>sample 2</MenuItem>
-                <MenuItem value={30}>sample 3</MenuItem>
-                </Select>
-            </Stack>
-            <Stack direction="row" alignItems="center" spacing={2}  sx={{ mt: 2 }}>
-                <InputLabel id="sample-brought-label" style={{"width":"35%"}}>Sample Brought from</InputLabel>
-                <Select
-                labelId="sample-brought-select-label"
-                id="sample-brought-select"
-                value={Morphine}
-                onChange={(event) => handleChange(event, "Morphine")}
-                style={{"width":"70%", "height":"30px"}}
-                >
-                <MenuItem value={10}>sample 1</MenuItem>
-                <MenuItem value={20}>sample 2</MenuItem>
-                <MenuItem value={30}>sample 3</MenuItem>
-                </Select>
-            </Stack>
-            <Stack direction="row" alignItems="center" spacing={2}  sx={{ mt: 2 }}>
-                <InputLabel id="sample-brought-label" style={{"width":"35%"}}>Sample Brought from</InputLabel>
-                <Select
-                labelId="sample-brought-select-label"
-                id="sample-brought-select"
-                value={Amphetamine}
-                onChange={(event) => handleChange(event, "Amphetamine")}
-                style={{"width":"70%", "height":"30px"}}
-                >
-                <MenuItem value={10}>sample 1</MenuItem>
-                <MenuItem value={20}>sample 2</MenuItem>
-                <MenuItem value={30}>sample 3</MenuItem>
-                </Select>
-            </Stack>
-            <Stack direction="row" alignItems="center" spacing={2}  sx={{ mt: 2 }}>
-                <InputLabel id="sample-brought-label" style={{"width":"35%"}}>Sample Brought from</InputLabel>
-                <Select
-                labelId="sample-brought-select-label"
-                id="sample-brought-select"
-                value={barbiturates}
-                onChange={(event) => handleChange(event, "barbiturates")}
-                style={{"width":"70%", "height":"30px"}}
-                >
-                <MenuItem value={10}>sample 1</MenuItem>
-                <MenuItem value={20}>sample 2</MenuItem>
-                <MenuItem value={30}>sample 3</MenuItem>
-                </Select>
-            </Stack>
-            <Stack direction="row" alignItems="center" spacing={2}  sx={{ mt: 2 }}>
-                <InputLabel id="sample-brought-label" style={{"width":"35%"}}>Sample Brought from</InputLabel>
-                <Select
-                labelId="sample-brought-select-label"
-                id="sample-brought-select"
-                value={OPiates}
-                onChange={(event) => handleChange(event, "OPiates")}
-                style={{"width":"70%", "height":"30px"}}
-                >
-                <MenuItem value={10}>sample 1</MenuItem>
-                <MenuItem value={20}>sample 2</MenuItem>
-                <MenuItem value={30}>sample 3</MenuItem>
-                </Select>
-            </Stack>
-        </FormGroup>
-        </div>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={()=>{submit()}}>
-            Save changes
-          </Button>
-        </DialogActions>
-      </BootstrapDialog>
+        <div>
+          <Form
+            form={form}
+            onFinish={onFinish}
+           // labelCol={{ span: 4 }}
+           // wrapperCol={{ span: 14 }}
+            layout="horizontal"
+            initialValues={{ remember: true }}
+          >
+            <Row gutter={20}>
+            <Col span={5}></Col>
+              <Col span={15} style={{paddingLeft:'30px'}}>
+                <Form.Item name="HB" label="HB" style={{marginBottom: '7px'}}>
+                  <Space>
+                    <Input /><span>gm/dl</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="TLC" label="TLC" style={{marginBottom: '7px'}}>
+                  <Space>
+                    <Input  /><span>/cumm</span> 
+                  </Space>
+                </Form.Item>
+                <Text code>DLC --:</Text>
+                <Divider style={{margin:"7px 0px"}} />
+                <Space>
+                    <Form.Item name="Polymorphs" label="Polymorphs" style={{marginBottom: '7px'}}>
+                    <Space>
+                        <Input  /><span>%</span> 
+                      </Space>
+                    </Form.Item>
+                    <div style={{width:'50px'}}></div>
+                    <Form.Item name="Lym" label="Lym" style={{marginBottom: '7px'}}>
+                    <Space>
+                        <Input  /><span>%</span> 
+                      </Space>
+                    </Form.Item>
+                </Space>
 
+                <Space>
+                    <Form.Item name="Lymphocytes" label="Lymphocytes" style={{marginBottom: '7px'}}>
+                    <Space>
+                        <Input  /><span>%</span> 
+                      </Space>
+                    </Form.Item>
+                    <div style={{width:'50px'}}></div>
+                    <Form.Item name="Gran" label="Gran" style={{marginBottom: '7px'}}>
+                    <Space>
+                        <Input  /><span>%</span> 
+                      </Space>
+                    </Form.Item>
+                </Space>
+
+                <Space>
+                <Form.Item name="Monocytes" label="Monocytes" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>%</span> 
+                  </Space>
+                </Form.Item>
+                <div style={{width:'50px'}}></div>
+                <Form.Item name="Mid" label="Mid" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>%</span> 
+                  </Space>
+                </Form.Item>
+
+                </Space>
+
+                <Space>
+                  <Form.Item name="Eosinophils" label="Eosinophils" style={{marginBottom: '7px'}}>
+                  <Space>
+                      <Input  /><span>%</span> 
+                    </Space>
+                  </Form.Item>
+                  <div style={{width:'50px'}}></div>
+                  <Form.Item name="LymHash" label="Lym" style={{marginBottom: '7px'}}>
+                  <Space>
+                      <Input  /><span>#</span> 
+                    </Space>
+                  </Form.Item>
+
+                </Space>
+
+                <Space>
+                  <Form.Item name="Basophils" label="Basophils" style={{marginBottom: '7px'}}>
+                  <Space>
+                      <Input  /><span>%</span> 
+                    </Space>
+                  </Form.Item>
+                  <div style={{width:'50px'}}></div>
+                  <Form.Item name="GranHash" label="Gran" style={{marginBottom: '7px'}}>
+                  <Space>
+                      <Input  /><span>#</span> 
+                    </Space>
+                  </Form.Item>
+
+                </Space>
+
+                <Space>
+                  <Form.Item name="Mid" label="Mid" style={{marginBottom: '7px'}}>
+                  <Space>
+                      <Input  /><span>%</span> 
+                    </Space>
+                  </Form.Item>
+                  <div style={{width:'50px'}}></div>
+                  <Form.Item name="Mid" label="Mid" style={{marginBottom: '7px'}}>
+                  <Space>
+                      <Input  /><span>#</span> 
+                    </Space>
+                  </Form.Item>
+
+                </Space>
+               
+                
+                
+               
+                <Form.Item name="TotalRBCCount" label="Total RBC Count Description" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>million/cumm</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="PCV" label="PCV" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>%</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="MCV" label="MCV" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>fL</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="MCH" label="MCH" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>pG</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="MCHC" label="MCHC" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>%</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="RDW-CV" label="RDW-CV" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>%</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="RDW-SD" label="RDW-SD" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>fL</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="Platelets" label="Platelets" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>lakhs/cumm</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="MPV" label="MPV" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>fL</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="PDW-SD" label="PDW-SD" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span></span> 
+                  </Space>
+                </Form.Item>
+
+                <Form.Item name="PDW-CV" label="PDW-CV" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>%</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="PCT" label="PCT" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>%</span> 
+                  </Space>
+                </Form.Item>
+
+                <Form.Item name="P-LCR" label="P-LCR" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>%</span> 
+                  </Space>
+                </Form.Item>
+
+                <Form.Item name="P-LCC" label="P-LCC" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span></span> 
+                  </Space>
+                </Form.Item>
+                {/* <Form.Item name="BGrouping" label="B. Grouping" style={{marginBottom: '7px'}}>
+                  <Select >
+                    <Option value="option1">Option 1</Option>
+                    <Option value="option2">Option 2</Option>
+                  </Select>
+                </Form.Item>
+                <Form.Item name="RhTyping" label="Rh Typing" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  />
+                  </Space>
+                </Form.Item> */}
+                {/* <Form.Item name="MaterialParasite" label="Material Parasite" style={{marginBottom: '7px'}}>
+                  <Select >
+                    <Option value="option1">Option 1</Option>
+                    <Option value="option2">Option 2</Option>
+                  </Select>
+                </Form.Item> */}
+                {/* <Form.Item name="PTIControl" label="P.T.I.  Control" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>sec(100%)</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="Test" label="Test" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>sec</span> 
+                  </Space>
+                </Form.Item> */}
+                {/* <Form.Item name="Index" label="Index" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>%</span> 
+                  </Space>
+                </Form.Item>
+                <Space>
+                <Form.Item name="INR" label="INR" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /> 
+                  </Space>
+                </Form.Item> */}
+                {/* <Form.Item name="APTT" label="APTT" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>sec</span> 
+                  </Space>
+                </Form.Item>
+                </Space>
+                <Space>
+                <Form.Item name="Bleeding-Time" label="Bleeding-Time" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /> 
+                  </Space>
+                </Form.Item>
+                
+
+                </Space> */}
+                {/* <Form.Item name="clotting-Time" label="clotting-Time" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /> 
+                  </Space>
+                </Form.Item> */}
+              </Col>
+              {/* Repeat Form.Item for each input */}
+              {/* Example Select */}
+              {/* <Col span={4}></Col> */}
+              {/* <Col span={8}>
+              <Form.Item name="PTTK" label="PTTK" style={{marginBottom: '7px'}}>
+                  <Space>
+                    <Input /><span>sec</span> 
+                  </Space>
+              </Form.Item>
+              <Form.Item name="TotalRBCCount" label="Total RBC Count" style={{marginBottom: '7px'}}>
+                  <Space>
+                    <Input /><span>million/Cumm</span> 
+                  </Space>
+              </Form.Item>
+              <Form.Item name="Platelets_L" label="Platelets" style={{marginBottom: '7px'}}>
+                  <Space>
+                    <Input /><span>lakh/cumm</span> 
+                  </Space>
+              </Form.Item>
+              <Form.Item name="Platelets_T" label="" style={{marginBottom: '7px'}}>
+                  <Space>
+                    <Input /><span>Throusands/cumm</span> 
+                  </Space>
+              </Form.Item>
+              <Form.Item name="PCV" label="PCV" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>%</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="Reticulocyte" label="Reticulocyte Count" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>%</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="MCV" label="MCV" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>tl</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="MCH" label="MCH" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>pG</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="MCHC" label="MCHC" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>%</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="A-Eosinophil-Count" label="A. Eosinophil Count" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input  /><span>/Cumm</span> 
+                  </Space>
+                </Form.Item>
+
+
+                <Form.Item name="LECell" label="L. E; Cell">
+                  <Select>
+                    <Option value="option1">Option 1</Option>
+                    <Option value="option2">Option 2</Option>
+                  </Select>
+                </Form.Item>
+                <Form.Item name="Coombs-Test(D)" label="Coombs Test(D)">
+                  <Select>
+                    <Option value="option1">Option 1</Option>
+                    <Option value="option2">Option 2</Option>
+                  </Select>
+                </Form.Item>
+                <Form.Item name="Coombs-Test(I)" label="Coombs Test(I)">
+                  <Select>
+                    <Option value="option1">Option 1</Option>
+                    <Option value="option2">Option 2</Option>
+                  </Select>
+                </Form.Item>
+              </Col> */}
+            </Row>
+            {/* Repeat Row and Col for additional inputs */}
+            {/* Add more Form.Items as needed */}
+
+            <Form.Item>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
+
+          {/* Display the form data in a grid form */}
+          {formData && (
+            <div>
+              <h2>Form Data</h2>
+              <Row gutter={16}>
+                {Object.entries(formData).map(([key, value]) => (
+                  <Col span={8} key={key}>
+                    <p>
+                      <strong>{key}:</strong>{formData[key]}
+                    </p>
+                  </Col>
+                ))}
+              </Row>
+            </div>
+          )}
+        </div>
+      </Modal>
     </>
-  )
-}
+  );
+};
 
 export default CBCDialog;
