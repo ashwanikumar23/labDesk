@@ -35,6 +35,7 @@ import StoolDialog from '../../Dialogs/StoolDialog';
 import URINEDialog from '../../Dialogs/URINEDialog';
 import SEROLOGYDialog from '../../Dialogs/SEROLOGYDialog';
 import FLUIDDialog from '../../Dialogs/FLUIDDialog';
+import SpecialDialog from '../../Dialogs/SpecialDialog';
 // import PregnancyDilaog from './Dialogs/PregnancyDialog';
 // import Footer from './Footer/Footer';
 // import IronDialog from './Dialogs/IronDialog';
@@ -359,7 +360,8 @@ function DrugsTestClick(IRONData:any){
         <RFTDialog />
         <THYROIDDialog />
         <Button className='btn' variant="contained" ></Button>
-        <Button className='btn' variant="contained">SPECIAL TEST</Button>
+        {/* <Button className='btn' variant="contained">SPECIAL TEST</Button> */}
+        <SpecialDialog />
         <PregnancyDilaog onSaveClick={PregnacyTestClick} />
         <Button className='btn' variant="contained">PBF</Button>
         {/* <Button className='btn' variant="contained" onClick={handleRFTClickOpen}>RFT/KFT</Button> */}

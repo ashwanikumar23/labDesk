@@ -17,7 +17,7 @@ import {
 } from "antd";
 
 const { Option } = Select;
-const URINEDialog = (props:any) => {
+const SpecialDialog = (props:any) => {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
   const [formData, setFormData] = useState(null);
@@ -36,10 +36,10 @@ const URINEDialog = (props:any) => {
   return (
 <>
     <Button className="btn" type="primary" onClick={() => setOpen(true)}>
-    URINE TEST 
+    SPECIAL TEST 
     </Button>
     <Modal
-      title="URINE TEST"
+      title="SPECIAL TEST"
       centered
       
       open={open}
@@ -48,15 +48,13 @@ const URINEDialog = (props:any) => {
      onCancel={() => setOpen(false)}
       width={700}
     >
-      <div><Space>
-      <p>PHYSICAL EXAMINATION</p>
+      <div>
       <Radio.Group onChange={onChange} value={value}>
     <Radio value={"PRINT"}>PRINT</Radio>
     <Radio value={"PRINT-ALL"}>PRINT ALL</Radio>
     {/* <Radio value={"METHOD"}>METHOD</Radio> */}
     <Radio value={"COMMENTS"}>COMMENTS</Radio>
   </Radio.Group>
-      </Space>
         <Form
           form={form}
           onFinish={onFinish}
@@ -68,167 +66,116 @@ const URINEDialog = (props:any) => {
           <Row gutter={22}>
           <Col span={10}>
           {/* <div ><p>MACROSCOPIC EXAMINATION</p></div> */}
-          <Form.Item name="QUALITY" label="QUALITY" style={{marginBottom: '7px'}}>
-              <Input value={'21ML'}/>
-          </Form.Item>
-          <Form.Item name="COLOUR" label="COLOUR" style={{marginBottom: '7px'}}>
-                  <Select >
-                    <Option value="option1">Option 1</Option>
-                    <Option value="option2">Option 2</Option>
-                  </Select>
-          </Form.Item>
-          <Form.Item name="DEPOSITS" label="DEPOSITS" style={{marginBottom: '7px'}}>
-              <Select >
-                    <Option value="option1">Option 1</Option>
-                    <Option value="option2">Option 2</Option>
-              </Select>
-          </Form.Item>
-          <Form.Item name="SPECIFICGRAVITY" label="SPECIFIC GRAVITY" style={{marginBottom: '7px'}}>
-              <Select >
-                    <Option value="option1">Option 1</Option>
-                    <Option value="option2">Option 2</Option>
-              </Select>
-          </Form.Item>
-          <Form.Item name="REACTION" label="REACTION" style={{marginBottom: '7px'}}>
-              <Select >
-                    <Option value="option1">Option 1</Option>
-                    <Option value="option2">Option 2</Option>
-              </Select>
-          </Form.Item>
-          <Form.Item name="APPEARANCE" label="APPEARANCE" style={{marginBottom: '7px'}}>
-              <Select >
-                    <Option value="option1">Option 1</Option>
-                    <Option value="option2">Option 2</Option>
-              </Select>
-          </Form.Item>
-           <div ><p>MICROSCOPIC EXAMINATION</p></div>
-          <Form.Item name="RBCs" label="RBCs" style={{marginBottom: '7px'}}>
-          <Select >
-                    <Option value="option1">MANY</Option>
-                    <Option value="option2">Option 2</Option>
-              </Select>
-          </Form.Item>
-          <Form.Item name="PUSCELLS" label="Pus Cells" style={{marginBottom: '7px'}}>
-          <Select >
-                    <Option value="option1">Option 1</Option>
-                    <Option value="option2">Option 2</Option>
-              </Select>
-          </Form.Item>
-          <Form.Item name="EpthelialCell" label="Epthelial Cel" style={{marginBottom: '7px'}}>
+          <Form.Item name="CA_125" label="CA-125" style={{marginBottom: '7px'}}>
               <Input/>
           </Form.Item>
-          <Form.Item name="Crystal" label="Crystal" style={{marginBottom: '7px'}}>
-          <Select >
-                    <Option value="option1">Option 1</Option>
-                    <Option value="option2">Option 2</Option>
-              </Select>
-          </Form.Item>
-          <Form.Item name="Casts" label="Casts" style={{marginBottom: '7px'}}>
-          <Select >
-                    <Option value="option1">Option 1</Option>
-                    <Option value="option2">Option 2</Option>
-              </Select>
-          </Form.Item>
-          <div ><p>MICROSCOPIC EXAMINATION</p></div>
-          <Form.Item name="SpermatozaSeen" label="Spermatoza Seen" style={{marginBottom: '7px'}}>
-          <Select >
-                    <Option value="option1">Option 1</Option>
-                    <Option value="option2">Option 2</Option>
-              </Select>
-          </Form.Item>
-          
-          <Form.Item name="24hoursProtein" label="24 hours Protein" style={{marginBottom: '7px'}}>
-              <Space><Input /><span>%</span></Space>
-          </Form.Item>
-          <Form.Item name="Yeast" label="Yeast" style={{marginBottom: '7px'}}>
-              <Space><Input /><span>%</span></Space>
-          </Form.Item>
-          <Form.Item name="BenceJonesProtien" label="Bence Jones Protien" style={{marginBottom: '7px'}}>
-              <Space><Input /><span>%</span></Space>
-          </Form.Item>
-          {/* <Form.Item name="PlusCells" label="Plus Cells" style={{marginBottom: '7px'}}>
-              <Space><Input /><span>/HPF</span></Space>
-          </Form.Item>
-          <Form.Item name="RBCs" label="RBCs" style={{marginBottom: '7px'}}>
-              <Space><Input /><span>/HPF</span></Space>
-          </Form.Item>
-          <Form.Item name="EPITHELIAL CELL" label="EPITHELIAL CELL" style={{marginBottom: '7px'}}>
-              <Space><Input /><span>/HPF</span></Space>
-          </Form.Item> */}
-          {/* <Form.Item name="MORPHOLOGY" label="MORPHOLOGY" style={{marginBottom: '7px'}}>
-              <Select >
-                    <Option value="option1">Option 1</Option>
-                    <Option value="option2">Option 2</Option>
-              </Select>
-          </Form.Item>
-          <Form.Item name="TOTALSPERMCOUNT" label="TOTAL SPERM COUNT" style={{marginBottom: '7px'}}>
+          <Form.Item name="CEA" label="CEA" style={{marginBottom: '7px'}}>
               <Input/>
           </Form.Item>
-          <Form.Item name="COMMENTS" label="COMMENTS" style={{marginBottom: '7px'}}>
-          <Select >
-                    <Option value="option1">Option 1</Option>
-                    <Option value="option2">Option 2</Option>
-              </Select>
+          <Form.Item name="C-ReactionProtien" label="C-Reaction Protien" style={{marginBottom: '7px'}}>
+              <Input/>
           </Form.Item>
-          <Form.Item name="OPINION" label="OPINION" style={{marginBottom: '7px'}}>
+          <Form.Item name="CreatenineKinase" label="Createnine Kinase" style={{marginBottom: '7px'}}>
+              <Input/>
+          </Form.Item>
+          <Form.Item name="Iron" label="Iron" style={{marginBottom: '7px'}}>
+              <Input/>
+          </Form.Item>
+          <Form.Item name="TIBC" label="TIBC" style={{marginBottom: '7px'}}>
+              <Input/>
+          </Form.Item>
+          <Form.Item name="RapidPSA" label="Rapid PSA" style={{marginBottom: '7px'}}>
+              <Input/>
+          </Form.Item>
+          <Form.Item name="G6PD" label="G6PD" style={{marginBottom: '7px'}}>
+              <Input/>
+          </Form.Item>
+          
+          <Form.Item name="RapidStyphi" label="Rapid S.typhi" style={{marginBottom: '7px'}}>
               <Select >
                     <Option value="option1">Option 1</Option>
                     <Option value="option2">Option 2</Option>
               </Select>
-          </Form.Item> */}
-          
-          
+          </Form.Item>
+          <Form.Item name="RapidMalaria" label="Rapid Malaria(Pan/pt)" style={{marginBottom: '7px'}}>
+              <Select >
+                    <Option value="option1">Option 1</Option>
+                    <Option value="option2">Option 2</Option>
+              </Select>
+          </Form.Item>
+          <Form.Item name="RapidTB(lgG)" label="Rapid TB (lgG)" style={{marginBottom: '7px'}}>
+              <Select >
+                    <Option value="option1">Option 1</Option>
+                    <Option value="option2">Option 2</Option>
+              </Select>
+          </Form.Item>
+          <Form.Item name="RapidTB(lgM)" label="Rapid TB (lgM)" style={{marginBottom: '7px'}}>
+              <Select >
+                    <Option value="option1">Option 1</Option>
+                    <Option value="option2">Option 2</Option>
+              </Select>
+          </Form.Item>
+          <Form.Item name="RapidTB(lgA)" label="Rapid TB (lgA)" style={{marginBottom: '7px'}}>
+              <Select >
+                    <Option value="option1">Option 1</Option>
+                    <Option value="option2">Option 2</Option>
+              </Select>
+          </Form.Item>
+          <Form.Item name="Dengue(lgG)" label="Dengue (lgG)" style={{marginBottom: '7px'}}>
+              <Select >
+                    <Option value="option1">Option 1</Option>
+                    <Option value="option2">Option 2</Option>
+              </Select>
+          </Form.Item>
+          <Form.Item name="Dengue(lgM)" label="Dengue (lgM)" style={{marginBottom: '7px'}}>
+              <Select >
+                    <Option value="option1">Option 1</Option>
+                    <Option value="option2">Option 2</Option>
+              </Select>
+          </Form.Item>
+          <Form.Item name="RapidTB(lgGlgMlgA)" label="Rapid TB (lgG,lgM,lgA)" style={{marginBottom: '7px'}}>
+              <Select >
+                    <Option value="option1">Option 1</Option>
+                    <Option value="option2">Option 2</Option>
+              </Select>
+          </Form.Item>
+          <Form.Item name="TROP_T" label="TROP_T" style={{marginBottom: '7px'}}>
+              <Select >
+                    <Option value="option1">Option 1</Option>
+                    <Option value="option2">Option 2</Option>
+              </Select>
+          </Form.Item>
+          <Form.Item name="TROP_I" label="TROP_I" style={{marginBottom: '7px'}}>
+              <Select >
+                    <Option value="option1">Option 1</Option>
+                    <Option value="option2">Option 2</Option>
+              </Select>
+          </Form.Item>
+          <Form.Item name="SCRUBTYPHUS" label="SCRUB TYPHUS" style={{marginBottom: '7px'}}>
+              <Select >
+                    <Option value="option1">Option 1</Option>
+                    <Option value="option2">Option 2</Option>
+              </Select>
+          </Form.Item>
           </Col>
-           <Col span={4} ></Col>
             <Col span={10}>
-            <div ><p>CHEMICAL EXAMINATION</p></div>
             {/* <div ><p>MACROSCOPIC EXAMINATION</p></div> */}
-            <Form.Item name="ALBUMIN" label="ALBUMIN" style={{marginBottom: '7px'}}>
+            <Form.Item name="COVIDE19RAPID" label="COVIDE-19 RAPID" style={{marginBottom: '7px'}}>
               <Select >
                     <Option value="option1">Option 1</Option>
                     <Option value="option2">Option 2</Option>
               </Select>
           </Form.Item>
-          <Form.Item name="MICROALBUMIN" label="MICRO ALBUMIN" style={{marginBottom: '7px'}}>
-            <Input />
-          </Form.Item>
-          <Form.Item name="SUGAR" label="SUGAR" style={{marginBottom: '7px'}}>
+          <Form.Item name="COVIDE19RT-PCR" label="COVIDE-19 RT-PCR" style={{marginBottom: '7px'}}>
               <Select >
                     <Option value="option1">Option 1</Option>
                     <Option value="option2">Option 2</Option>
               </Select>
           </Form.Item>
-          <Form.Item name="ACETONE" label="ACETONE" style={{marginBottom: '7px'}}>
-              <Select >
-                    <Option value="option1">Option 1</Option>
-                    <Option value="option2">Option 2</Option>
-              </Select>
-          </Form.Item>
-          <Form.Item name="KETONE" label="KETONE" style={{marginBottom: '7px'}}>
-              <Select >
-                    <Option value="option1">Option 1</Option>
-                    <Option value="option2">Option 2</Option>
-              </Select>
-          </Form.Item>
-          <Form.Item name="BITESALTS" label="BITE SALTS" style={{marginBottom: '7px'}}>
-              <Select >
-                    <Option value="option1">Option 1</Option>
-                    <Option value="option2">Option 2</Option>
-              </Select>
-          </Form.Item>
-          <Form.Item name="UROBILINOGEN" label="UROBILINOGEN" style={{marginBottom: '7px'}}>
-              <Select >
-                    <Option value="option1">Option 1</Option>
-                    <Option value="option2">Option 2</Option>
-              </Select>
-          </Form.Item>
-          <Form.Item name="PH" label="PH" style={{marginBottom: '7px'}}>
+          <Form.Item name="FERRITINE" label="FERRITINE" style={{marginBottom: '7px'}}>
               <Input />
           </Form.Item>
-          <Form.Item name="NITRITE" label="NITRITE" style={{marginBottom: '7px'}}>
-              <Input />
-          </Form.Item>
-          {/* <Form.Item name="D-DIMER" label="DIMER" style={{marginBottom: '7px'}}>
+          <Form.Item name="D-DIMER" label="DIMER" style={{marginBottom: '7px'}}>
               <Input />
           </Form.Item>
           <Form.Item name="CYST" label="CYST" style={{marginBottom: '7px'}}>
@@ -236,7 +183,7 @@ const URINEDialog = (props:any) => {
                     <Option value="option1">Option 1</Option>
                     <Option value="option2">Option 2</Option>
               </Select>
-          </Form.Item> */}
+          </Form.Item>
           {/* <Form.Item name="UndigestedFoodParticles" label="Undigested Food Particles" style={{marginBottom: '7px'}}>
               <Select >
                     <Option value="option1">Option 1</Option>
@@ -328,4 +275,4 @@ const URINEDialog = (props:any) => {
   )
 }
 
-export default URINEDialog;
+export default SpecialDialog;
