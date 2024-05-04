@@ -138,105 +138,85 @@ const HomeFormAndDialog: React.FC<any> = (props:any) => {
 
                 </Col>
               </Row>
+
               <Row gutter={24}>
-                <Col span={8}>
-                <Form.Item label="Name" name="name">
-                    <Space.Compact>
-                        <Form.Item
-                        name={['Name', 'Prefix']}
-                        noStyle
-                        rules={[{ required: true, message: 'Prefix is required' }]}
-                        >
-                        <Select style={{ width: '40%' }} placeholder="Select Prefix">
+                <Col span={6}>
+                    <Form.Item label="Prefix" name="Prefix" >
+                        <Select style={{ width: '100%' }} placeholder="Select Prefix">
                             <Option value="Mr">Mr</Option>
                             <Option value="Dr">Dr</Option>
+                            <Option value="Master">Master</Option>
                         </Select>
-                        </Form.Item>
-                        <Form.Item
-                        name={['Name', 'fullname']}
-                        noStyle
-                        rules={[{ required: true, message: 'fullname is required' }]}
-                        >
-                        <Input style={{ width: '60%' }}  placeholder="Input street" />
-                        </Form.Item>
-                    </Space.Compact>
                     </Form.Item>
 
                 </Col>
-                <Col span={5}>
+                <Col span={6}>
+                    <Form.Item label="Name" name="name" >
+                        <Input style={{ width: '100%' }} placeholder="Input " />
+                    </Form.Item>
+                </Col>
+                <Col span={6}>
                 <Form.Item label="Gender" name="gender">
                         <Select style={{width:'100%'}}>
                             <Select.Option value="M">M</Select.Option>
                             <Select.Option value="F">F</Select.Option>
                         </Select>
                     </Form.Item>
-                </Col>
-                <Col span={7}>
-                <Form.Item label="Age" name="age">
-                    <Space.Compact>
-                        <Form.Item
-                        name={['age', 'number']}
-                        noStyle
-                        rules={[{ required: true, message: 'Prefix is required' }]}
-                        >
-                        <Input  placeholder="Input street" />
-                        </Form.Item>
-                        <Form.Item
-                        name={['age', 'old']}
-                        noStyle
-                        rules={[{ required: true, message: 'fullname is required' }]}
-                        >
-                       
-                        <Select style={{ width: '40%' }} placeholder="Select Prefix">
-                            <Option value="Mr">Mr</Option>
-                            <Option value="Dr">Dr</Option>
-                        </Select>
-                        </Form.Item>
-                    </Space.Compact>
-                    </Form.Item>
 
                 </Col>
+                
               </Row>
-              
-            {/* <Flex vertical={false}>
-                <div style={{ ...baseStyle }}> */}
-                    {/* <Form.Item label="Date :" name="date">
-                        <DatePicker style={{ width: '115%' }}  defaultValue={dayjs('01/01/2015', dateFormatList)} format={dateFormatList} />
-                    </Form.Item> */}
-                {/* </div>
-                <div style={{ ...baseStyle }}> */}
-                    {/* <Form.Item label="Time :" name="time">
-                        <DatePicker style={{ width: '115%' }} name='time' picker={'time'}  />
-                    </Form.Item> */}
-                {/* </div>
-                <div style={{ ...baseStyle }}> */}
-                    {/* <Form.Item label="Lab :" name="labNumber">
-                        <Input name='labNumber' style={{ width: '115%' }} placeholder='122' />
-                    </Form.Item> */}
-
-                {/* </div>
-            </Flex> */}
-            <Flex vertical={false}>
-                <div style={{ ...baseStyle2 }}>
-                    {/* <Form.Item label="Rec-Date:" name="Recivedtime" >
-                        <DatePicker name='RecivedDate' style={{ width: '115%' }}  defaultValue={dayjs('01/01/2015', dateFormatList)} format={dateFormatList} />
-                    </Form.Item> */}
-                </div>
-                <div style={{ ...baseStyle2 }}>
-                    {/* <Form.Item label="Time :">
-                        <DatePicker name='Recivedtime' style={{ width: '115%' }} picker={'time'}  />
-                    </Form.Item> */}
-                </div>
-                <div style={{ width: '50%' }}></div>
-            </Flex>
-            <Flex vertical={false}>
-                <div >
-                    {/* <Form.Item label="Name :" name="name">
+              <Row gutter={24}>
+                <Col span={6}>
+                    <Form.Item label="Age" style={{ marginBottom: 0 }}>
+                        <Form.Item
+                            name="ageinNumber"
+                            rules={[{ required: true }]}
+                            style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
+                        >
+                            <Input style={{ width: '100%' }} placeholder="Input birth year" />
+                        </Form.Item>
+                        <Form.Item
+                            name="Year"
+                            rules={[{ required: true }]}
+                            style={{ display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px' }}
+                        >
+                        <Select style={{ width: '100%' }} placeholder="Select Prefix">
+                                <Option value="Day">Day</Option>
+                                <Option value="Month">Month</Option>
+                                <Option value="Year">Year</Option>
+                            </Select>
+                        </Form.Item>
+                    </Form.Item>
+                </Col>
+                <Col span={6}></Col>
+                <Col span={6}></Col>
+              </Row>
+              {/* <Row gutter={24} style={{height:'55px'}}> */}
+                {/* <Col span={7}> */}
+                {/* <Form.Item label="Name" style={{ marginBottom: 0 }}>
+                    <Form.Item
+                        name="Prefix"
+                        rules={[{ required: true }]}
+                        style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
+                    >
+                        
+                        
+                    </Form.Item>
+                    <Form.Item
+                        name="fullname"
+                        rules={[{ required: true }]}
+                        style={{ display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px' }}
+                    >
+                       <Input style={{ width: '100%' }} placeholder="Input " />
+                    </Form.Item>
+                </Form.Item> */}
+                {/* <Form.Item label="Name" name="name">
                     <Space.Compact>
                         <Form.Item
                         name={['Name', 'Prefix']}
                         noStyle
-                        rules={[{ required: true, message: 'Prefix is required' }]}
+                        // rules={[{ required: true, message: 'Prefix is required' }]}
                         >
                         <Select style={{ width: '40%' }} placeholder="Select Prefix">
                             <Option value="Mr">Mr</Option>
@@ -246,52 +226,30 @@ const HomeFormAndDialog: React.FC<any> = (props:any) => {
                         <Form.Item
                         name={['Name', 'fullname']}
                         noStyle
-                        rules={[{ required: true, message: 'fullname is required' }]}
+                        // rules={[{ required: true, message: 'fullname is required' }]}
                         >
-                        <Input  placeholder="Input street" />
+                        <Input  style={{ width: '60%' }}  placeholder="Input street" />
                         </Form.Item>
                     </Space.Compact>
                     </Form.Item> */}
 
-                </div>
-                <div style={{ width: '20%' }}>
-                    {/* <Form.Item label="Gender :" name="gender" style={{marginLeft:"72px"}}>
-                        <Select style={{width:'70%'}}>
-                            <Select.Option value="M">M</Select.Option>
-                            <Select.Option value="F">F</Select.Option>
-                        </Select>
-                    </Form.Item> */}
-                </div>
-                <div style={{width:'40%'}} >
-                {/* <Form.Item label="Age :" name="age">
-                    <Space.Compact>
-                        <Form.Item
-                        name={['age', 'number']}
-                        noStyle
-                        rules={[{ required: true, message: 'Prefix is required' }]}
-                        >
-                        <Input  placeholder="Input street" />
-                        </Form.Item>
-                        <Form.Item
-                        name={['age', 'old']}
-                        noStyle
-                        rules={[{ required: true, message: 'fullname is required' }]}
-                        >
-                       
-                        <Select style={{ width: '40%' }} placeholder="Select Prefix">
-                            <Option value="Mr">Mr</Option>
-                            <Option value="Dr">Dr</Option>
-                        </Select>
-                        </Form.Item>
-                    </Space.Compact>
-                    </Form.Item> */}
-                </div>
+                {/* </Col>
+                <Col span={5}>
+                
+                </Col>
+                <Col span={7}>
+                
 
-            </Flex>
-            <Flex vertical={false}>
-                <div style={{width:'58%'}}>
+                </Col> */}
+              {/* </Row> */}
+              
+
+
+
+            <Flex vertical={false} gap={'5px'}>
+                <div style={{width:'60%'}}>
                 <Form.Item label="Address :" name="address" style={{marginLeft:'-179px'}}>
-                    <Input name='address' style={{ width: '115%' }} placeholder='Enter Address ' onChange={(e)=>{props.handleChange(e)}}/>
+                    <Input name='address' style={{  }} placeholder='Enter Address ' onChange={(e)=>{props.handleChange(e)}}/>
                 </Form.Item>
                 </div>
                 <div style={{width:'25%'}}>
@@ -300,12 +258,13 @@ const HomeFormAndDialog: React.FC<any> = (props:any) => {
                 </Form.Item>
                 </div>
             </Flex>
+
             <Flex vertical={false}>
-                <div style={{width:"42%"}}>
+                <div style={{width:"43%"}}>
                     <Form.Item label="Materials" name='materials' style={{marginLeft:'-89px'}}>
                         <Select
                         defaultValue="URINE"
-                        style={{ width: 120 }}
+                        style={{  }}
                         options={[
                             { value: 'URINE', label: 'URINE' },
                             { value: 'BOOLD', label: 'BLOOD' },
@@ -315,7 +274,7 @@ const HomeFormAndDialog: React.FC<any> = (props:any) => {
                         />
                     </Form.Item>
                 </div>
-                <div style={{width:"50%"}}>
+                <div style={{width:"40%"}}>
                     <Form.Item label="Reffer by" name='referance'>
                         <Select>
                             <Select.Option value="demo">Demo</Select.Option>
