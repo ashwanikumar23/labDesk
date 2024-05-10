@@ -40,24 +40,7 @@ const PatientList: React.FC<any> = (props:any) => {
       // });
   }, []);
 
-  // const onLoadMore = () => {
-  //   setLoading(true);
-  //   setList(
-  //     data.concat([...new Array(count)].map(() => ({ loading: true, name: {}, picture: {} }))),
-  //   );
-  //   fetch(fakeDataUrl)
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       const newData = data.concat(props.patientsDB);
-  //       setData(newData);
-  //       setList(newData);
-  //       setLoading(false);
-  //       // Resetting window's offsetTop so as to display react-virtualized demo underfloor.
-  //       // In real scene, you can using public method of react-virtualized:
-  //       // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
-  //       window.dispatchEvent(new Event('resize'));
-  //     });
-  // };
+ 
 
   const loadMore =
     !initLoading && !loading ? (
@@ -69,16 +52,14 @@ const PatientList: React.FC<any> = (props:any) => {
           lineHeight: '32px',
         }}
       >
-        {/* <Button onClick={onLoadMore}>loading more</Button> */}
+       
       </div>
     ) : null;
 
   return (
     <List
       size="small"
-      // header={<div>Header</div>}
       style={{marginLeft:'4px',marginRight:'4px', background: 'aliceblue'}}
-      footer={<div>Footer</div>}
       bordered
       dataSource={data}
       renderItem={(item:any) => <List.Item><Space> <div style={{width:'140px'}}>{item.name}</div> <div><EditFilled /></div> <div><DeleteFilled /></div></Space></List.Item>}

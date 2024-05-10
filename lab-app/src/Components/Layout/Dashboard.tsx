@@ -12,13 +12,12 @@ import {
 import patientsDB from './DB/PatientDB.json'
 import type { MenuProps } from 'antd';
 import { Divider, Layout, Menu, Typography, theme } from 'antd';
-import { AnyNaptrRecord } from 'dns';
 import HomeFormAndDialog from './HomeFormAndDialog';
 import './layout.css';
 import PatientList from './PatientList';
 
-const { Header, Content, Footer, Sider } = Layout;
-const { Title } = Typography;
+const {  Content, Footer, Sider } = Layout;
+//const { Title } = Typography;
 
 const items: MenuProps['items'] = [
   UserOutlined,
@@ -98,12 +97,8 @@ const DashBoard: React.FC = () => {
         <div className="demo-logo-vertical" />
         <h3  style={{color:'#f5f5f5 !important'}} >Patient list</h3>
         <PatientList patientsDB={patientsDB} />
-        {/* <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} /> */}
       </Sider>
       <Layout style={{ marginLeft: 250 }}>
-        {/* <Header style={{ padding: 0, background: colorBgContainer }} >
-        <div style={{padding:'3px'}}>Patient screen</div>
-        </Header> */}
 
         <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
           <div

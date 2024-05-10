@@ -36,6 +36,7 @@ import URINEDialog from '../../Dialogs/URINEDialog';
 import SEROLOGYDialog from '../../Dialogs/SEROLOGYDialog';
 import FLUIDDialog from '../../Dialogs/FLUIDDialog';
 import SpecialDialog from '../../Dialogs/SpecialDialog';
+import PBFDialog from '../../Dialogs/PBFDialog';
 // import PregnancyDilaog from './Dialogs/PregnancyDialog';
 // import Footer from './Footer/Footer';
 // import IronDialog from './Dialogs/IronDialog';
@@ -95,48 +96,6 @@ function ModalGrid(props:any) {
   const [  CBC, setCBC] = React.useState({});
   const [  STOOL, setSTOOL] = React.useState({});
 
-  // if(Object.keys(props.editPatient).length !==0){
-  //   setName(props.editPatient.Name.toString());
-  // }
-  // console.log(props.editPatient.Name);
-
-//   function formatDate(dateObj:Date) {
-//     const year = dateObj.getFullYear();
-//     const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // Adding 1 because getMonth returns zero-based index
-//     const day = String(dateObj.getDate()).padStart(2, '0');
-//     return `${day}-${month}-${year}`;
-//   }
-//   function save_Print(){
-  
-//     setPatient((prevState: { constructor?: any; }) => {
-//       let newState:any = { ...prevState }; // Make a copy of the previous state
-    
-//       if (Object.keys(prevState).length === 0 && prevState.constructor === Object) {
-//         const uniqueId = generateUniqueId();
-//         newState.id = uniqueId; // Set the ID if it's the first time setting state
-//       }
-    
-//       // Set other properties
-//       newState['DATE'] = DATE;
-//       newState['Name'] = (Name!==''?Name:(props.editPatient.Name?props.editPatient.Name:'Name'));
-//       newState['RecivedDate'] = ReciveData;
-//       newState['Time'] = (time!==''?time:(props.editPatient.time?props.editPatient.time:'time'));
-//       newState['Lab NO'] = (LabNO!==''?LabNO:(props.editPatient.LabNO?props.editPatient.LabNO:'LabNO'));
-//       newState['M_no'] =  (M_no!==''?M_no:(props.editPatient.M_no?props.editPatient.M_no:'888888888'));
-//       newState['Age'] =  (Age!==''?Age:(props.editPatient.Age?props.editPatient.Age:'23'));
-//       newState['Gender'] =  (Gender!==''?Gender:(props.editPatient.Gender?props.editPatient.Gender:'23'));
-//       newState['Materials'] = (Materials!==''?Materials:(props.editPatient.Materials?props.editPatient.Materials:'23'));
-//       newState['referredby'] =  (referredby!==''?referredby:(props.editPatient.referredby?props.editPatient.referredby:'23'));
-//       newState['Address'] =  (Address!==''?Address:(props.editPatient.Address?props.editPatient.Address:'23'));
-//       // newState['Preg Test'] =  (Object.keys(PREG).length!==0?PREG:(Object.keys(props.editPatient['Preg Tes']).length!==0?props.editPatient['Preg Tes']:{}));
-//       // newState['Iron Test'] =  (Object.keys(IRON).length!==0?IRON:(Object.keys(props.editPatient['Iron Test']).length!==0?props.editPatient['Iron Test']:{}));
-//       newState['Drugs Test'] = DRUGABUSE;
-    
-//       return newState; // Return the updated state
-//     });
-    
-//     console.log("patient",Patient)
-//   }
 
 function PregnacyTestClick(PregData:any){
   console.log(PregData);
@@ -151,29 +110,6 @@ function DrugsTestClick(IRONData:any){
   setDRUGABUSE(IRONData);
 }
 
-  
-
-//   function generateUniqueId() {
-  
-//     return Math.random().toString(36).substring(2, 10);
-//   }
-  
-//   const [Materials, setMaterials] = React.useState('');
-//   const handleChange = (event: SelectChangeEvent) => {
-//     setMaterials(event.target.value);
-//   };
-//   const [referredby, setReferredby] = React.useState('');
-//   const handleReferreChange = (event: SelectChangeEvent) => {
-//     setReferredby(event.target.value);
-//   };
-//   const [openHAEMATOLOGY, setOpenHAEMATOLOGY] = React.useState(false);
-//   const handleClickOpen = () => {
-//     setOpenHAEMATOLOGY(true);
-//   };
-
-//   const handleClose = () => {
-//     setOpenHAEMATOLOGY(false);
-//   };
   const [openBIOCHEMISTRY, setOpenBIOCHEMISTRY] = React.useState(false);
   const handleClickBIOOpen = () => {
     setOpenBIOCHEMISTRY(true);
@@ -230,14 +166,6 @@ function DrugsTestClick(IRONData:any){
     setOpenCULTURE(false);
   };
 
-  // const [openIRON, setOpenIRON] = React.useState(false);
-
-  // const handleIRONClickOpen = () => {
-  //   setOpenIRON(true);
-  // };
-  // const handleIRONClose = () => {
-  //   setOpenIRON(false);
-  // };
 
   
   const [openGTT, setOpenGTT] = React.useState(false);
@@ -249,14 +177,6 @@ function DrugsTestClick(IRONData:any){
     setOpenGTT(false);
   };
 
-  // const [openPreg, setOpenPreg] = React.useState(false);
-
-  // const handlePregClickOpen = () => {
-  //   setOpenPreg(true);
-  // };
-  // const handlePregClose = () => {
-  //   setOpenPreg(false);
-  // };
 
   const [openRFT, setOpenRFT] = React.useState(false);
 
@@ -329,28 +249,15 @@ function DrugsTestClick(IRONData:any){
     <>
       <div className='flex pt'>
         <HAEMATOLOGYDialog />
-        <BIOModal />
-        {/* <Button className='btn' variant="contained" onClick={handleClickOpen}>HAEMATOLOGY</Button> */}
-        {/* <Button className='btn' variant="contained" onClick={handleClickBIOOpen}>BIOCHEMISTRY</Button> */}
-        {/* <Button className='btn' variant="contained">SEROLOGY</Button> */}
+        <BIOModal />      
         <SEROLOGYDialog />
-        {/* <Button className='btn' variant="contained" onClick={handleURINEClickOpen}>URINE</Button> */}
         <URINEDialog />
-        {/* <Button className='btn' variant="contained" onClick={handleStoolClickOpen}>STOOL</Button> */}
         <StoolDialog />
-        {/* <Button className='btn' variant="contained">FLUID</Button> */}
         <FLUIDDialog />
       </div>
       <div className='flex  pt'>
-        {/* <Button className='btn' variant="contained" onClick={handleLFTClickOpen}>LFT</Button>
-        <Button className='btn' variant="contained" onClick={handleLIPIDClickOpen}>LIPID PROFILE</Button>
-        <Button className='btn' variant="contained" onClick={handleSEMENClickOpen}>SEMEN</Button>
-        <Button className='btn' variant="contained" onClick={handleELECTROLYTESClickOpen}>ELECTROLYTES</Button>
-        <Button className='btn' variant="contained" onClick={handleWIDALClickOpen}>WIDAL</Button>
-        <Button className='btn' variant="contained" onClick={handleCBCClickOpen}>CBC</Button> */}
         <LFTDialog />
         <LIPIDDialog />
-
         <SEMENDialog />
         <ELECTROLYTESDialog />
         <WIDALDialog />
@@ -360,13 +267,9 @@ function DrugsTestClick(IRONData:any){
         <RFTDialog />
         <THYROIDDialog />
         <Button className='btn' variant="contained" ></Button>
-        {/* <Button className='btn' variant="contained">SPECIAL TEST</Button> */}
         <SpecialDialog />
         <PregnancyDilaog onSaveClick={PregnacyTestClick} />
-        <Button className='btn' variant="contained">PBF</Button>
-        {/* <Button className='btn' variant="contained" onClick={handleRFTClickOpen}>RFT/KFT</Button> */}
-        {/* <Button className='btn' variant="contained" onClick={handleTHYROIDClickOpen}>THYROID</Button> */}
-        {/* <Button className='btn' variant="contained" onClick={handlePregClickOpen}>PREGNANCY</Button> */}
+        <PBFDialog />
       </div>
       <div className='flex  pt'>
         <GTTDialog />
@@ -375,19 +278,7 @@ function DrugsTestClick(IRONData:any){
         <DRUG_ABUSE onSaveClick={DrugsTestClick} />
         <HBA1c1Dialog/>
         <HBA1c2Dialog />
-        {/* <Button className='btn' variant="contained" onClick={handleGTTClickOpen}>GTT</Button> */}
-        {/* <Button className='btn' variant="contained" onClick={handleIRONClickOpen}>IRON</Button> */}
-        {/* <Button className='btn' variant="contained" onClick={handleClickCULTUREOpen} >CULTURE</Button> */}
-        {/* <Button className='btn' variant="contained" >DRUG ABUSE</Button> */}
-        {/* <Button className='btn' variant="contained" onClick={handleHBA1c1ClickOpen}>HB A1c 1</Button>
-        <Button className='btn' variant="contained" onClick={handleHBA1c2ClickOpen}>HB A1c 2</Button> */}
       </div>
-      
-
-      
-      
-     
-
     </>
   );
 

@@ -79,10 +79,6 @@ const HomeFormAndDialog: React.FC<any> = (props:any) => {
     });
     const onFinish = (fieldsValue: any) => {
         console.log(fieldsValue[0].name,fieldsValue[0].value);
-    //     const rangeValue = fieldsValue['date'];
-    //    // const rangeTimeValue = fieldsValue['range-time-picker'];
-        
-    //     console.log('Received values of form: ', rangeValue);
       };
 
 
@@ -93,7 +89,6 @@ const HomeFormAndDialog: React.FC<any> = (props:any) => {
             wrapperCol={{ span: 14 }}
             layout="horizontal"
             onFinish={onFinish}
-            //onFieldsChange={onFinish}
             labelWrap
             initialValues={{ size: componentSize }}
             onValuesChange={onFormLayoutChange}
@@ -132,9 +127,7 @@ const HomeFormAndDialog: React.FC<any> = (props:any) => {
                     </Form.Item>
                 </Col>
                 <Col span={6}>
-                        {/* <Form.Item label="Lab :" name="labNumber">
-                            <Input name='labNumber' style={{ width: '115%' }} placeholder='122' />
-                        </Form.Item> */}
+                        
 
                 </Col>
               </Row>
@@ -192,60 +185,6 @@ const HomeFormAndDialog: React.FC<any> = (props:any) => {
                 <Col span={6}></Col>
                 <Col span={6}></Col>
               </Row>
-              {/* <Row gutter={24} style={{height:'55px'}}> */}
-                {/* <Col span={7}> */}
-                {/* <Form.Item label="Name" style={{ marginBottom: 0 }}>
-                    <Form.Item
-                        name="Prefix"
-                        rules={[{ required: true }]}
-                        style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
-                    >
-                        
-                        
-                    </Form.Item>
-                    <Form.Item
-                        name="fullname"
-                        rules={[{ required: true }]}
-                        style={{ display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px' }}
-                    >
-                       <Input style={{ width: '100%' }} placeholder="Input " />
-                    </Form.Item>
-                </Form.Item> */}
-                {/* <Form.Item label="Name" name="name">
-                    <Space.Compact>
-                        <Form.Item
-                        name={['Name', 'Prefix']}
-                        noStyle
-                        // rules={[{ required: true, message: 'Prefix is required' }]}
-                        >
-                        <Select style={{ width: '40%' }} placeholder="Select Prefix">
-                            <Option value="Mr">Mr</Option>
-                            <Option value="Dr">Dr</Option>
-                        </Select>
-                        </Form.Item>
-                        <Form.Item
-                        name={['Name', 'fullname']}
-                        noStyle
-                        // rules={[{ required: true, message: 'fullname is required' }]}
-                        >
-                        <Input  style={{ width: '60%' }}  placeholder="Input street" />
-                        </Form.Item>
-                    </Space.Compact>
-                    </Form.Item> */}
-
-                {/* </Col>
-                <Col span={5}>
-                
-                </Col>
-                <Col span={7}>
-                
-
-                </Col> */}
-              {/* </Row> */}
-              
-
-
-
             <Flex vertical={false} gap={'5px'}>
                 <div style={{width:'60%'}}>
                 <Form.Item label="Address :" name="address" style={{marginLeft:'-179px'}}>
@@ -268,8 +207,7 @@ const HomeFormAndDialog: React.FC<any> = (props:any) => {
                         options={[
                             { value: 'URINE', label: 'URINE' },
                             { value: 'BOOLD', label: 'BLOOD' },
-                            // { value: 'Yiminghe', label: 'yiminghe' },
-                            // { value: 'disabled', label: 'Disabled', disabled: true },
+                           
                         ]}
                         />
                     </Form.Item>
@@ -303,13 +241,8 @@ const HomeFormAndDialog: React.FC<any> = (props:any) => {
                 <Button type="dashed">Search by Name</Button>
                 <Button type="dashed">Search by Date</Button>
                 <Button type="dashed">PRINT</Button>
-                {/* <Button type="link">Link Button</Button> */}
+               
             </Flex>
-            
-            
-            {/* <Form.Item label="Button">
-                <Button>Button</Button>
-            </Form.Item> */}
         </Form>
     );
 };
