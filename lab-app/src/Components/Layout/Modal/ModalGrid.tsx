@@ -1,17 +1,8 @@
 
-import { Button, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, TextField, styled } from '@mui/material';
+import {  styled } from '@mui/material';
 //import '../App.css';
 import React from 'react';
 import Dialog from '@mui/material/Dialog';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemButton from '@mui/material/ListItemButton';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
 import PregnancyDilaog from '../../Dialogs/PregnancyDialog';
@@ -37,6 +28,7 @@ import SEROLOGYDialog from '../../Dialogs/SEROLOGYDialog';
 import FLUIDDialog from '../../Dialogs/FLUIDDialog';
 import SpecialDialog from '../../Dialogs/SpecialDialog';
 import PBFDialog from '../../Dialogs/PBFDialog';
+import { Button } from 'antd';
 // import PregnancyDilaog from './Dialogs/PregnancyDialog';
 // import Footer from './Footer/Footer';
 // import IronDialog from './Dialogs/IronDialog';
@@ -266,7 +258,7 @@ function DrugsTestClick(IRONData:any){
       <div className='flex  pt'>
         <RFTDialog />
         <THYROIDDialog />
-        <Button className='btn' variant="contained" ></Button>
+        <Button className="btn" type="primary"></Button>
         <SpecialDialog />
         <PregnancyDilaog onSaveClick={PregnacyTestClick} />
         <PBFDialog />
