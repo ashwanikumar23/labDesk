@@ -60,6 +60,7 @@ const PatientList: React.FC<any> = (props:any) => {
     <List
       size="small"
       style={{marginLeft:'4px',marginRight:'4px', background: 'aliceblue'}}
+
       bordered
       dataSource={data}
       renderItem={(item:any) => <List.Item><Space> <div style={{width:'140px'}}>{item.name}</div> <div><EditFilled /></div> <div><DeleteFilled /></div></Space></List.Item>}
