@@ -2,6 +2,7 @@ import './App.css';
 import React, { useEffect } from 'react';
 import DashBoard from './Components/Layout/Dashboard';
 import PdfView from './Components/Layout/PDF/PdfView';
+import PdfLayout from './Components/PDF/PdfLayout';
 function App() {
   const [uniqueId, setUniqueId] = React.useState("");
   useEffect(() => {
@@ -11,8 +12,8 @@ function App() {
   }, []); 
   return (
     <>
-    <DashBoard />
-    {/* <PdfView /> */}
+    {/* <DashBoard /> */}
+    <PdfLayout />
     </>
   );
 }
