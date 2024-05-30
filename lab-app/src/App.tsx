@@ -7,13 +7,14 @@ function App() {
   const [uniqueId, setUniqueId] = React.useState("");
   useEffect(() => {
     // Generate a unique ID when the component mounts
-    const id = "id-" + Math.random().toString(36).substr(2, 9); // Simple unique ID generator
+    const id = "id-" + Math.random().toString(36)
+    console.log("mm",id);
     setUniqueId(id);
   }, []); 
   return (
     <>
-    {/* <DashBoard /> */}
-    <PdfLayout />
+    <DashBoard />
+    {/* <PdfLayout /> */}
     </>
   );
 }
