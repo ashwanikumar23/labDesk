@@ -1,0 +1,7 @@
+.card-blur{
+    background: rgba(255, 255, 255, 0.3); /* Semi-transparent background */
+  border-radius: 10px;
+  backdrop-filter: blur(10px); /* Apply the blur effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
