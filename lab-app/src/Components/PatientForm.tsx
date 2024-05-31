@@ -36,106 +36,106 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     padding: theme.spacing(1),
   },
 }));
-function PatientForm(props:any) {
+function PatientForm(props: any) {
 
   const [Patient, setPatient] = React.useState<any>({});
-  const [Name , setName ] = React.useState('');
-  const [DATE , setDate ] = React.useState<string>(formatDate(new Date));
+  const [Name, setName] = React.useState('');
+  const [DATE, setDate] = React.useState<string>(formatDate(new Date));
   //setDate(formatDate(new Date));
-  const [ReciveData , setReciveDate ] = React.useState('');
-  const [time  , setTime ] = React.useState('');
-  const [  LabNO, setLabNo] = React.useState('');
-  const [  Gender, setGender] = React.useState('');
-  const [  Age, setAge] = React.useState('');
-  const [  prefix, setprefix] = React.useState('');
-  const [  Address, setAddress] = React.useState('');
-  const [  M_no, setM_no] = React.useState('');
-  const [  HAEMATOLOGY, setHAEMATOLOGY] = React.useState({});
-  const [  BIO, setBIO] = React.useState({});
-  const [  PREG, setPREG] = React.useState({});
-  const [  Wadal, setWadal] = React.useState({});
-  const [  URINE, setURINE] = React.useState({});
-  const [  IRON, setIRON] = React.useState({});
-  const [  CULTURE, setCULTURE] = React.useState({});
-  const [  HBA1c1, setHBA1c1] = React.useState({});
-  const [  GTT, setGTT] = React.useState({});
-  const [  HBA1c2, setHBA1c2] = React.useState({});
-  const [  PBF, setPBF] = React.useState({});
-  const [  SPECIAL, setSPECIAL] = React.useState({});
-  const [  THYROID, setTHYROID] = React.useState({});
-  const [  SEROLOGY, setSEROLOGY] = React.useState({});
-  const [  FLUID, setFLUID] = React.useState({});
-  const [  DRUGABUSE, setDRUGABUSE] = React.useState({});
-  const [  LFT, setLFT] = React.useState({});
-  const [  LIPID, setLIPID] = React.useState({});
-  const [  SEMEN, setSEMEN] = React.useState({});
-  const [  ELECTROLYTES, setELECTROLYTES] = React.useState({});
-  const [  CBC, setCBC] = React.useState({});
-  const [  STOOL, setSTOOL] = React.useState({});
+  const [ReciveData, setReciveDate] = React.useState('');
+  const [time, setTime] = React.useState('');
+  const [LabNO, setLabNo] = React.useState('');
+  const [Gender, setGender] = React.useState('');
+  const [Age, setAge] = React.useState('');
+  const [prefix, setprefix] = React.useState('');
+  const [Address, setAddress] = React.useState('');
+  const [M_no, setM_no] = React.useState('');
+  const [HAEMATOLOGY, setHAEMATOLOGY] = React.useState({});
+  const [BIO, setBIO] = React.useState({});
+  const [PREG, setPREG] = React.useState({});
+  const [Wadal, setWadal] = React.useState({});
+  const [URINE, setURINE] = React.useState({});
+  const [IRON, setIRON] = React.useState({});
+  const [CULTURE, setCULTURE] = React.useState({});
+  const [HBA1c1, setHBA1c1] = React.useState({});
+  const [GTT, setGTT] = React.useState({});
+  const [HBA1c2, setHBA1c2] = React.useState({});
+  const [PBF, setPBF] = React.useState({});
+  const [SPECIAL, setSPECIAL] = React.useState({});
+  const [THYROID, setTHYROID] = React.useState({});
+  const [SEROLOGY, setSEROLOGY] = React.useState({});
+  const [FLUID, setFLUID] = React.useState({});
+  const [DRUGABUSE, setDRUGABUSE] = React.useState({});
+  const [LFT, setLFT] = React.useState({});
+  const [LIPID, setLIPID] = React.useState({});
+  const [SEMEN, setSEMEN] = React.useState({});
+  const [ELECTROLYTES, setELECTROLYTES] = React.useState({});
+  const [CBC, setCBC] = React.useState({});
+  const [STOOL, setSTOOL] = React.useState({});
 
   // if(Object.keys(props.editPatient).length !==0){
   //   setName(props.editPatient.Name.toString());
   // }
   // console.log(props.editPatient.Name);
 
-  function formatDate(dateObj:Date) {
+  function formatDate(dateObj: Date) {
     const year = dateObj.getFullYear();
     const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // Adding 1 because getMonth returns zero-based index
     const day = String(dateObj.getDate()).padStart(2, '0');
     return `${day}-${month}-${year}`;
   }
-  function save_Print(){
-  
+  function save_Print() {
+
     setPatient((prevState: { constructor?: any; }) => {
-      let newState:any = { ...prevState }; // Make a copy of the previous state
-    
+      let newState: any = { ...prevState }; // Make a copy of the previous state
+
       if (Object.keys(prevState).length === 0 && prevState.constructor === Object) {
         const uniqueId = generateUniqueId();
         newState.id = uniqueId; // Set the ID if it's the first time setting state
       }
-    
+
       // Set other properties
       newState['DATE'] = DATE;
-      newState['Name'] = (Name!==''?Name:(props.editPatient.Name?props.editPatient.Name:'Name'));
+      newState['Name'] = (Name !== '' ? Name : (props.editPatient.Name ? props.editPatient.Name : 'Name'));
       newState['RecivedDate'] = ReciveData;
-      newState['Time'] = (time!==''?time:(props.editPatient.time?props.editPatient.time:'time'));
-      newState['Lab NO'] = (LabNO!==''?LabNO:(props.editPatient.LabNO?props.editPatient.LabNO:'LabNO'));
-      newState['M_no'] =  (M_no!==''?M_no:(props.editPatient.M_no?props.editPatient.M_no:'888888888'));
-      newState['Age'] =  (Age!==''?Age:(props.editPatient.Age?props.editPatient.Age:'23'));
-      newState['Gender'] =  (Gender!==''?Gender:(props.editPatient.Gender?props.editPatient.Gender:'23'));
-      newState['Materials'] = (Materials!==''?Materials:(props.editPatient.Materials?props.editPatient.Materials:'23'));
-      newState['referredby'] =  (referredby!==''?referredby:(props.editPatient.referredby?props.editPatient.referredby:'23'));
-      newState['Address'] =  (Address!==''?Address:(props.editPatient.Address?props.editPatient.Address:'23'));
+      newState['Time'] = (time !== '' ? time : (props.editPatient.time ? props.editPatient.time : 'time'));
+      newState['Lab NO'] = (LabNO !== '' ? LabNO : (props.editPatient.LabNO ? props.editPatient.LabNO : 'LabNO'));
+      newState['M_no'] = (M_no !== '' ? M_no : (props.editPatient.M_no ? props.editPatient.M_no : '888888888'));
+      newState['Age'] = (Age !== '' ? Age : (props.editPatient.Age ? props.editPatient.Age : '23'));
+      newState['Gender'] = (Gender !== '' ? Gender : (props.editPatient.Gender ? props.editPatient.Gender : '23'));
+      newState['Materials'] = (Materials !== '' ? Materials : (props.editPatient.Materials ? props.editPatient.Materials : '23'));
+      newState['referredby'] = (referredby !== '' ? referredby : (props.editPatient.referredby ? props.editPatient.referredby : '23'));
+      newState['Address'] = (Address !== '' ? Address : (props.editPatient.Address ? props.editPatient.Address : '23'));
       // newState['Preg Test'] =  (Object.keys(PREG).length!==0?PREG:(Object.keys(props.editPatient['Preg Tes']).length!==0?props.editPatient['Preg Tes']:{}));
       // newState['Iron Test'] =  (Object.keys(IRON).length!==0?IRON:(Object.keys(props.editPatient['Iron Test']).length!==0?props.editPatient['Iron Test']:{}));
       newState['Drugs Test'] = DRUGABUSE;
-    
+
       return newState; // Return the updated state
     });
-    
-    console.log("patient",Patient)
+
+    console.log("patient", Patient)
   }
 
-function PregnacyTestClick(PregData:any){
-  console.log(PregData);
-  setPREG(PregData);
-}
-function IRONTestClick(IRONData:any){
-  console.log(IRONData);
-  setIRON(IRONData);
-}
-function DrugsTestClick(IRONData:any){
-  
-  setDRUGABUSE(IRONData);
-}
+  function PregnacyTestClick(PregData: any) {
+    console.log(PregData);
+    setPREG(PregData);
+  }
+  function IRONTestClick(IRONData: any) {
+    console.log(IRONData);
+    setIRON(IRONData);
+  }
+  function DrugsTestClick(IRONData: any) {
 
-  
+    setDRUGABUSE(IRONData);
+  }
+
+
 
   function generateUniqueId() {
-  
+
     return Math.random().toString(36).substring(2, 10);
   }
-  
+
   const [Materials, setMaterials] = React.useState('');
   const handleChange = (event: SelectChangeEvent) => {
     setMaterials(event.target.value);
@@ -217,7 +217,7 @@ function DrugsTestClick(IRONData:any){
   //   setOpenIRON(false);
   // };
 
-  
+
   const [openGTT, setOpenGTT] = React.useState(false);
 
   const handleGTTClickOpen = () => {
@@ -314,7 +314,7 @@ function DrugsTestClick(IRONData:any){
             defaultValue={"02-04-2024"}
             value={DATE}
             size="small"
-            onChange={(e)=>{setDate(e.target.value)}}
+            onChange={(e) => { setDate(e.target.value) }}
           />
         </div>
         <div>
@@ -322,7 +322,7 @@ function DrugsTestClick(IRONData:any){
             label="TIME"
             id="outlined-size-small"
             value={time}
-            onChange={(e)=>{setTime(e.target.value)}}
+            onChange={(e) => { setTime(e.target.value) }}
             size="small"
           />
         </div>
@@ -331,7 +331,7 @@ function DrugsTestClick(IRONData:any){
             label="LAB NO"
             id="outlined-size-small"
             value={LabNO}
-            onChange={(e)=>{setLabNo(e.target.value)}}
+            onChange={(e) => { setLabNo(e.target.value) }}
             size="small"
           />
         </div>
@@ -344,8 +344,8 @@ function DrugsTestClick(IRONData:any){
             label="RECIVED ON"
             id="outlined-size-small"
             type='date'
-            value={ReciveData ||formatDate(new Date)}
-            onChange={(e)=>{setReciveDate(e.target.value)}}
+            value={ReciveData || formatDate(new Date)}
+            onChange={(e) => { setReciveDate(e.target.value) }}
             size="small"
           />
         </div>
@@ -353,8 +353,8 @@ function DrugsTestClick(IRONData:any){
           <TextField
             label="TIME"
             id="outlined-size-small"
-            value={props.editPatient.time?props.editPatient.time:time}
-            onChange={(e)=>{setTime(e.target.value)}}
+            value={props.editPatient.time ? props.editPatient.time : time}
+            onChange={(e) => { setTime(e.target.value) }}
             size="small"
           />
         </div>
@@ -367,22 +367,22 @@ function DrugsTestClick(IRONData:any){
           <TextField
             label="PATIENT NAME"
             id="outlined-size-small"
-            value={props.editPatient.Name?props.editPatient.Name:Name}
-            onChange={(e)=>{setName(e.target.value)}}
+            value={props.editPatient.Name ? props.editPatient.Name : Name}
+            onChange={(e) => { setName(e.target.value) }}
             size="small"
           />
         </div>
         <div>
-        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+          <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
             <InputLabel id="demo-select-small-label">GENDER</InputLabel>
             <Select
               labelId="demo-select-small-label"
-              style={{'background':'#ececf8'}}
+              style={{ 'background': '#ececf8' }}
               className='Gender'
               id="demo-select-small"
-              value={ props.editPatient.Gender?props.editPatient.Gender:Gender}
+              value={props.editPatient.Gender ? props.editPatient.Gender : Gender}
               label="GENDER"
-              onChange={(e)=>{setGender(e.target.value)}}
+              onChange={(e) => { setGender(e.target.value) }}
             >
               <MenuItem value="">
                 <em>None</em>
@@ -403,8 +403,8 @@ function DrugsTestClick(IRONData:any){
           <TextField
             label="AGE"
             id="outlined-size-small"
-            value={ props.editPatient.Age?props.editPatient.Age:Age}
-            onChange={(e)=>{setAge(e.target.value)}}
+            value={props.editPatient.Age ? props.editPatient.Age : Age}
+            onChange={(e) => { setAge(e.target.value) }}
             size="small"
           />
         </div>
@@ -417,8 +417,8 @@ function DrugsTestClick(IRONData:any){
           <TextField
             label="Addres"
             id="outlined-size-small"
-            value={ props.editPatient.Address?props.editPatient.Address:Address}
-            onChange={(e)=>{setAddress(e.target.value)}}
+            value={props.editPatient.Address ? props.editPatient.Address : Address}
+            onChange={(e) => { setAddress(e.target.value) }}
             size="small"
           />
         </div>
@@ -426,8 +426,8 @@ function DrugsTestClick(IRONData:any){
           <TextField
             label="Mobile"
             id="outlined-size-small"
-            value={ props.editPatient.M_no?props.editPatient.M_no:M_no}
-            onChange={(e)=>{setM_no(e.target.value)}}
+            value={props.editPatient.M_no ? props.editPatient.M_no : M_no}
+            onChange={(e) => { setM_no(e.target.value) }}
             size="small"
           />
         </div>
@@ -442,7 +442,7 @@ function DrugsTestClick(IRONData:any){
             <Select
               labelId="demo-select-small-label"
               id="demo-select-small"
-              value={ props.editPatient.Materials?props.editPatient.Materials:Materials}
+              value={props.editPatient.Materials ? props.editPatient.Materials : Materials}
               label="Materials"
               className='Materials'
               onChange={handleChange}
@@ -462,7 +462,7 @@ function DrugsTestClick(IRONData:any){
             <Select
               labelId="demo-select-small-label"
               id="demo-select-small"
-              value={ props.editPatient.referredby?props.editPatient.referredby:referredby}
+              value={props.editPatient.referredby ? props.editPatient.referredby : referredby}
               label="REFERRED BY"
               className='REFERRED'
               onChange={handleReferreChange}
@@ -505,7 +505,7 @@ function DrugsTestClick(IRONData:any){
       </div>
       <div className='flex  pt'>
         <Button className='btn' variant="contained" onClick={handleGTTClickOpen}>GTT</Button>
-        <IronDialog onSaveClick={IRONTestClick}/>
+        <IronDialog onSaveClick={IRONTestClick} />
         {/* <Button className='btn' variant="contained" onClick={handleIRONClickOpen}>IRON</Button> */}
         <Button className='btn' variant="contained" onClick={handleClickCULTUREOpen} >CULTURE</Button>
         <DRUG_ABUSE onSaveClick={DrugsTestClick} />
@@ -514,7 +514,7 @@ function DrugsTestClick(IRONData:any){
         <Button className='btn' variant="contained" onClick={handleHBA1c2ClickOpen}>HB A1c 2</Button>
       </div>
       <div>
-        <Footer  save={save_Print} getData={props.getData}  Patient={Patient}/>
+        <Footer save={save_Print} getData={props.getData} Patient={Patient} />
       </div>
 
       <Dialog
@@ -571,7 +571,7 @@ function DrugsTestClick(IRONData:any){
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-            BIOCHEMISTRY
+              BIOCHEMISTRY
             </Typography>
             <Button autoFocus color="inherit" onClick={handleBIOClose}>
               save
@@ -608,7 +608,7 @@ function DrugsTestClick(IRONData:any){
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-            BIOCHEMISTRY
+              BIOCHEMISTRY
             </Typography>
             <Button autoFocus color="inherit" onClick={handleCULTUREClose}>
               save
@@ -646,7 +646,7 @@ function DrugsTestClick(IRONData:any){
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-            BIOCHEMISTRY
+              BIOCHEMISTRY
             </Typography>
             <Button autoFocus color="inherit" onClick={handleStoolClose}>
               save
@@ -684,7 +684,7 @@ function DrugsTestClick(IRONData:any){
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-            BIOCHEMISTRY
+              BIOCHEMISTRY
             </Typography>
             <Button autoFocus color="inherit" onClick={handleStoolClose}>
               save
