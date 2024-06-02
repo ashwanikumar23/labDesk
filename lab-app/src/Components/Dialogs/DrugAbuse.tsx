@@ -15,6 +15,7 @@ import {
   Radio,
   RadioChangeEvent,
 } from "antd";
+import GradientButton from "../../shared/UI/Button/gradientButton";
 
 const { Option } = Select;
 const DRUG_ABUSE = (props:any) => {
@@ -36,9 +37,10 @@ const DRUG_ABUSE = (props:any) => {
 
   return (
     <>
-      <Button className="btn" type="primary" onClick={() => setOpen(true)}>
+      {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
       DRUG ABUSE3
-      </Button>
+      </Button> */}
+      <GradientButton id={0} BtnName={"DRUG ABUSE3"} clickEvent={() => setOpen(true)} />
       <Modal
         title="DRUG ABUSET TEST"
         centered

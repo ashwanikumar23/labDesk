@@ -128,7 +128,7 @@ const DashBoard: React.FC = () => {
           </a>
         </Dropdown>
         <h3 style={{ color: '#f5f5f5 !important' }} >Patient list</h3>
-        <PatientList patientsDB={patientsDB} />
+        {/* <PatientList patientsDB={patientsDB} /> */}
       </Sider>
       <Layout style={{ marginLeft: 5, overflow: 'auto' }}>
 

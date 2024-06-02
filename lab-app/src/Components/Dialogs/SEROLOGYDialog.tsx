@@ -15,8 +15,10 @@ import {
   Radio,
   RadioChangeEvent,
 } from "antd";
+import GradientButton from "../../shared/UI/Button/gradientButton";
 
 const { Option } = Select;
+
 const SEROLOGYDialog = (props:any) => {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
@@ -35,9 +37,10 @@ const SEROLOGYDialog = (props:any) => {
   };
   return (
 <>
-    <Button className="btn" type="primary" onClick={() => setOpen(true)}>
+    {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
     SEROLOGY TEST 
-    </Button>
+    </Button> */}
+    <GradientButton id={0} BtnName={"SEROLOGY TEST"} width="150px" clickEvent={() => setOpen(true)} />
     <Modal
       title="SEROLOGY TEST"
       centered

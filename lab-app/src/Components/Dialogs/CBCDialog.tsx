@@ -14,6 +14,7 @@ import {
   Modal,
   Typography,
 } from "antd";
+import GradientButton from "../../shared/UI/Button/gradientButton";
 
 const { Option } = Select;
 const { Text, Link } = Typography;
@@ -36,9 +37,10 @@ const CBCDialog = (props: any) => {
 
   return (
     <>
-      <Button className="btn" type="primary" onClick={() => setOpen(true)}>
+      {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
         CBC
-      </Button>
+      </Button> */}
+      <GradientButton id={0} BtnName={"CBC"} width="150px" clickEvent={() => setOpen(true)} />
       <Modal
         title="CBC TEST"
         centered

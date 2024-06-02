@@ -15,6 +15,7 @@ import {
   Radio,
   RadioChangeEvent,
 } from "antd";
+import GradientButton from "../../shared/UI/Button/gradientButton";
 
 const { Option } = Select;
 const LIPIDDialog = (props:any) => {
@@ -35,9 +36,10 @@ const LIPIDDialog = (props:any) => {
   };
   return (
     <>
-    <Button className="btn" type="primary" onClick={() => setOpen(true)}>
+    {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
     LIPID PROFILE 
-    </Button>
+    </Button> */}
+    <GradientButton id={0} BtnName={"LIPID PROFILE"} width="150px" clickEvent={() => setOpen(true)} />
     <Modal
       title="LIPID PROFILE TEST"
       centered

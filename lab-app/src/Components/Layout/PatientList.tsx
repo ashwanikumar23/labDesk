@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import './layout.css';
-import { Avatar, Button, List, Skeleton, Space, Typography } from 'antd';
-import { AnyNsRecord } from 'dns';
-import { DeleteFilled, EditFilled } from '@ant-design/icons';
+import { Avatar, Button, Divider, List, Skeleton } from 'antd';
+import { Padding } from '@mui/icons-material';
+import { EditOutlined } from '@ant-design/icons';
+import DB from './DB/PatientDB.json'
+import IEnterForm from '../../shared/Interface/All-interface';
 
 interface DataType {
   gender?: string;
@@ -22,19 +23,60 @@ interface DataType {
 }
 
 const count = 3;
-const { Title } = Typography;
-const PatientList: React.FC<any> = (props: any) => {
+const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat,picture&noinfo`;
+
+const PatientList: React.FC = () => {
   const [initLoading, setInitLoading] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<DataType[]>([]);
-  const [list, setList] = useState<DataType[]>([]);
+  const [data, setData] = useState<any[]>([]);
+  const [list, setList] = useState<any[]>([]);
+  
+  const [patients, setPatients] = useState([{}]);
+  const [displayedCount, setDisplayedCount] = useState(0);
+
+  const [users, setUsers] = useState([]);
+
+  const loadMorePatients = () => {
+    const newDisplayedCount = displayedCount + 5;
+    const morePatients = DB.slice(0, newDisplayedCount);
+    setInitLoading(false);
+    setData(morePatients);
+    setList(morePatients);
+    setPatients((prevPatients) => [...prevPatients, ...morePatients]);
+    setDisplayedCount(newDisplayedCount);
+    console.log(patients);
+  };
+
 
   useEffect(() => {
-    setInitLoading(false);
-    setData(props.patientsDB);
+    loadMorePatients();   
+    // fetch(fakeDataUrl)
+    //   .then((res) => res.json())
+    //   .then((res) => {
+    //     setInitLoading(false);
+    //     setData(res.results);
+    //     setList(res.results);
+    //   });
   }, []);
 
-
+  const onLoadMore = () => {
+    setLoading(true);
+    setList(
+      data.concat([...new Array(count)].map(() => ({ loading: true, name: {}, picture: {} }))),
+    );
+    fetch(fakeDataUrl)
+      .then((res) => res.json())
+      .then((res) => {
+        const newData = data.concat(res.results);
+        setData(newData);
+        setList(newData);
+        setLoading(false);
+        // Resetting window's offsetTop so as to display react-virtualized demo underfloor.
+        // In real scene, you can using public method of react-virtualized:
+        // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
+        window.dispatchEvent(new Event('resize'));
+      });
+  };
 
   const loadMore =
     !initLoading && !loading ? (
@@ -46,19 +88,38 @@ const PatientList: React.FC<any> = (props: any) => {
           lineHeight: '32px',
         }}
       >
-
+        <Button onClick={onLoadMore}>loading more</Button>
       </div>
     ) : null;
 
   return (
+    <>
+    <Divider style={{padding:"0px",margin:"0px"}} />
+    <div style={{padding:"4px 0px",textAlign:"center",alignSelf:"center"}}> <strong>List</strong></div>
+    <Divider style={{padding:"0px",margin:"0px"}} />
     <List
-      size="small"
-      style={{ marginLeft: '4px', marginRight: '4px', background: 'aliceblue' }}
-
-      bordered
-      dataSource={data}
-      renderItem={(item: any) => <List.Item><Space> <div style={{ width: '140px' }}>{item.name}</div> <div><EditFilled /></div> <div><DeleteFilled /></div></Space></List.Item>}
+    style={{width:"100%",padding:"1px 8px"}}
+      className="demo-loadmore-list"
+      loading={initLoading}
+      itemLayout="horizontal"
+      loadMore={loadMore}
+      dataSource={list}
+      renderItem={(item) => (
+        <List.Item
+          actions={[<Button shape="circle" icon={<EditOutlined />} />]}
+        >
+          <Skeleton avatar title={false} loading={item.loading} active>
+            <List.Item.Meta
+             
+              title={<a href="https://ant.design">{item.name}</a>}
+             
+            />
+           
+          </Skeleton>
+        </List.Item>
+      )}
     />
+    </>
   );
 };
 

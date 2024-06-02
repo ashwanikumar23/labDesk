@@ -14,10 +14,14 @@ import {
   Modal,
   Typography,
 } from "antd";
+import GradientButton from "../../shared/UI/Button/gradientButton";
+import { Idailog } from "../../shared/Interface/All-interface";
 
 const { Option } = Select;
 const { Text, Link } = Typography;
-const HAEMATOLOGYDialog = (props: any) => {
+
+
+const HAEMATOLOGYDialog = ({id,disabled}: Idailog) => {
   const [open, setOpen] = useState(false);
   const [openHAEMATOLOGY, setOpenHAEMATOLOGY] = React.useState(false);
   const handleClickOpen = () => {
@@ -36,9 +40,10 @@ const HAEMATOLOGYDialog = (props: any) => {
 
   return (
     <>
-      <Button className="btn" type="primary" onClick={() => setOpen(true)}>
+      {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
         HAEMATOLOGY
-      </Button>
+      </Button> */}
+      <GradientButton id={id} BtnName={"HAEMATOLOGY"} disabled={disabled} width="150px" clickEvent={() => setOpen(true)} />
       <Modal
         title="HAEMATOLOGY"
         centered

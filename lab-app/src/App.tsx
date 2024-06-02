@@ -4,6 +4,7 @@ import DashBoard from './Components/Layout/Dashboard';
 import PdfView from './Components/Layout/PDF/PdfView';
 import PdfLayout from './Components/PDF/PdfLayout';
 import SignIn from './Pages/sign-in';
+import DesktopLayout from './shared/layoutWraper/destopLayout';
 function App() {
   const [sign, setSign] = React.useState(false);
   const getToken=()=>{
@@ -13,9 +14,10 @@ function App() {
   }, []); 
   return (
     <>
-    <SignIn />
+    {/* <SignIn /> */}
     {/* <DashBoard /> */}
     {/* <PdfLayout /> */}
+    <DesktopLayout />
     </>
   );
 }

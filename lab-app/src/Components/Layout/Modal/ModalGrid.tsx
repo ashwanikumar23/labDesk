@@ -51,7 +51,12 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     padding: theme.spacing(1),
   },
 }));
-function ModalGrid(props:any) {
+
+interface IModal{
+  id:number,
+  disabled?:boolean
+}
+function ModalGrid({id,disabled}:IModal) {
 
   const [Patient, setPatient] = React.useState<any>({});
   const [Name , setName ] = React.useState('');
@@ -239,41 +244,137 @@ function DrugsTestClick(IRONData:any){
   };
   return (
     <>
-      <div className='flex pt'>
-        <HAEMATOLOGYDialog />
-        <BIOModal />      
-        <SEROLOGYDialog />
-        <URINEDialog />
-        <StoolDialog />
-        <FLUIDDialog />
+    <div style={{display:"flex", justifyContent:"center", gap:"4px"}}>
+      <div style={{ alignItems:"center"}}>
+      <HAEMATOLOGYDialog id={id} disabled={disabled}  />
+      
       </div>
-      <div className='flex  pt'>
-        <LFTDialog />
-        <LIPIDDialog />
-        <SEMENDialog />
-        <ELECTROLYTESDialog />
-        <WIDALDialog />
-        <CBCDialog />
+      <div style={{ alignItems:"center"}}>
+      <BIOModal />      
+        
       </div>
-      <div className='flex  pt'>
-        <RFTDialog />
-        <THYROIDDialog />
-        <Button className="btn" type="primary"></Button>
-        <SpecialDialog />
-        <PregnancyDilaog onSaveClick={PregnacyTestClick} />
-        <PBFDialog />
+    </div>
+    <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
+      <div style={{ alignItems:"center"}}>
+      <SEROLOGYDialog />
+      
       </div>
-      <div className='flex  pt'>
+      <div style={{ alignItems:"center"}}>
+      <URINEDialog />     
+        
+      </div>
+    </div>
+    <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
+      <div style={{ alignItems:"center"}}>
+      <StoolDialog />
+      
+      </div>
+      <div style={{ alignItems:"center"}}>
+      <FLUIDDialog />    
+        
+      </div>
+    </div>
+    <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
+      <div style={{ alignItems:"center"}}>
+      <LFTDialog />
+      
+      </div>
+      <div style={{ alignItems:"center"}}>
+      <LIPIDDialog />   
+        
+      </div>
+    </div>
+    <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
+      <div style={{ alignItems:"center"}}>
+      <SEMENDialog />
+      
+      </div>
+      <div style={{ alignItems:"center"}}>
+      <ELECTROLYTESDialog />
+        
+      </div>
+    </div>
+    <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
+      <div style={{ alignItems:"center"}}>
+      <WIDALDialog />
+      
+      </div>
+      <div style={{ alignItems:"center"}}>
+      <CBCDialog />
+        
+      </div>
+    </div>
+    <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
+      <div style={{ alignItems:"center"}}>
+      <RFTDialog />
+      
+      </div>
+      <div style={{ alignItems:"center"}}>
+      <THYROIDDialog />
+        
+      </div>
+    </div>
+    <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
+      <div style={{ alignItems:"center"}}>
+      <SpecialDialog />
+      
+      </div>
+      <div style={{ alignItems:"center"}}>
+      <PregnancyDilaog onSaveClick={PregnacyTestClick} />
+        
+      </div>
+    </div>
+    <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
+      <div style={{ alignItems:"center"}}>
+      <PBFDialog />
+      
+      </div>
+      <div style={{ alignItems:"center"}}>
+      <GTTDialog />
+        
+      </div>
+    </div>
+    <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
+      <div style={{ alignItems:"center"}}>
+      <IronDialog onSaveClick={IRONTestClick}/>
+      
+      </div>
+      <div style={{ alignItems:"center"}}>
+      <CULTUREDialog />
+        
+      </div>
+    </div>
+    <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
+      <div style={{ alignItems:"center"}}>
+      <DRUG_ABUSE onSaveClick={DrugsTestClick} />
+      
+      </div>
+      <div style={{ alignItems:"center"}}>
+      
+        
+      </div>
+    </div>
+    <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
+      <div style={{ alignItems:"center"}}>
+      <HBA1c2Dialog />
+      
+      </div>
+      <div style={{ alignItems:"center"}}>
+      <HBA1c1Dialog/>
+        
+      </div>
+    </div>
+
+      {/* <div className='flex  pt'>
         <GTTDialog />
         <IronDialog onSaveClick={IRONTestClick}/>
         <CULTUREDialog />
         <DRUG_ABUSE onSaveClick={DrugsTestClick} />
         <HBA1c1Dialog/>
         <HBA1c2Dialog />
-      </div>
+      </div>  */}
     </>
   );
-
 
 }
 export default ModalGrid;

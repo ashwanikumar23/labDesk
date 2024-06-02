@@ -15,6 +15,7 @@ import {
   Radio,
   RadioChangeEvent,
 } from "antd";
+import GradientButton from "../../shared/UI/Button/gradientButton";
 
 const { Option } = Select;
 const FLUIDDialog = (props:any) => {
@@ -36,9 +37,10 @@ const FLUIDDialog = (props:any) => {
 
   return (
     <>
-      <Button className="btn" type="primary" onClick={() => setOpen(true)}>
+      {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
       FLUID
-      </Button>
+      </Button> */}
+      <GradientButton id={0} BtnName={"FLUID"} width="150px" clickEvent={() => setOpen(true)} />
       <Modal
         title="FLUID TEST"
         centered

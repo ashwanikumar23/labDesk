@@ -15,6 +15,7 @@ import {
   Radio,
   RadioChangeEvent,
 } from "antd";
+import GradientButton from "../../shared/UI/Button/gradientButton";
 
 const { Option } = Select;
 const WIDALDialog = (props:any) => {
@@ -36,9 +37,10 @@ const WIDALDialog = (props:any) => {
 
     return (
       <>
-      <Button className="btn" type="primary" onClick={() => setOpen(true)}>
+      {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
       WADAL
-      </Button>
+      </Button> */}
+      <GradientButton id={0} BtnName={"WADAL TEST"} width="150px" clickEvent={() => setOpen(true)} />
       <Modal
         title=" WADAL TEST"
         centered

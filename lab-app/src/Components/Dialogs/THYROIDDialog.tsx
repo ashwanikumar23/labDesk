@@ -15,6 +15,7 @@ import {
   Radio,
   RadioChangeEvent,
 } from "antd";
+import GradientButton from "../../shared/UI/Button/gradientButton";
 
 const { Option } = Select;
 const THYROIDDialog = (props:any) => {
@@ -35,9 +36,10 @@ const THYROIDDialog = (props:any) => {
   };
   return (
     <>
-    <Button className="btn" type="primary" onClick={() => setOpen(true)}>
+    {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
     THYROID 
-    </Button>
+    </Button> */}
+    <GradientButton id={0} BtnName={"THYROID TEST"} width="150px" clickEvent={() => setOpen(true)} />
     <Modal
       title="THYROID FUNCTION TEST"
       centered

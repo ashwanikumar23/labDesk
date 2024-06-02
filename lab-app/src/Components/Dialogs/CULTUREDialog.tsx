@@ -14,6 +14,7 @@ import {
   Modal,
   Typography,
 } from "antd";
+import GradientButton from "../../shared/UI/Button/gradientButton";
 
 const { Option } = Select;
 const { Text, Link } = Typography;
@@ -36,9 +37,10 @@ const CULTUREDialog = (props: any) => {
 
   return (
     <>
-      <Button className="btn" type="primary" onClick={() => setOpen(true)}>
+      {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
         CULTURE 
-      </Button>
+      </Button> */}
+      <GradientButton id={0} BtnName={"CULTURE"} width="150px" clickEvent={() => setOpen(true)} />
       <Modal
         title="CULTURE & SENSITIVITY REPORT"
         centered

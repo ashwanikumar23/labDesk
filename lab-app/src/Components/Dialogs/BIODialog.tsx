@@ -15,6 +15,7 @@ import {
   Radio,
   RadioChangeEvent,
 } from "antd";
+import GradientButton from "../../shared/UI/Button/gradientButton";
 
 const { Option } = Select;
 const BIOModal = (props:any) => {
@@ -35,9 +36,10 @@ const BIOModal = (props:any) => {
   };
   return (
 <>
-    <Button className="btn" type="primary" onClick={() => setOpen(true)}>
+    {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
     BIO TEST 
-    </Button>
+    </Button> */}
+    <GradientButton id={0} BtnName={" BIO TEST "} width="150px" clickEvent={() => setOpen(true)} />
     <Modal
       title="BIO TEST"
       centered

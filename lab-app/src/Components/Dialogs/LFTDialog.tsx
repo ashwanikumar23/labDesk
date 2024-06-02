@@ -15,6 +15,7 @@ import {
   Radio,
   RadioChangeEvent,
 } from "antd";
+import GradientButton from "../../shared/UI/Button/gradientButton";
 
 const { Option } = Select;
 const LFTDialog = (props:any) => {
@@ -35,9 +36,10 @@ const LFTDialog = (props:any) => {
   };
   return (
     <>
-    <Button className="btn" type="primary" onClick={() => setOpen(true)}>
+    {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
    LFT
-    </Button>
+    </Button> */}
+    <GradientButton id={0} BtnName={"LFT"} width="150px" clickEvent={() => setOpen(true)} />
     <Modal
       title="LFT TEST"
       centered

@@ -15,6 +15,7 @@ import {
   Radio,
   RadioChangeEvent,
 } from "antd";
+import GradientButton from "../../shared/UI/Button/gradientButton";
 
 const { Option } = Select;
 function PregnancyDilaog(props:any){
@@ -36,9 +37,10 @@ function PregnancyDilaog(props:any){
 
     return (
       <>
-      <Button className="btn" type="primary" onClick={() => setOpen(true)}>
+      {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
       PREGNANCY
-      </Button>
+      </Button> */}
+      <GradientButton id={0} BtnName={"PREGNANCY"} width="150px" clickEvent={() => setOpen(true)} />
       <Modal
         title=" PREGNANCY TEST"
         centered

@@ -15,6 +15,7 @@ import {
   Radio,
   RadioChangeEvent,
 } from "antd";
+import GradientButton from "../../shared/UI/Button/gradientButton";
 
 const { Option } = Select;
 const StoolDialog = (props:any) => {
@@ -35,9 +36,10 @@ const StoolDialog = (props:any) => {
   };
   return (
 <>
-    <Button className="btn" type="primary" onClick={() => setOpen(true)}>
+    {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
     STOOL 
-    </Button>
+    </Button> */}
+    <GradientButton id={0} BtnName={"STOOL TEST"} width="150px" clickEvent={() => setOpen(true)} />
     <Modal
       title="STOOL TEST"
       centered
