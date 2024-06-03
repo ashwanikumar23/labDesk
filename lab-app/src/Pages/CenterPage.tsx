@@ -82,14 +82,14 @@ const EnterForm = ({ id, createId }: IEnterFormProps) => {
                 disabled={disabled}
                 onFinish={handleFinish}
             >
-                <div style={{ display: "flex" }}>
+                <div style={{ display: "flex",gap:"4px"}}>
                     <Form.Item
                         style={{ width: "30%" }}
                         label="Report Date"
                         name="DATE"
                         rules={[{ required: true, message: 'Please select a date!' }]}
                     >
-                        <DatePicker />
+                        <DatePicker style={{width:"96%"}} />
                     </Form.Item>
 
                     <Form.Item
@@ -98,7 +98,7 @@ const EnterForm = ({ id, createId }: IEnterFormProps) => {
                         name="time"
                         rules={[{ required: true, message: 'Please select a time!' }]}
                     >
-                        <TimePicker />
+                        <TimePicker style={{width:"96%"}} />
                     </Form.Item>
 
                     <Form.Item
@@ -107,17 +107,17 @@ const EnterForm = ({ id, createId }: IEnterFormProps) => {
                         name="LabNO"
                         rules={[{ required: true, message: 'Please input the lab number!' }]}
                     >
-                        <Input type="number" />
+                        <Input type="number" style={{width:"96%"}}  />
                     </Form.Item>
                 </div>
-                <div style={{ display: "flex" }}>
+                <div style={{ display: "flex",gap:"4px"}}>
                     <Form.Item
                         style={{ width: "30%" }}
                         label="Received Date"
                         name="ReciveData"
                         rules={[{ required: true, message: 'Please select a received date!' }]}
                     >
-                        <DatePicker />
+                        <DatePicker style={{width:"96%"}} />
                     </Form.Item>
                     <Form.Item
                         style={{ width: "30%" }}
@@ -125,7 +125,7 @@ const EnterForm = ({ id, createId }: IEnterFormProps) => {
                         name="Receivtime"
                         rules={[{ required: true, message: 'Please select a received time!' }]}
                     >
-                        <TimePicker />
+                        <TimePicker style={{width:"96%"}}  />
                     </Form.Item>
 
                 </div>
