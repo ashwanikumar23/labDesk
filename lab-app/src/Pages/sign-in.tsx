@@ -12,6 +12,7 @@ type FieldType = {
 };
 
 const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
+    
     console.log('Success:', values);
 };
 
@@ -19,7 +20,14 @@ const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
     console.log('Failed:', errorInfo);
 };
 
-export default function SignIn() {
+interface ISignin{
+    clickLogin:any
+}
+export default function SignIn({clickLogin}:ISignin) {
+    const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
+        clickLogin();
+        console.log('Success:', values);
+    };
     return (
         <>
             <div style={{width:"100%",height:"100vh", display: 'flex', justifyContent: 'center', alignItems: 'center',  backgroundImage: `url('/labs-medical-lab.jpg')`, backgroundSize: 'cover',

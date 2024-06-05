@@ -15,13 +15,13 @@ import {
   Typography,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
-import { Idailog } from "../../shared/Interface/All-interface";
+import Idailog from "../../shared/Interface/Idailog";
 
 const { Option } = Select;
 const { Text, Link } = Typography;
 
 
-const HAEMATOLOGYDialog = ({id,disabled}: Idailog) => {
+const HAEMATOLOGYDialog = ({id,disabled,patientData}: Idailog) => {
   const [open, setOpen] = useState(false);
   const [openHAEMATOLOGY, setOpenHAEMATOLOGY] = React.useState(false);
   const handleClickOpen = () => {
