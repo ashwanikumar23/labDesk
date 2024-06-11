@@ -16,12 +16,14 @@ import {
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
 import Idailog from "../../shared/Interface/Idailog";
+import IEnterForm from "../../shared/Interface/All-interface";
+import IHAEMATOLOGY from "../../shared/Interface/IHAEMATOLOGY";
 
 const { Option } = Select;
 const { Text, Link } = Typography;
 
 
-const HAEMATOLOGYDialog = ({id,disabled,patientData}: Idailog) => {
+const HAEMATOLOGYDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
   const [open, setOpen] = useState(false);
   const [openHAEMATOLOGY, setOpenHAEMATOLOGY] = React.useState(false);
   const handleClickOpen = () => {
@@ -29,11 +31,22 @@ const HAEMATOLOGYDialog = ({id,disabled,patientData}: Idailog) => {
   };
 
   const [form] = Form.useForm();
-  const [formData, setFormData] = useState(null);
+  const [formData, setFormData] = useState<IEnterForm>(patientData);
+  const [homatology,setHomatology]=useState<IHAEMATOLOGY|null>(null);
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: IHAEMATOLOGY) => {
     console.log("Form values:", values);
-    setFormData(values);
+    setHomatology(values);
+    if(homatology){
+      patientData.id=id;
+      patientData.HAEMATOLOGY=homatology;
+    }else{
+   ///throw alert messages
+    }
+    setFormData(patientData);
+    console.log(formData);
+    saveDataEvent(formData);
+    // let object=Object.entries(formData);
   };
 
 
@@ -270,7 +283,7 @@ const HAEMATOLOGYDialog = ({id,disabled,patientData}: Idailog) => {
                 {Object.entries(formData).map(([key, value]) => (
                   <Col span={8} key={key}>
                     <p>
-                      <strong>{key}:</strong>{formData[key]}
+                      {/* <strong>{key}:</strong>{formData[key]} */}
                     </p>
                   </Col>
                 ))}

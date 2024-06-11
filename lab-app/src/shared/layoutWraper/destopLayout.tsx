@@ -17,22 +17,52 @@ const items = [UserOutlined, VideoCameraOutlined, UploadOutlined, UserOutlined].
   }),
 );
 interface ILayout {
-  data: IEnterForm;
+  InitialData: IEnterForm,
+  clickLogin:any,
 }
 
 // const loadInitialData = (): IEnterForm => {
 //   const savedData = localStorage.getItem('formData');
 //   return savedData ? JSON.parse(savedData) : initialData;
 // };
-export default function DesktopLayout({ data }: ILayout) {
+export default function DesktopLayout({ InitialData,clickLogin }: ILayout) {
   const [id, setId] = useState(0);
   const [disabled, setDisabled] = useState(true);
+///Main Data Store state 
+  const [formData, setFormData] = useState<IEnterForm[]>([InitialData]);
 
-  const [formData, setFormData] = useState<IEnterForm[]>([data]);
+  useEffect(()=>{
+    const storedData = localStorage.getItem('formData');
+    if (storedData) {
+      const parsedData = JSON.parse(storedData) as IEnterForm[];
+      setFormData(parsedData)
+      console.log("use",parsedData);
+    }
+
+  },[])
 
   const saveFormData = (newFormData: IEnterForm) => {
-    setFormData((prevFormData: IEnterForm[]) => [...prevFormData, newFormData]);
-    localStorage.setItem('formData', JSON.stringify(formData));
+    setFormData((prevFormData: IEnterForm[]) => {
+      const existingIndex = prevFormData.findIndex(formData => formData.id === newFormData.id);
+      let updatedFormData;
+  
+      if (existingIndex !== -1) {
+        // If the id exists, update the existing entry
+        updatedFormData = [
+          ...prevFormData.slice(0, existingIndex),
+          newFormData,
+          ...prevFormData.slice(existingIndex + 1),
+        ];
+      } else {
+        // If the id does not exist, add new entry
+        updatedFormData = [...prevFormData, newFormData];
+      }
+  
+      // Save updated data to local storage
+      localStorage.setItem('formData', JSON.stringify(updatedFormData));
+      return updatedFormData;
+    });
+    //localStorage.setItem('formData', JSON.stringify(formData));
   };
 
   const {
@@ -70,10 +100,10 @@ export default function DesktopLayout({ data }: ILayout) {
       <Layout style={{ backgroundColor: '#f1f1fa' }}>
         <div style={{ display: "flex", height: "100vh" }}>
           <div style={{ width: "70%" }}>
-            <EnterForm id={id} createId={createID} />
+            <EnterForm id={id} createId={createID} saveData={saveFormData} initalData={formData} />
           </div>
           <div style={{ width: "30%" }}>
-            <SideCard id={id} disabled={disabled} />
+            <SideCard id={id} disabled={disabled} saveData={saveFormData} InitialData={InitialData} />
           </div>
 
         </div>

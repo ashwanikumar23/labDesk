@@ -16,18 +16,31 @@ import {
   RadioChangeEvent,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
+import Idailog from "../../shared/Interface/Idailog";
+import IEnterForm from "../../shared/Interface/All-interface";
+import IIRON from "../../shared/Interface/IIRON";
 
 const { Option } = Select;
 
 
-const IronDialog = (props:any) => {
+const IronDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
-  const [formData, setFormData] = useState(null);
+  const [formData, setFormData] = useState<IEnterForm>(patientData);
+  const [homatology,setHomatology]=useState<IIRON|null>(null);
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: IIRON) => {
     console.log("Form values:", values);
-    setFormData(values);
+    setHomatology(values);
+    if(homatology){
+      patientData.id=id;
+      patientData.IRON=homatology;
+    }else{
+   ///throw alert messages
+    }
+    setFormData(patientData);
+    console.log(formData);
+    saveDataEvent(formData);
   };
 
   const [value, setValue] = useState(1);
@@ -104,7 +117,7 @@ const IronDialog = (props:any) => {
               {Object.entries(formData).map(([key, value]) => (
                 <Col span={8} key={key}>
                   <p>
-                    <strong>{key}:</strong>{formData[key]}
+                    <strong>{key}:</strong>
                   </p>
                 </Col>
               ))}

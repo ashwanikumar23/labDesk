@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import DashBoard from './Components/Layout/Dashboard';
 import PdfView from './Components/Layout/PDF/PdfView';
 import PdfLayout from './Components/PDF/PdfLayout';
@@ -30,9 +30,16 @@ import IWADAL from './shared/Interface/IWADAL';
 
 function App() {
   const [sign, setSign] = React.useState(false);
+  const [data, setData] = useState([]);
   const clickLogin=()=>{
     setSign(true);
   }
+  useEffect(() => {
+    fetch('/data.json')
+      .then((response) => response.json())
+      .then((data) => setData(data))
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []);
 
   const initialData:IEnterForm={
     name: '',
@@ -66,15 +73,13 @@ function App() {
     CBC: {} as ICBC, // Initialize with empty object or default values
     STOOL: {} as IStool // Initialize with empty object or default values
     ,
-    id: 0
+
+    id: 0,
+    Receivtime: ''
   }
   return (
     <>
-    {sign?<DesktopLayout data={initialData} />: <SignIn clickLogin={clickLogin} />}
-    {/* <SignIn clickLogin={clickLogin} /> */}
-    {/* <DashBoard /> */}
-    {/* <PdfLayout /> */} 
-    
+    {sign?<DesktopLayout  InitialData={initialData} clickLogin={clickLogin} />: <SignIn clickLogin={clickLogin} />}
     </>
   );
 }

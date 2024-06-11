@@ -41,7 +41,7 @@ export default function PatientList({patient}:IPatient) {
 
   const loadMorePatients = () => {
     const newDisplayedCount = displayedCount + 5;
-    const morePatients = patient.slice(0, newDisplayedCount);
+    const morePatients = patient.slice(1, newDisplayedCount);
     setInitLoading(false);
     setData(morePatients);
     setList(morePatients);
@@ -52,6 +52,12 @@ export default function PatientList({patient}:IPatient) {
 
 
   useEffect(() => {
+    const storedData = localStorage.getItem('patientData');
+    console.log(storedData)
+    if (storedData) {
+      const parsedData = JSON.parse(storedData) as IEnterForm[];
+      setPatients(parsedData)
+    }
     loadMorePatients();   
     // fetch(fakeDataUrl)
     //   .then((res) => res.json())
@@ -61,9 +67,22 @@ export default function PatientList({patient}:IPatient) {
     //     setList(res.results);
     //   });
   }, []);
+  // useEffect(() => {
+  //   const storedData = localStorage.getItem('patientData');
+  //   if (storedData) {
+  //     const parsedData = JSON.parse(storedData) as IEnterForm[];
+  //     setData(parsedData);
+  //     setList(parsedData.slice(0, displayedCount + 5));
+  //     setDisplayedCount(displayedCount + 5);
+  //     setInitLoading(false);
+  //   } else {
+  //     loadMorePatients();
+  //   }
+  // }, []);
 
   const onLoadMore = () => {
-    loadMorePatients
+    loadMorePatients();
+
   //   setLoading(true);
   //   setList(
   //     data.concat([...new Array(count)].map(() => ({ loading: true, name: {}, picture: {} }))),

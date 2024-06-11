@@ -15,10 +15,13 @@ import {
   Typography,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
+import IEnterForm from "../../shared/Interface/All-interface";
+import Idailog from "../../shared/Interface/Idailog";
+import ICBC from "../../shared/Interface/ICBC";
 
 const { Option } = Select;
 const { Text, Link } = Typography;
-const CBCDialog = (props: any) => {
+const CBCDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
   const [open, setOpen] = useState(false);
   const [openHAEMATOLOGY, setOpenHAEMATOLOGY] = React.useState(false);
   const handleClickOpen = () => {
@@ -26,11 +29,21 @@ const CBCDialog = (props: any) => {
   };
 
   const [form] = Form.useForm();
-  const [formData, setFormData] = useState(null);
+  const [formData, setFormData] =useState<IEnterForm>(patientData);
+  const [homatology,setHomatology]=useState<ICBC|null>(null);
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: ICBC) => {
     console.log("Form values:", values);
-    setFormData(values);
+    setHomatology(values);
+    if(homatology){
+      patientData.id=id;
+      patientData.CBC=homatology;
+    }else{
+   ///throw alert messages
+    }
+    setFormData(patientData);
+    console.log(formData);
+    saveDataEvent(formData);
   };
 
 
@@ -385,7 +398,7 @@ const CBCDialog = (props: any) => {
           </Form>
 
           {/* Display the form data in a grid form */}
-          {formData && (
+          {/* {formData && (
             <div>
               <h2>Form Data</h2>
               <Row gutter={16}>
@@ -398,7 +411,7 @@ const CBCDialog = (props: any) => {
                 ))}
               </Row>
             </div>
-          )}
+          )} */}
         </div>
       </Modal>
     </>

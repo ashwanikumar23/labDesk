@@ -29,6 +29,7 @@ import FLUIDDialog from '../../Dialogs/FLUIDDialog';
 import SpecialDialog from '../../Dialogs/SpecialDialog';
 import PBFDialog from '../../Dialogs/PBFDialog';
 import { Button } from 'antd';
+import IEnterForm from '../../../shared/Interface/All-interface';
 // import PregnancyDilaog from './Dialogs/PregnancyDialog';
 // import Footer from './Footer/Footer';
 // import IronDialog from './Dialogs/IronDialog';
@@ -54,9 +55,11 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
 interface IModal{
   id:number,
-  disabled?:boolean
+  disabled?:boolean,
+  saveData:any,
+  InitialData: IEnterForm,
 }
-function ModalGrid({id,disabled}:IModal) {
+function ModalGrid({id,disabled,saveData,InitialData}:IModal) {
 
   const [Patient, setPatient] = React.useState<any>({});
   const [Name , setName ] = React.useState('');
@@ -246,11 +249,11 @@ function DrugsTestClick(IRONData:any){
     <>
     <div style={{display:"flex", justifyContent:"center", gap:"4px"}}>
       <div style={{ alignItems:"center"}}>
-      <HAEMATOLOGYDialog id={id} disabled={disabled}  />
+      <HAEMATOLOGYDialog id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData} />
       
       </div>
       <div style={{ alignItems:"center"}}>
-      <BIOModal />      
+      <BIOModal id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData}  />      
         
       </div>
     </div>
@@ -270,13 +273,13 @@ function DrugsTestClick(IRONData:any){
       
       </div>
       <div style={{ alignItems:"center"}}>
-      <FLUIDDialog />    
+      <FLUIDDialog id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData} />    
         
       </div>
     </div>
     <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
       <div style={{ alignItems:"center"}}>
-      <LFTDialog />
+      <LFTDialog id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData} />
       
       </div>
       <div style={{ alignItems:"center"}}>
@@ -290,7 +293,7 @@ function DrugsTestClick(IRONData:any){
       
       </div>
       <div style={{ alignItems:"center"}}>
-      <ELECTROLYTESDialog />
+      <ELECTROLYTESDialog id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData} />
         
       </div>
     </div>
@@ -300,7 +303,7 @@ function DrugsTestClick(IRONData:any){
       
       </div>
       <div style={{ alignItems:"center"}}>
-      <CBCDialog />
+      <CBCDialog id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData} />
         
       </div>
     </div>
@@ -320,33 +323,33 @@ function DrugsTestClick(IRONData:any){
       
       </div>
       <div style={{ alignItems:"center"}}>
-      <PregnancyDilaog onSaveClick={PregnacyTestClick} />
+      <PregnancyDilaog id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData} />
         
       </div>
     </div>
     <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
       <div style={{ alignItems:"center"}}>
-      <PBFDialog />
+      <PBFDialog id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData} />
       
       </div>
       <div style={{ alignItems:"center"}}>
-      <GTTDialog />
+      <GTTDialog id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData} />
         
       </div>
     </div>
     <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
       <div style={{ alignItems:"center"}}>
-      <IronDialog onSaveClick={IRONTestClick}/>
+      <IronDialog id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData}/>
       
       </div>
       <div style={{ alignItems:"center"}}>
-      <CULTUREDialog />
+      <CULTUREDialog id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData} />
         
       </div>
     </div>
     <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
       <div style={{ alignItems:"center"}}>
-      <DRUG_ABUSE onSaveClick={DrugsTestClick} />
+      <DRUG_ABUSE id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData} />
       
       </div>
       <div style={{ alignItems:"center"}}>
@@ -356,11 +359,11 @@ function DrugsTestClick(IRONData:any){
     </div>
     <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
       <div style={{ alignItems:"center"}}>
-      <HBA1c2Dialog />
+      <HBA1c2Dialog id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData} />
       
       </div>
       <div style={{ alignItems:"center"}}>
-      <HBA1c1Dialog/>
+      <HBA1c1Dialog id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData}/>
         
       </div>
     </div>

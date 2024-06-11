@@ -16,16 +16,29 @@ import {
   RadioChangeEvent,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
+import Idailog from "../../shared/Interface/Idailog";
+import IEnterForm from "../../shared/Interface/All-interface";
+import IHBA1c1 from "../../shared/Interface/IHBA1c1";
 
 const { Option } = Select;
-const HBA1c1Dialog = (props:any) => {
+const HBA1c1Dialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
-  const [formData, setFormData] = useState(null);
+  const [formData, setFormData] = useState<IEnterForm>(patientData);
+  const [homatology,setHomatology]=useState<IHBA1c1|null>(null);
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: IHBA1c1) => {
     console.log("Form values:", values);
-    setFormData(values);
+    setHomatology(values);
+    if(homatology){
+      patientData.id=id;
+      patientData.HBA1c1=homatology;
+    }else{
+   ///throw alert messages
+    }
+    setFormData(patientData);
+    console.log(formData);
+    saveDataEvent(formData);
   };
 
   const [value, setValue] = useState(1);
@@ -104,7 +117,7 @@ const HBA1c1Dialog = (props:any) => {
               {Object.entries(formData).map(([key, value]) => (
                 <Col span={8} key={key}>
                   <p>
-                    <strong>{key}:</strong>{formData[key]}
+                    <strong>{key}:</strong>
                   </p>
                 </Col>
               ))}

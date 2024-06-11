@@ -1,4 +1,4 @@
-export default  interface GTT {
+export default  interface IGTT {
     Print: boolean,
     Comments: boolean,
     Fasting: string;

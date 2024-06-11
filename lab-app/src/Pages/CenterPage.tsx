@@ -3,29 +3,19 @@ import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, DatePicker, TimePicker, Select, Divider } from 'antd';
 import GradientButton from '../shared/UI/Button/gradientButton';
 import { SearchProps } from 'antd/es/input/Search';
+import IEnterForm from '../shared/Interface/All-interface';
 const { Option } = Select;
 
 interface IEnterFormProps {
-    id: Number,
-    createId?: any
+    id: number,
+    createId?: any,
+    saveData?:any,
+    initalData?:IEnterForm[],
+
 }
 const { Search } = Input;
-const EnterForm = ({ id, createId }: IEnterFormProps) => {
-    const [formData, setFormData] = useState({
-        name: '',
-        DATE: null,
-        ReciveData: null,
-        time: null,
-        Receivtime: null,
-        prefix: '',
-        LabNO: null,
-        Gender: '',
-        Age: null,
-        Address: '',
-        M_no: null,
-        materials: '',
-        Reference: ''
-    });
+const EnterForm = ({ id, createId,saveData,initalData }: IEnterFormProps) => {
+    const [formData, setFormData] = useState<IEnterForm>();
     const[disabled,setDisabled]=useState(true);
 
     const handleFinish = (values: { DATE: { format: (arg0: string) => any; }; time: { format: (arg0: string) => any; }; ReciveData: { format: (arg0: string) => any; }; Receivtime: { format: (arg0: string) => any; }; }) => {
@@ -38,10 +28,11 @@ const EnterForm = ({ id, createId }: IEnterFormProps) => {
         };
         console.log(formattedValues);
 
-        const newFormData = formattedValues;
+        const newFormData = formattedValues as IEnterForm;
+        newFormData.id=id
+        console.log("new",newFormData);
         setFormData(newFormData);
-        localStorage.setItem('patientData', JSON.stringify(newFormData));
-        console.log('Saved data:', newFormData);
+        saveData(newFormData);
     };
     const onSearch: SearchProps['onSearch'] = (value, _e, info) => console.log(info?.source, value);
     useEffect(()=>{

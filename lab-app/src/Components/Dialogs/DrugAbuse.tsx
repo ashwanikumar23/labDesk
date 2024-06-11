@@ -16,16 +16,29 @@ import {
   RadioChangeEvent,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
+import Idailog from "../../shared/Interface/Idailog";
+import IEnterForm from "../../shared/Interface/All-interface";
+import IDRUG from "../../shared/Interface/IDRUG";
 
 const { Option } = Select;
-const DRUG_ABUSE = (props:any) => {
+const DRUG_ABUSE = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
-  const [formData, setFormData] = useState(null);
+  const [formData, setFormData] = useState<IEnterForm>(patientData);
+  const [homatology,setHomatology]=useState<IDRUG|null>(null);
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: IDRUG) => {
     console.log("Form values:", values);
-    setFormData(values);
+    setHomatology(values);
+    if(homatology){
+      patientData.id=id;
+      patientData.DRUGABUSE=homatology;
+    }else{
+   ///throw alert messages
+    }
+    setFormData(patientData);
+    console.log(formData);
+    saveDataEvent(formData);
   };
 
   const [value, setValue] = useState(1);
@@ -128,7 +141,7 @@ const DRUG_ABUSE = (props:any) => {
                 {Object.entries(formData).map(([key, value]) => (
                   <Col span={8} key={key}>
                     <p>
-                      <strong>{key}:</strong>{formData[key]}
+                      <strong>{key}:</strong>
                     </p>
                   </Col>
                 ))}

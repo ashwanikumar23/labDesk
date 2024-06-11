@@ -5,10 +5,12 @@ import ICULTURE from "./ICULTURE";
 import IDRUG from "./IDRUG";
 import IElectrolyte from "./IElectrolyte";
 import IFluid from "./IFluid";
+import IGTT from "./IGTT";
 import IHAEMATOLOGY from "./IHAEMATOLOGY";
 import IHBA1c1 from "./IHBA1c1";
 import IIRON from "./IIRON";
 import ILFT from "./ILFT";
+import ILIPID from "./ILIPID";
 import IPBF from "./IPBF";
 import IPREG from "./IPREG";
 import ISEROLOGY from "./ISEROLOGY";
@@ -24,34 +26,37 @@ export default interface IEnterForm {
     DATE: string;
     ReciveData: string;
     time: string;
+    Receivtime:string
     prefix: string;
     LabNO: string;
     Gender: string;
     Age: string;
     Address: string;
     M_no: string;
-    HAEMATOLOGY: IHAEMATOLOGY;
-    BIO: IBio;
-    CULTURE: ICULTURE;
-    IRON: IIRON;
-    URINE: IURINE;
-    Wadal: IWADAL;
-    PREG: IPREG;
-    HBA1c1: IHBA1c1;
+    HAEMATOLOGY?: IHAEMATOLOGY;
+    BIO?: IBio;
+    CULTURE?: ICULTURE;
+    IRON?: IIRON;
+    URINE?: IURINE;
+    Wadal?: IWADAL;
+    PREG?: IPREG;
+    HBA1c1?: IHBA1c1;
+    GTT?:IGTT;
+    LIPID?:ILIPID;
 
-    HBA1c2: IHBA1c2;
+    HBA1c2?: IHBA1c2;
 
-    PBF: IPBF;
-    SPECIAL: ISpecial;
-    THYROID: IThyroid;
-    SEROLOGY: ISEROLOGY;
-    FLUID: IFluid;
-    DRUGABUSE: IDRUG;
-    LFT: ILFT;
-    SEMEN: ISEROLOGY;
-    ELECTROLYTES: IElectrolyte;
-    CBC: ICBC;
-    STOOL: IStool;
+    PBF?: IPBF;
+    SPECIAL?: ISpecial;
+    THYROID?: IThyroid;
+    SEROLOGY?: ISEROLOGY;
+    FLUID?: IFluid;
+    DRUGABUSE?: IDRUG;
+    LFT?: ILFT;
+    SEMEN?: ISEROLOGY;
+    ELECTROLYTES?: IElectrolyte;
+    CBC?: ICBC;
+    STOOL?: IStool;
 
 }
 
