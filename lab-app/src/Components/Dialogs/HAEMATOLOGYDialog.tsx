@@ -18,12 +18,16 @@ import GradientButton from "../../shared/UI/Button/gradientButton";
 import Idailog from "../../shared/Interface/Idailog";
 import IEnterForm from "../../shared/Interface/All-interface";
 import IHAEMATOLOGY from "../../shared/Interface/IHAEMATOLOGY";
+import { AppDispatch } from "../../shared/Store/store";
+import { useDispatch } from "react-redux";
+import { updateHAEMATOLOGY } from "../../shared/Store/dataSlice";
 
 const { Option } = Select;
 const { Text, Link } = Typography;
 
 
 const HAEMATOLOGYDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
+  const dispatch: AppDispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [openHAEMATOLOGY, setOpenHAEMATOLOGY] = React.useState(false);
   const handleClickOpen = () => {
@@ -38,6 +42,9 @@ const HAEMATOLOGYDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => 
     console.log("Form values:", values);
     setHomatology(values);
     if(homatology){
+      console.warn("hiye")
+      const body={id: id, data: homatology}
+      dispatch(updateHAEMATOLOGY({id,data:homatology}));
       patientData.id=id;
       patientData.HAEMATOLOGY=homatology;
     }else{
@@ -46,6 +53,8 @@ const HAEMATOLOGYDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => 
     setFormData(patientData);
     console.log(formData);
     saveDataEvent(formData);
+   
+   
     // let object=Object.entries(formData);
   };
 
@@ -53,9 +62,7 @@ const HAEMATOLOGYDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => 
 
   return (
     <>
-      {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
-        HAEMATOLOGY
-      </Button> */}
+     
       <GradientButton id={id} BtnName={"HAEMATOLOGY"} disabled={disabled} width="150px" clickEvent={() => setOpen(true)} />
       <Modal
         title="HAEMATOLOGY"
@@ -274,22 +281,6 @@ const HAEMATOLOGYDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => 
               </Button>
             </Form.Item>
           </Form>
-
-          {/* Display the form data in a grid form */}
-          {formData && (
-            <div>
-              <h2>Form Data</h2>
-              <Row gutter={16}>
-                {Object.entries(formData).map(([key, value]) => (
-                  <Col span={8} key={key}>
-                    <p>
-                      {/* <strong>{key}:</strong>{formData[key]} */}
-                    </p>
-                  </Col>
-                ))}
-              </Row>
-            </div>
-          )}
         </div>
       </Modal>
     </>

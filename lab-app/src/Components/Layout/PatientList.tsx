@@ -1,31 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Avatar, Button, Divider, List, Skeleton } from 'antd';
-import { Padding } from '@mui/icons-material';
 import { EditOutlined } from '@ant-design/icons';
-// import DB from './DB/PatientDB.json'
 import IEnterForm from '../../shared/Interface/All-interface';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../shared/Store/store';
 
-interface DataType {
-  gender?: string;
-  name: {
-    title?: string;
-    first?: string;
-    last?: string;
-  };
-  email?: string;
-  picture: {
-    large?: string;
-    medium?: string;
-    thumbnail?: string;
-  };
-  nat?: string;
-  loading: boolean;
-}
 
 const count = 3;
-const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat,picture&noinfo`;
 
 interface IPatient{
   patient:IEnterForm[];
@@ -56,8 +37,9 @@ export default function PatientList({patient}:IPatient) {
 
 
   useEffect(() => {
-    loadMorePatients();   
-  }, []);
+    loadMorePatients();
+    console.warn("ListOfPatient",ListOfPatient);   
+  }, [ListOfPatient]);
   // useEffect(() => {
   //   const storedData = localStorage.getItem('patientData');
   //   if (storedData) {

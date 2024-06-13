@@ -62,6 +62,7 @@ const dataSlice = createSlice({
   reducers: {
     addData(state, action: PayloadAction<IEnterForm>) {
       state.push(action.payload);
+      console.warn("here is store",state);
     },
     saveToLocalStorage(state) {
         localStorage.setItem('data', JSON.stringify(state));
@@ -71,12 +72,14 @@ const dataSlice = createSlice({
       if (index !== -1) {
         state[index].HAEMATOLOGY = action.payload.data;
       }
+      console.warn("here is store",state);
     },
     updateBIO(state, action: PayloadAction<{ id: number; data: IBio }>) {
       const index = state.findIndex(item => item.id === action.payload.id);
       if (index !== -1) {
         state[index].BIO = action.payload.data;
       }
+      console.warn("here is store",state);
     },
     // Similarly, define update actions for other interfaces
     updateCULTURE(state, action: PayloadAction<{ id: number; data: ICULTURE }>) {
@@ -84,6 +87,7 @@ const dataSlice = createSlice({
         if (index !== -1) {
           state[index].CULTURE = action.payload.data;
         }
+        console.warn("here is store",state);
       },
       updateIRON(state, action: PayloadAction<{ id: number; data: IIRON }>) {
         const index = state.findIndex(item => item.id === action.payload.id);
