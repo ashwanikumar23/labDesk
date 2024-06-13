@@ -1,0 +1,128 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+.header-container {
+   
+    background-color: white;
+    border-bottom: 4px solid #007bff;
+    padding: 10px;
+}
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo img {
+    width: 50px;
+    height: auto;
+}
+
+.header-content {
+    text-align: center;
+    flex-grow: 1;
+}
+
+.header-content h1 {
+    font-size: 24px;
+    margin: 0;
+    color: #007bff;
+}
+
+.header-content h1 span {
+    color: black;
+}
+
+.header-content p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.contact-item img {
+    width: 20px;
+    height: auto;
+    margin-right: 5px;
+}
+
+.website a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 16px;
+    margin-left: auto;
+}
+
+.website a:hover {
+    text-decoration: underline;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.cbc-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    /* border: 1px solid #ddd;
+    border-radius: 5px; */
+    background-color: #fff;
+}
+
+.cbc-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.cbc-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cbc-table th,
+.cbc-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.cbc-table th {
+    background-color: #f4f4f4;
+}
+
+.cbc-table td.low {
+    color: blue;
+}
+
+.cbc-table td.high {
+    color: red;
+}
+
+.cbc-table td.borderline {
+    color: orange;
+}
+
+.cbc-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.cbc-table tr:hover {
+    background-color: #f1f1f1;
+}
+

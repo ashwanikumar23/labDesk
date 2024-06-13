@@ -77,7 +77,8 @@ function App() {
 
   return (
     <>
-    {isLoggedIn?<DesktopLayout  InitialData={initialData} clickLogin={clickLogin} />: <SignIn clickLogin={clickLogin} />}
+    {/* {isLoggedIn?<DesktopLayout  InitialData={initialData} clickLogin={clickLogin} />: <SignIn clickLogin={clickLogin} />} */}
+    <PdfLayout/>
     </>
   );
 }
