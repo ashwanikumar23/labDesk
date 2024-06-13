@@ -4,6 +4,8 @@ import { Padding } from '@mui/icons-material';
 import { EditOutlined } from '@ant-design/icons';
 // import DB from './DB/PatientDB.json'
 import IEnterForm from '../../shared/Interface/All-interface';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../shared/Store/store';
 
 interface DataType {
   gender?: string;
@@ -29,43 +31,32 @@ interface IPatient{
   patient:IEnterForm[];
 }
 export default function PatientList({patient}:IPatient) {
+  const ListOfPatient = useSelector((state: RootState) => state.data);
+  console.warn("ListOfPatient",ListOfPatient);
   const [initLoading, setInitLoading] = useState(true);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<IEnterForm[]>();
   const [list, setList] = useState<IEnterForm[]>();
   
-  const [patients, setPatients] = useState<IEnterForm[]|null>(patient);
+  // const [patients, setPatients] = useState<IEnterForm[]|null>(patient);
   const [displayedCount, setDisplayedCount] = useState(0);
 
   const [users, setUsers] = useState([]);
 
   const loadMorePatients = () => {
     const newDisplayedCount = displayedCount + 5;
-    const morePatients = patient.slice(1, newDisplayedCount);
+    const morePatients = ListOfPatient.slice(0, newDisplayedCount);
     setInitLoading(false);
     setData(morePatients);
     setList(morePatients);
     // setPatients((prevPatients) => [...prevPatients, ...morePatients]);
     setDisplayedCount(newDisplayedCount);
-    console.log(patients);
+
   };
 
 
   useEffect(() => {
-    const storedData = localStorage.getItem('patientData');
-    console.log(storedData)
-    if (storedData) {
-      const parsedData = JSON.parse(storedData) as IEnterForm[];
-      setPatients(parsedData)
-    }
     loadMorePatients();   
-    // fetch(fakeDataUrl)
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     setInitLoading(false);
-    //     setData(res.results);
-    //     setList(res.results);
-    //   });
   }, []);
   // useEffect(() => {
   //   const storedData = localStorage.getItem('patientData');

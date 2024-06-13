@@ -25,7 +25,9 @@ interface ILayout {
 //   const savedData = localStorage.getItem('formData');
 //   return savedData ? JSON.parse(savedData) : initialData;
 // };
-export default function DesktopLayout({ InitialData,clickLogin }: ILayout) {
+export default function DesktopLayout(props:any) {
+  console.warn("store->",props);
+  const {InitialData,clickLogin}=props
   const [id, setId] = useState(0);
   const [disabled, setDisabled] = useState(true);
 ///Main Data Store state 

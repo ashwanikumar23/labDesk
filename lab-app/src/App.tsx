@@ -4,7 +4,6 @@ import DashBoard from './Components/Layout/Dashboard';
 import PdfView from './Components/Layout/PDF/PdfView';
 import PdfLayout from './Components/PDF/PdfLayout';
 import SignIn from './Pages/sign-in';
-import DesktopLayout from './shared/layoutWraper/destopLayout';
 import IEnterForm  from './shared/Interface/All-interface';
 import IHBA1c2 from './shared/Interface/ IHBA1c2';
 import IBio from './shared/Interface/IBio';
@@ -25,21 +24,19 @@ import IStool from './shared/Interface/IStool';
 import IThyroid from './shared/Interface/IThyroid';
 import IURINE from './shared/Interface/IURINE';
 import IWADAL from './shared/Interface/IWADAL';
+import DesktopLayout from './shared/layoutWraper/destopLayout';
+import { useSelector } from 'react-redux';
+import { RootState } from './shared/Store/store';
 
 
 
 function App() {
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const [sign, setSign] = React.useState(false);
   const [data, setData] = useState([]);
   const clickLogin=()=>{
     setSign(true);
   }
-  useEffect(() => {
-    fetch('/data.json')
-      .then((response) => response.json())
-      .then((data) => setData(data))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
 
   const initialData:IEnterForm={
     name: '',
@@ -77,9 +74,10 @@ function App() {
     id: 0,
     Receivtime: ''
   }
+
   return (
     <>
-    {sign?<DesktopLayout  InitialData={initialData} clickLogin={clickLogin} />: <SignIn clickLogin={clickLogin} />}
+    {isLoggedIn?<DesktopLayout  InitialData={initialData} clickLogin={clickLogin} />: <SignIn clickLogin={clickLogin} />}
     </>
   );
 }

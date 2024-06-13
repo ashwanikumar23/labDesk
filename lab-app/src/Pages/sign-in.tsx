@@ -1,4 +1,7 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, AppDispatch } from '../shared/Store/store';
+import { login, logout } from '../shared/Store/signInSlice';
 import "./style.css";
 import type { FormProps } from 'antd';
 import { Button, Card, Checkbox, Form, Input, Space } from 'antd';
@@ -24,10 +27,20 @@ interface ISignin{
     clickLogin:any
 }
 export default function SignIn({clickLogin}:ISignin) {
+    const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const username = useSelector((state: RootState) => state.auth.username);
+  const dispatch: AppDispatch = useDispatch();
+
+
     const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
         clickLogin();
+        let username="sample.com"
+        dispatch(login(username));
         console.log('Success:', values);
     };
+    const handleLogout = () => {
+        dispatch(logout());
+      };
     return (
         <>
             <div style={{width:"100%",height:"100vh", display: 'flex', justifyContent: 'center', alignItems: 'center',  backgroundImage: `url('/labs-medical-lab.jpg')`, backgroundSize: 'cover',
