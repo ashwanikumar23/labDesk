@@ -63,6 +63,8 @@ const EnterForm = ({ id, createId,saveData,initalData }: IEnterFormProps) => {
         <div style={{ width: "90%", margin: "6px auto" }}>
             <div style={{ display: "flex", gap: "4px", margin: "10px 2px " }}>
                 <GradientButton id={id} BtnName={'Add Patient'} clickEvent={CreateId} />
+                <GradientButton id={id} BtnName={'Print'} clickEvent={CreateId} />
+                <GradientButton id={id} BtnName={'Save'} clickEvent={CreateId} />
                 <div style={{width:"100%"}}></div>
                 {/* <GradientButton id={id} BtnName={'Name Wi'} /> */}
                 <Search

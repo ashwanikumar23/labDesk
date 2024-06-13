@@ -42,7 +42,7 @@ const CBCDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
    ///throw alert messages
     }
     setFormData(patientData);
-    console.log(formData);
+   // console.log(formData);
     saveDataEvent(formData);
   };
 
