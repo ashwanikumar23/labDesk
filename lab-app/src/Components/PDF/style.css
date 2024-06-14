@@ -126,3 +126,298 @@ body {
     background-color: #f1f1f1;
 }
 
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.lft-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.lft-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.lft-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.lft-table th,
+.lft-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.lft-table th {
+    background-color: #f4f4f4;
+}
+
+.lft-table td.low {
+    color: blue;
+}
+
+.lft-table td.high {
+    color: red;
+}
+
+.lft-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.lft-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.kft-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.kft-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.kft-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.kft-table th,
+.kft-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.kft-table th {
+    background-color: #f4f4f4;
+}
+
+.kft-table td.low {
+    color: blue;
+}
+
+.kft-table td.high {
+    color: red;
+}
+
+.kft-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.kft-table tr:hover {
+    background-color: #f1f1f1;
+}
+body {
+    font-family: Arial, sans-serif;
+}
+
+.report-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.report-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.report-table th,
+.report-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.report-table th {
+    background-color: #f4f4f4;
+}
+
+.report-table td.low {
+    color: blue;
+}
+
+.report-table td.high {
+    color: red;
+}
+
+.report-table td.positive {
+    color: green;
+}
+
+.report-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.report-table tr:hover {
+    background-color: #f1f1f1;
+}
+body {
+    font-family: Arial, sans-serif;
+}
+
+.widal-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.widal-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.widal-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.widal-table th,
+.widal-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.widal-table th {
+    background-color: #f4f4f4;
+}
+
+.widal-table td.non-reactive {
+    color: green;
+}
+
+.widal-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.widal-table tr:hover {
+    background-color: #f1f1f1;
+}
+body {
+    font-family: Arial, sans-serif;
+}
+
+.lipid-profile-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.lipid-profile-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.lipid-profile-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.lipid-profile-table th,
+.lipid-profile-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.lipid-profile-table th {
+    background-color: #f4f4f4;
+}
+
+.lipid-profile-table td.high {
+    color: red;
+}
+
+.lipid-profile-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.lipid-profile-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.thyroid-profile-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.thyroid-profile-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.thyroid-profile-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.thyroid-profile-table th,
+.thyroid-profile-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.thyroid-profile-table th {
+    background-color: #f4f4f4;
+}
+
+.thyroid-profile-table td.high {
+    color: red;
+}
+
+.thyroid-profile-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.thyroid-profile-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+
+
+
+

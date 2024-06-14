@@ -2,7 +2,8 @@ body{
   background: #ececf8 !important;
 }
 .App{
-  overflow: hidden !important;
+  /* overflow: hidden !important; */
+  overflow: auto;
 }
   /* padding-top: 5px;
   display: flex;

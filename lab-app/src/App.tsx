@@ -76,10 +76,10 @@ function App() {
   }
 
   return (
-    <>
+    <div style={{overflow:'scroll',height:'100%'}}>
     {/* {isLoggedIn?<DesktopLayout  InitialData={initialData} clickLogin={clickLogin} />: <SignIn clickLogin={clickLogin} />} */}
     <PdfLayout/>
-    </>
+    </div>
   );
 }
 
