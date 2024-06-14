@@ -2,7 +2,6 @@ import './App.css';
 import React, { useEffect, useState } from 'react';
 import DashBoard from './Components/Layout/Dashboard';
 import PdfView from './Components/Layout/PDF/PdfView';
-import PdfLayout from './Components/PDF/PdfLayout';
 import SignIn from './Pages/sign-in';
 import IEnterForm  from './shared/Interface/All-interface';
 import IHBA1c2 from './shared/Interface/ IHBA1c2';
@@ -76,9 +75,9 @@ function App() {
   }
 
   return (
-    <div style={{overflow:'scroll',height:'100%'}}>
-    {/* {isLoggedIn?<DesktopLayout  InitialData={initialData} clickLogin={clickLogin} />: <SignIn clickLogin={clickLogin} />} */}
-    <PdfLayout/>
+    <div style={{}}>
+    {isLoggedIn?<DesktopLayout  InitialData={initialData} clickLogin={clickLogin} />: <SignIn clickLogin={clickLogin} />}
+    {/* <PdfLayout/> */}
     </div>
   );
 }

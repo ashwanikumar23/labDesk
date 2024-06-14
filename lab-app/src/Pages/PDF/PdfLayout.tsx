@@ -1,12 +1,12 @@
 import { Col, Divider, Row } from "antd";
 import './style.css'
+import React from "react";
 
 
 const val = "end";
 
-export default function App() {
-  return (
-    <>
+export const MyComponent =React.forwardRef((props, ref:any) =>(
+    <div ref={ref} >
     <div className="header-container">
       <div className="flex">
       <div className="logo" style={{width:'20%'}}>
@@ -14,7 +14,7 @@ export default function App() {
       </div>
       <div className="header-content" style={{display:'flex',gap:"2px",textAlign:'left'}}>
         <div style={{padding:'10px 0px',width:'70%'}}>
-          <h1>DRLOGY <span>PATHOLOGY LAB</span></h1>
+          <h1>DESK <span>LAB</span></h1>
           <p>Accurate | Caring | Instant</p>
 
         </div>
@@ -56,17 +56,16 @@ export default function App() {
 
     </div>
     <hr/>
-{/* <CompleteBloodCount />
+<CompleteBloodCount />
 <LftTable />
 <KFTTable />
-<PregnancyReportTable /> */}
+<PregnancyReportTable />
 <WidalSlideAgglutinationTest />
 <LipidProfileTable />
 
 </div>
-    </>
-  );
-}
+    </div>
+  ));
 
 function TableData() {
   return (

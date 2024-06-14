@@ -14,6 +14,7 @@ import {
   Modal,
   Radio,
   RadioChangeEvent,
+  Badge,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
 import Idailog from "../../shared/Interface/Idailog";
@@ -53,7 +54,10 @@ function PregnancyDilaog({id,disabled,patientData,saveDataEvent}: Idailog){
       {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
       PREGNANCY
       </Button> */}
+      <Badge dot size="default">
       <GradientButton id={0} BtnName={"PREGNANCY"} width="150px" clickEvent={() => setOpen(true)} />
+
+      </Badge>
       <Modal
         title=" PREGNANCY TEST"
         centered

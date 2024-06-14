@@ -14,6 +14,7 @@ import {
   Modal,
   Radio,
   RadioChangeEvent,
+  Badge,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
 import Idailog from "../../shared/Interface/Idailog";
@@ -52,7 +53,9 @@ const BIOModal = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
     {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
     BIO TEST 
     </Button> */}
-    <GradientButton id={0} BtnName={" BIO TEST "} width="150px" clickEvent={() => setOpen(true)} />
+    <Badge dot size="default">
+      <GradientButton id={0} BtnName={" BIO TEST "} width="150px" clickEvent={() => setOpen(true)} />
+      </Badge>
     <Modal
       title="BIO TEST"
       centered

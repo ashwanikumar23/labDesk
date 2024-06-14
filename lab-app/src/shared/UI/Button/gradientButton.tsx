@@ -28,15 +28,18 @@ export default function GradientButton({id,clickEvent,BtnName,width,disabled}:IB
                 theme={{
                     components: {
                         Button: {
-                            colorPrimary: `linear-gradient(135deg, ${colors1.join(', ')})`,
-                            colorPrimaryHover: `linear-gradient(135deg, ${getHoverColors(colors1).join(', ')})`,
-                            colorPrimaryActive: `linear-gradient(135deg, ${getActiveColors(colors1).join(', ')})`,
+                            //colorPrimary: `linear-gradient(135deg, ${colors1.join(', ')})`,
+                            colorPrimary:'#001d3d',
+                            //colorPrimaryHover: `linear-gradient(135deg, ${getHoverColors(colors1).join(', ')})`,
+                            colorPrimaryHover:'#000814',
+                            colorPrimaryActive:'#001d3d',
+                            //colorPrimaryActive: `linear-gradient(135deg, ${getActiveColors(colors1).join(', ')})`,
                             lineWidth: 0,
                         },
                     },
                 }}
             >
-                <Button type="primary" size="large" disabled={disabled} onClick={clickEvent} style={{width:`${width|| ''}`}} >
+                <Button type="primary" size="large" disabled={disabled} onClick={clickEvent} style={{width:`${width|| ''}`,fontSize:'13px'}} >
                     {BtnName}
                 </Button>
             </ConfigProvider>

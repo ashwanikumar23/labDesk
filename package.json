@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start":"electron .",
-    "start:watch":"npx electronmon --trace-warnings .",
+    "start": "electron .",
+    "start:watch": "npx electronmon --trace-warnings .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ashwani",
   "license": "ISC",
   "dependencies": {
-    "electron": "^29.1.6"
+    "electron": "^29.1.6",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
+    "react-to-print": "^2.15.1"
   }
 }

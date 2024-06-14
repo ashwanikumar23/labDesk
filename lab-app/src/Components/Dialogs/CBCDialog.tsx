@@ -13,6 +13,7 @@ import {
   Col,
   Modal,
   Typography,
+  Badge,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
 import IEnterForm from "../../shared/Interface/All-interface";
@@ -53,7 +54,10 @@ const CBCDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
       {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
         CBC
       </Button> */}
+      <Badge dot size="default">
       <GradientButton id={0} BtnName={"CBC"} width="150px" clickEvent={() => setOpen(true)} />
+
+      </Badge>
       <Modal
         title="CBC TEST"
         centered
