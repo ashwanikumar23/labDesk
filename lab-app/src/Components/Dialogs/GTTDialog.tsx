@@ -14,11 +14,15 @@ import {
   Modal,
   Radio,
   RadioChangeEvent,
+  Badge,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
 import Idailog from "../../shared/Interface/Idailog";
 import IEnterForm from "../../shared/Interface/All-interface";
 import IGTT from "../../shared/Interface/IGTT";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../shared/Store/store";
+import { updateCBC } from "../../shared/Store/dataSlice";
 
 const { Option } = Select;
 
@@ -28,6 +32,7 @@ const GTTDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
   const [form] = Form.useForm();
   const [formData, setFormData] = useState<IEnterForm>(patientData);
   const [homatology,setHomatology]=useState<IGTT|null>(null);
+  const dispatch:AppDispatch=useDispatch();
 
   const onFinish = (values: any) => {
     console.log("Form values:", values);
@@ -35,6 +40,7 @@ const GTTDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
     if(homatology){
       patientData.id=id;
       patientData.GTT=homatology;
+      // dispatch(updateGTT({id,data:homatology}));
     }else{
    ///throw alert messages
     }
@@ -54,7 +60,10 @@ const GTTDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
       {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
       GTT
       </Button> */}
+       <Badge dot size="default">
+
       <GradientButton id={0} BtnName={"GTT"} width="150px" clickEvent={() => setOpen(true)} />
+       </Badge>
       <Modal
         title="GTT Test"
         centered

@@ -20,6 +20,9 @@ import GradientButton from "../../shared/UI/Button/gradientButton";
 import Idailog from "../../shared/Interface/Idailog";
 import IEnterForm from "../../shared/Interface/All-interface";
 import IBio from "../../shared/Interface/IBio";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../shared/Store/store";
+import { updateBIO } from "../../shared/Store/dataSlice";
 
 const { Option } = Select;
 const BIOModal = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
@@ -27,6 +30,7 @@ const BIOModal = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
   const [form] = Form.useForm();
   const [formData, setFormData] = useState<IEnterForm>(patientData);
   const [homatology,setHomatology]=useState<IBio|null>(null);
+  const dispatch:AppDispatch=useDispatch();
 
   const onFinish = (values: IBio) => {
     console.log("Form values:", values);
@@ -34,6 +38,7 @@ const BIOModal = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
     if(homatology){
       patientData.id=id;
       patientData.BIO=homatology;
+      dispatch(updateBIO({id,data:homatology}));
     }else{
    ///throw alert messages
     }
@@ -50,9 +55,6 @@ const BIOModal = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
   };
   return (
 <>
-    {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
-    BIO TEST 
-    </Button> */}
     <Badge dot size="default">
       <GradientButton id={0} BtnName={" BIO TEST "} width="150px" clickEvent={() => setOpen(true)} />
       </Badge>

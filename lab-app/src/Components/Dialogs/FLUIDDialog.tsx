@@ -14,11 +14,15 @@ import {
   Modal,
   Radio,
   RadioChangeEvent,
+  Badge,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
 import Idailog from "../../shared/Interface/Idailog";
 import IEnterForm from "../../shared/Interface/All-interface";
 import IFluid from "../../shared/Interface/IFluid";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../shared/Store/store";
+import { updateDRUGABUSE, updateFLUID } from "../../shared/Store/dataSlice";
 
 const { Option } = Select;
 const FLUIDDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
@@ -26,6 +30,7 @@ const FLUIDDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
   const [form] = Form.useForm();
   const [formData, setFormData] =  useState<IEnterForm>(patientData);
   const [homatology,setHomatology]=useState<IFluid|null>(null);
+  const dispatch:AppDispatch=useDispatch();
 
   const onFinish = (values: IFluid) => {
     console.log("Form values:", values);
@@ -33,6 +38,7 @@ const FLUIDDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
     if(homatology){
       patientData.id=id;
       patientData.FLUID=homatology;
+      dispatch(updateFLUID({id,data:homatology}));
     }else{
    ///throw alert messages
     }
@@ -53,7 +59,10 @@ const FLUIDDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
       {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
       FLUID
       </Button> */}
-      <GradientButton id={0} BtnName={"FLUID"} width="150px" clickEvent={() => setOpen(true)} />
+       <Badge dot size="default">
+          <GradientButton id={0} BtnName={"FLUID"} width="150px" clickEvent={() => setOpen(true)} />
+
+       </Badge>
       <Modal
         title="FLUID TEST"
         centered

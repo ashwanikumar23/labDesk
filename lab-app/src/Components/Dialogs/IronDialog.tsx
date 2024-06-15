@@ -14,11 +14,15 @@ import {
   Modal,
   Radio,
   RadioChangeEvent,
+  Badge,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
 import Idailog from "../../shared/Interface/Idailog";
 import IEnterForm from "../../shared/Interface/All-interface";
 import IIRON from "../../shared/Interface/IIRON";
+import { updateIRON } from "../../shared/Store/dataSlice";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../shared/Store/store";
 
 const { Option } = Select;
 
@@ -28,6 +32,7 @@ const IronDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
   const [form] = Form.useForm();
   const [formData, setFormData] = useState<IEnterForm>(patientData);
   const [homatology,setHomatology]=useState<IIRON|null>(null);
+  const dispatch:AppDispatch=useDispatch();
 
   const onFinish = (values: IIRON) => {
     console.log("Form values:", values);
@@ -35,6 +40,7 @@ const IronDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
     if(homatology){
       patientData.id=id;
       patientData.IRON=homatology;
+      dispatch(updateIRON({id,data:homatology}));
     }else{
    ///throw alert messages
     }
@@ -54,7 +60,10 @@ const IronDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
     {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
     IRON 
     </Button> */}
+     <Badge dot size="default">
     <GradientButton id={0} BtnName={"IRON"} width="150px" clickEvent={() => setOpen(true)} />
+
+     </Badge>
     <Modal
       title="IRON TEST"
       centered

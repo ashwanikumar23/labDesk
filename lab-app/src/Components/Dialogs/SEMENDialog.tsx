@@ -14,6 +14,7 @@ import {
   Modal,
   Radio,
   RadioChangeEvent,
+  Badge,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
 
@@ -39,7 +40,10 @@ const SEMENDialog = (props:any) => {
     {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
     SEMEN TEST 
     </Button> */}
+     <Badge dot size="default">
+
     <GradientButton id={0} BtnName={"SEMEN TEST"} width="150px" clickEvent={() => setOpen(true)} />
+     </Badge>
     <Modal
       title="SEMEN TEST"
       centered

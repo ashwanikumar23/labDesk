@@ -14,11 +14,15 @@ import {
   Modal,
   Radio,
   RadioChangeEvent,
+  Badge,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
 import IEnterForm from "../../shared/Interface/All-interface";
 import Idailog from "../../shared/Interface/Idailog";
 import IPBF from "../../shared/Interface/IPBF";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../shared/Store/store";
+import { updatePBF } from "../../shared/Store/dataSlice";
 
 const { Option } = Select;
 const PBFDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
@@ -26,6 +30,7 @@ const PBFDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
   const [form] = Form.useForm();
   const [formData, setFormData] =useState<IEnterForm>(patientData);
   const [homatology,setHomatology]=useState<IPBF|null>(null);
+  const dispatch:AppDispatch=useDispatch();
 
   const onFinish = (values: IPBF) => {
     console.log("Form values:", values);
@@ -33,6 +38,7 @@ const PBFDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
     if(homatology){
       patientData.id=id;
       patientData.PBF=homatology;
+      dispatch(updatePBF({id,data:homatology}));
     }else{
    ///throw alert messages
     }
@@ -52,7 +58,10 @@ const PBFDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
     {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
     PBF 
     </Button> */}
+     <Badge dot size="default">
     <GradientButton id={0} BtnName={"PBF"} width="150px" clickEvent={() => setOpen(true)} />
+
+     </Badge>
     <Modal
       title="PERIPHERAL BLOOD FILM(PBF)"
       centered

@@ -202,6 +202,13 @@ const dataSlice = createSlice({
   });
   
   export const valueOfCBC=(id:number)=>(state:RootState)=>state.data.find(item=>item.id===id)?.CBC;
+  export const valueOfBIO=(id:number)=>(state:RootState)=>state.data.find(item=>item.id===id)?.BIO;
+  export const valueOfWadal=(id:number)=>(state:RootState)=>state.data.find(item=>item.id===id)?.Wadal;
+  export const valueOfPreg=(id:number)=>(state:RootState)=>state.data.find(item=>item.id===id)?.PREG;
+  export const valueOfLFT=(id:number)=>(state:RootState)=>state.data.find(item=>item.id===id)?.LFT;
+  export const valueOfHAEMATOLOGY=(id:number)=>(state:RootState)=>state.data.find(item=>item.id===id)?.HAEMATOLOGY;
+
+
   export const PaitentValue=(id:number)=>(state:RootState)=>state.data.find(item=>item.id===id);
   export const {
     addData,

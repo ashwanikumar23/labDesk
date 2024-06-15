@@ -20,6 +20,9 @@ import GradientButton from "../../shared/UI/Button/gradientButton";
 import Idailog from "../../shared/Interface/Idailog";
 import IEnterForm from "../../shared/Interface/All-interface";
 import IPREG from "../../shared/Interface/IPREG";
+import { useDispatch } from "react-redux";
+import { updatePREG } from "../../shared/Store/dataSlice";
+import { AppDispatch } from "../../shared/Store/store";
 
 const { Option } = Select;
 function PregnancyDilaog({id,disabled,patientData,saveDataEvent}: Idailog){
@@ -27,6 +30,7 @@ function PregnancyDilaog({id,disabled,patientData,saveDataEvent}: Idailog){
   const [form] = Form.useForm();
   const [formData, setFormData] =  useState<IEnterForm>(patientData);
   const [homatology,setHomatology]=useState<IPREG|null>(null);
+  const dispatch:AppDispatch=useDispatch();
 
   const onFinish = (values: IPREG) => {
     console.log("Form values:", values);
@@ -34,6 +38,7 @@ function PregnancyDilaog({id,disabled,patientData,saveDataEvent}: Idailog){
     if(homatology){
       patientData.id=id;
       patientData.PREG=homatology;
+      dispatch(updatePREG({id,data:homatology}));
     }else{
    ///throw alert messages
     }

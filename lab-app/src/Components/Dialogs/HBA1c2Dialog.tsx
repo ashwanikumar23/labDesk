@@ -14,6 +14,7 @@ import {
   Modal,
   Radio,
   RadioChangeEvent,
+  Badge,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
 import IEnterForm from "../../shared/Interface/All-interface";
@@ -52,7 +53,10 @@ const HBA1c2Dialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
     {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
     HBA1c1 
     </Button> */}
+     <Badge dot size="default">
     <GradientButton id={0} BtnName={"HBA1c2"} width="150px" clickEvent={() => setOpen(true)} />
+
+     </Badge>
     <Modal
       title="HBA1c1 TEST"
       centered

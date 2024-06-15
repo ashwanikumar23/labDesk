@@ -6,12 +6,16 @@ import { useReactToPrint } from "react-to-print";
 import { MyComponent } from "../../../Pages/PDF/PdfLayout";
 import GradientButton from "./gradientButton";
 import CloseButton from "./closeButton";
+import { RootState } from "../../Store/store";
+import { useSelector } from "react-redux";
 
 
 
 export function PDFPreview({id}:any){
+  const data = useSelector((state: RootState) => state);
     const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+
   const componentRef = useRef<HTMLDivElement | null>(null);
 
   const showModal = () => {
@@ -52,7 +56,10 @@ const handlePrint = useReactToPrint({
     }
   `,
   });
-
+  //  const check=()=>{
+  //   const  res=data.data.find((item)=>{item.id===id})
+  //   return res?.CBC?false:res?.BIO?false:true; 
+  //  }
   const handleOk = () => {
     setLoading(true);
     setTimeout(() => {
@@ -63,7 +70,7 @@ const handlePrint = useReactToPrint({
 
   return (
     <>
-      <GradientButton id={0} BtnName={" Preview"} clickEvent={showModal} />
+      <GradientButton id={0} BtnName={" Preview"}  clickEvent={showModal} />
       <Modal
         open={open}
         title="PRINT"
@@ -71,9 +78,6 @@ const handlePrint = useReactToPrint({
         width={1000}
         footer={[
           <CloseButton  id={0} BtnName={"back"} clickEvent={handleCancel} />,
-          // <Button key="back" style={{padding:'30px auto'}} onClick={handleCancel}>
-          //   Close
-          // </Button>,
           <GradientButton  id={0} BtnName={"Print"} clickEvent={handlePrint} />,
           <GradientButton  id={0} BtnName={" Download"} clickEvent={handlePrint} />,
           // <Button key="download" type="primary" >

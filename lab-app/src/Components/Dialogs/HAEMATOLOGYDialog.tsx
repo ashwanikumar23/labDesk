@@ -13,6 +13,7 @@ import {
   Col,
   Modal,
   Typography,
+  Badge,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
 import Idailog from "../../shared/Interface/Idailog";
@@ -38,6 +39,7 @@ const HAEMATOLOGYDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => 
   const [formData, setFormData] = useState<IEnterForm>(patientData);
   const [homatology,setHomatology]=useState<IHAEMATOLOGY|null>(null);
 
+
   const onFinish = (values: IHAEMATOLOGY) => {
     console.log("Form values:", values);
     setHomatology(values);
@@ -62,8 +64,10 @@ const HAEMATOLOGYDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => 
 
   return (
     <>
-     
+      <Badge dot size="default">
       <GradientButton id={id} BtnName={"HAEMATOLOGY"} disabled={disabled} width="150px" clickEvent={() => setOpen(true)} />
+
+      </Badge>
       <Modal
         title="HAEMATOLOGY"
         centered

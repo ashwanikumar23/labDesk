@@ -14,18 +14,25 @@ import {
   Modal,
   Radio,
   RadioChangeEvent,
+  Badge,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
+import IURINE from "../../shared/Interface/IURINE";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../shared/Store/store";
+import { updateURINE } from "../../shared/Store/dataSlice";
 
 const { Option } = Select;
-const URINEDialog = (props:any) => {
+const URINEDialog = ({id}:any) => {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
-  const [formData, setFormData] = useState(null);
+  const [urine, setUrine] = useState<IURINE >({} as IURINE);
+  const dispatch:AppDispatch=useDispatch();
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: IURINE) => {
     console.log("Form values:", values);
-    setFormData(values);
+    setUrine(values);
+    dispatch(updateURINE({id,data:values}));
   };
 
   const [value, setValue] = useState(1);
@@ -39,7 +46,10 @@ const URINEDialog = (props:any) => {
     {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
     URINE TEST 
     </Button> */}
+     <Badge dot size="default">
+
     <GradientButton id={0} BtnName={"URINE TEST"} width="150px" clickEvent={() => setOpen(true)} />
+     </Badge>
     <Modal
       title="URINE TEST"
       centered
@@ -308,22 +318,6 @@ const URINEDialog = (props:any) => {
             </div>
           </Form.Item>
         </Form>
-
-        {/* Display the form data in a grid form */}
-        {formData && (
-          <div>
-            <h2>Form Data</h2>
-            <Row gutter={16}>
-              {Object.entries(formData).map(([key, value]) => (
-                <Col span={8} key={key}>
-                  <p>
-                    <strong>{key}:</strong>{formData[key]}
-                  </p>
-                </Col>
-              ))}
-            </Row>
-          </div>
-        )}
       </div>
     </Modal>
   </>

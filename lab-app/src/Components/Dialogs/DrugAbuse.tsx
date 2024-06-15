@@ -14,11 +14,15 @@ import {
   Modal,
   Radio,
   RadioChangeEvent,
+  Badge,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
 import Idailog from "../../shared/Interface/Idailog";
 import IEnterForm from "../../shared/Interface/All-interface";
 import IDRUG from "../../shared/Interface/IDRUG";
+import { AppDispatch } from "../../shared/Store/store";
+import { useDispatch } from "react-redux";
+import { updateDRUGABUSE } from "../../shared/Store/dataSlice";
 
 const { Option } = Select;
 const DRUG_ABUSE = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
@@ -26,6 +30,7 @@ const DRUG_ABUSE = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
   const [form] = Form.useForm();
   const [formData, setFormData] = useState<IEnterForm>(patientData);
   const [homatology,setHomatology]=useState<IDRUG|null>(null);
+  const dispatch:AppDispatch=useDispatch();
 
   const onFinish = (values: IDRUG) => {
     console.log("Form values:", values);
@@ -33,6 +38,7 @@ const DRUG_ABUSE = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
     if(homatology){
       patientData.id=id;
       patientData.DRUGABUSE=homatology;
+      dispatch(updateDRUGABUSE({id,data:homatology}));
     }else{
    ///throw alert messages
     }
@@ -53,7 +59,10 @@ const DRUG_ABUSE = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
       {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
       DRUG ABUSE3
       </Button> */}
-      <GradientButton id={0} BtnName={"DRUG ABUSE3"} clickEvent={() => setOpen(true)} />
+       <Badge dot size="default">
+        <GradientButton id={0} BtnName={"DRUG ABUSE3"} clickEvent={() => setOpen(true)} />
+
+       </Badge>
       <Modal
         title="DRUG ABUSET TEST"
         centered

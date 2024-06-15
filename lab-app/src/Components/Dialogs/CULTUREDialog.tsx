@@ -13,11 +13,15 @@ import {
   Col,
   Modal,
   Typography,
+  Badge,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
 import Idailog from "../../shared/Interface/Idailog";
 import IEnterForm from "../../shared/Interface/All-interface";
 import ICULTURE from "../../shared/Interface/ICULTURE";
+import { AppDispatch } from "../../shared/Store/store";
+import { useDispatch } from "react-redux";
+import { updateCULTURE } from "../../shared/Store/dataSlice";
 
 const { Option } = Select;
 const { Text, Link } = Typography;
@@ -31,6 +35,7 @@ const CULTUREDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
   const [form] = Form.useForm();
   const [formData, setFormData] = useState<IEnterForm>(patientData);
   const [homatology,setHomatology]=useState<ICULTURE|null>(null);
+  const dispatch:AppDispatch=useDispatch();
 
   const onFinish = (values: ICULTURE) => {
     console.log("Form values:", values);
@@ -38,6 +43,7 @@ const CULTUREDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
     if(homatology){
       patientData.id=id;
       patientData.CULTURE=homatology;
+      dispatch(updateCULTURE({id,data:homatology}));
     }else{
    ///throw alert messages
     }
@@ -53,7 +59,10 @@ const CULTUREDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
       {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
         CULTURE 
       </Button> */}
-      <GradientButton id={0} BtnName={"CULTURE"} width="150px" clickEvent={() => setOpen(true)} />
+       <Badge dot size="default">
+        <GradientButton id={0} BtnName={"CULTURE"} width="150px" clickEvent={() => setOpen(true)} />
+
+       </Badge>
       <Modal
         title="CULTURE & SENSITIVITY REPORT"
         centered

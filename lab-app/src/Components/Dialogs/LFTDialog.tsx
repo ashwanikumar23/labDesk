@@ -14,11 +14,15 @@ import {
   Modal,
   Radio,
   RadioChangeEvent,
+  Badge,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
 import IEnterForm from "../../shared/Interface/All-interface";
 import ILFT from "../../shared/Interface/ILFT";
 import Idailog from "../../shared/Interface/Idailog";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../shared/Store/store";
+import { updateLFT } from "../../shared/Store/dataSlice";
 
 const { Option } = Select;
 const LFTDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
@@ -26,6 +30,7 @@ const LFTDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
   const [form] = Form.useForm();
   const [formData, setFormData] =useState<IEnterForm>(patientData);
   const [homatology,setHomatology]=useState<ILFT|null>(null);
+  const dispatch:AppDispatch=useDispatch();
 
   const onFinish = (values: ILFT) => {
     console.log("Form values:", values);
@@ -33,6 +38,7 @@ const LFTDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
     if(homatology){
       patientData.id=id;
       patientData.LFT=homatology;
+      dispatch(updateLFT({id,data:homatology}));
     }else{
    ///throw alert messages
     }
@@ -52,7 +58,10 @@ const LFTDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
     {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
    LFT
     </Button> */}
+     <Badge dot size="default">
     <GradientButton id={0} BtnName={"LFT"} width="150px" clickEvent={() => setOpen(true)} />
+
+     </Badge>
     <Modal
       title="LFT TEST"
       centered

@@ -14,18 +14,23 @@ import {
   Modal,
   Radio,
   RadioChangeEvent,
+  Badge,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
+import { AppDispatch } from "../../shared/Store/store";
+import { useDispatch } from "react-redux";
 
 const { Option } = Select;
 const LIPIDDialog = (props:any) => {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
   const [formData, setFormData] = useState(null);
+  const dispatch:AppDispatch=useDispatch();
 
   const onFinish = (values: any) => {
     console.log("Form values:", values);
     setFormData(values);
+    // dispatch(update({id,data:homatology}));
   };
 
   const [value, setValue] = useState(1);
@@ -39,7 +44,10 @@ const LIPIDDialog = (props:any) => {
     {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
     LIPID PROFILE 
     </Button> */}
+     <Badge dot size="default">
     <GradientButton id={0} BtnName={"LIPID PROFILE"} width="150px" clickEvent={() => setOpen(true)} />
+
+     </Badge>
     <Modal
       title="LIPID PROFILE TEST"
       centered

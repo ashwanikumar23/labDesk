@@ -14,12 +14,16 @@ import {
   Modal,
   Radio,
   RadioChangeEvent,
+  Badge,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
 import IEnterForm from "../../shared/Interface/All-interface";
 import IHAEMATOLOGY from "../../shared/Interface/IHAEMATOLOGY";
 import Idailog from "../../shared/Interface/Idailog";
 import IElectrolyte from "../../shared/Interface/IElectrolyte";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../shared/Store/store";
+import { updateELECTROLYTES } from "../../shared/Store/dataSlice";
 
 const { Option } = Select;
 const ELECTROLYTESDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
@@ -27,6 +31,7 @@ const ELECTROLYTESDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) =>
   const [form] = Form.useForm();
   const [formData, setFormData] = useState<IEnterForm>(patientData);
   const [homatology,setHomatology]=useState<IElectrolyte|null>(null);
+  const dispatch:AppDispatch=useDispatch();
 
   const onFinish = (values: IElectrolyte) => {
     console.log("Form values:", values);
@@ -34,6 +39,7 @@ const ELECTROLYTESDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) =>
     if(homatology){
       patientData.id=id;
       patientData.ELECTROLYTES=homatology;
+      dispatch(updateELECTROLYTES({id,data:homatology}));
     }else{
    ///throw alert messages
     }
@@ -53,7 +59,10 @@ const ELECTROLYTESDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) =>
     {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
     ELECTROLYTES 
     </Button> */}
-    <GradientButton id={0} BtnName={"ELECTROLYTES"} width="150px" clickEvent={() => setOpen(true)} />
+     <Badge dot size="default">
+      <GradientButton id={0} BtnName={"ELECTROLYTES"} width="150px" clickEvent={() => setOpen(true)} />
+
+     </Badge>
     <Modal
       title="ELECTROLYTES TEST"
       centered
