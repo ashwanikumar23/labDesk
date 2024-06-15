@@ -1,16 +1,24 @@
 import { Col, Divider, Row } from "antd";
 import './style.css'
 import React from "react";
-
+import { useSelector } from "react-redux";
+import { valueOfCBC,PaitentValue } from "../../shared/Store/dataSlice";
+import log from './logo.jpg'
+import mail from './mail.png';
+import call from './call.png'
+import { Height } from "@mui/icons-material";
 
 const val = "end";
 
-export const MyComponent =React.forwardRef((props, ref:any) =>(
-    <div ref={ref} >
+export const MyComponent =React.forwardRef((props:any, ref:any) =>{
+  const id=props.id;
+  const Paitient=useSelector(PaitentValue(id));
+  return (
+    <div ref={ref} className="printable-component" >
     <div className="header-container">
       <div className="flex">
       <div className="logo" style={{width:'20%'}}>
-          <img src="path-to-logo-image" alt="Pb Logo" />
+          <img src={log} alt="Pb Logo" style={{width:'100px', height:'100px',borderRadius:"50%"}} />
       </div>
       <div className="header-content" style={{display:'flex',gap:"2px",textAlign:'left'}}>
         <div style={{padding:'10px 0px',width:'70%'}}>
@@ -20,13 +28,13 @@ export const MyComponent =React.forwardRef((props, ref:any) =>(
         </div>
           <div className="" style={{width:"30%",textAlign:"left",justifyContent:"left"}}>
               <div className="contact-item" style={{width:'100%' ,fontSize:"14px", textAlign:'left'}}>
-              <svg aria-hidden="true" focusable="false" className="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1em" height="1em"><path d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z"/></svg>
+              <img src={call} alt="Email Icon" style={{width:'15px',height:'15px'}} />
                   <span>0123456789 | 0912345678</span>
               </div>
-              <br/>
-              <div className="" style={{width:'100%',fontSize:"14px",textAlign:'left'}}>
-                  <img src="email-icon-path" alt="Email Icon" />
-                  <span>samplemaile.com</span>
+  
+              <div className="" style={{width:'100%',fontSize:"14px",textAlign:'left', display:'flex', gap:'1px',alignItems:'center'}}>
+                  <img src={mail} alt="Email Icon" style={{width:'20px',height:'15px',marginTop:'3px'}} />
+                  <span style={{marginTop:'0px'}}>samplemaile.com</span>
               </div>
           </div>
         
@@ -38,10 +46,10 @@ export const MyComponent =React.forwardRef((props, ref:any) =>(
 <div style={{backgroundColor: 'white' }}>
     <div style={{display:'flex',gap:"2px", backgroundColor: 'white' ,width:'90%',margin:'0px auto'}}>
       <div style={{width:'33%', borderRight:'1px solid black' ,padding:'2px 5px'}}>
-      <p><strong>Yash M. Patel</strong></p>
-            <p>Age : 21 Years</p>
-            <p>Sex : Male</p>
-            <p>PID : 555</p>
+      <p><strong >{Paitient?.prefix}{Paitient?.name}</strong></p>
+            <p>Age : {Paitient?.Age} Years</p>
+            <p>Sex : {Paitient?.Gender}</p>
+            {/* <p>PID : 555</p> */}
       </div>
       <div style={{width:'33%',borderRight:'1px solid black',padding:'2px 5px'}}>
       <p><strong>Sample Collected At:</strong></p>
@@ -49,23 +57,31 @@ export const MyComponent =React.forwardRef((props, ref:any) =>(
             <p>Ref. By: <strong>Dr. Hiren Shah</strong></p>
       </div>
       <div style={{width:'33%',padding:'2px 5px'}}>
-      <p>Registered on: 02:31 PM 02 Dec, 2X</p>
-            <p>Collected on: 03:11 PM 02 Dec, 2X</p>
-            <p>Reported on: 04:35 PM 02 Dec, 2X</p>
+      <p>Registered on: {Paitient?.DATE}</p>
+            <p>Collected on:{Paitient?.DATE}, {Paitient?.time}</p>
+            <p>Reported on: {Paitient?.ReciveData}, {Paitient?.Receivtime}</p>
       </div>
 
     </div>
     <hr/>
-<CompleteBloodCount />
-<LftTable />
+    {
+      Paitient?.CBC?Paitient?.CBC.PrintAll?<CompleteBloodCount id={id}/>:"":""
+
+    }
+
+{/* <LftTable />
 <KFTTable />
 <PregnancyReportTable />
 <WidalSlideAgglutinationTest />
-<LipidProfileTable />
+<LipidProfileTable /> */}
 
 </div>
     </div>
-  ));
+
+
+  );
+});
+  // ));
 
 function TableData() {
   return (
@@ -89,7 +105,9 @@ function TableData() {
 }
 
 
-export function CompleteBloodCount (){
+export function CompleteBloodCount (id:any){
+  const CBCData=useSelector(valueOfCBC(id.id));
+  console.warn(id,"print",CBCData);
   return (
     <div className="cbc-container">
       <h2>Complete Blood Count (CBC)</h2>
@@ -114,7 +132,7 @@ export function CompleteBloodCount (){
           </tr>
           <tr>
             <td>Hemoglobin (Hb)</td>
-            <td className="low">12.5</td>
+            <td className="low">{CBCData?.HB}</td>
             <td>Low 13.0 - 17.0</td>
             <td>g/dL</td>
           </tr>
@@ -123,7 +141,7 @@ export function CompleteBloodCount (){
           </tr>
           <tr>
             <td>Total RBC count</td>
-            <td>5.2</td>
+            <td>{CBCData?.TotalRBCCount}</td>
             <td>4.5 - 5.5</td>
             <td>mill/cumm</td>
           </tr>
@@ -132,31 +150,31 @@ export function CompleteBloodCount (){
           </tr>
           <tr>
             <td>Packed Cell Volume (PCV)</td>
-            <td className="high">57.5</td>
+            <td className="high">{CBCData?.PCV}</td>
             <td>High 40 - 50</td>
             <td>%</td>
           </tr>
           <tr>
             <td>Mean Corpuscular Volume (MCV)</td>
-            <td>87.75</td>
+            <td>{CBCData?.MCV}</td>
             <td>83 - 101</td>
             <td>fL</td>
           </tr>
           <tr>
             <td>MCH <small>Calculated</small></td>
-            <td>27.2</td>
+            <td>{CBCData?.MCH}</td>
             <td>27 - 32</td>
             <td>pg</td>
           </tr>
           <tr>
             <td>MCHC <small>Calculated</small></td>
-            <td>32.8</td>
+            <td>{CBCData?.MCHC}</td>
             <td>32.5 - 34.5</td>
             <td>g/dL</td>
           </tr>
           <tr>
             <td>RDW</td>
-            <td>13.6</td>
+            <td>{CBCData?.RDW_CV}</td>
             <td>11.6 - 14.0</td>
             <td>%</td>
           </tr>
@@ -180,25 +198,25 @@ export function CompleteBloodCount (){
           </tr>
           <tr>
             <td>Lymphocytes</td>
-            <td>31</td>
+            <td>{CBCData?.Lymphocytes}</td>
             <td>20 - 40</td>
             <td>%</td>
           </tr>
           <tr>
             <td>Eosinophils</td>
-            <td>1</td>
+            <td>{CBCData?.Eosinophils}</td>
             <td>00 - 06</td>
             <td>%</td>
           </tr>
           <tr>
             <td>Monocytes</td>
-            <td>7</td>
+            <td>{CBCData?.Monocytes}</td>
             <td>00 - 10</td>
             <td>%</td>
           </tr>
           <tr>
             <td>Basophils</td>
-            <td>1</td>
+            <td>{CBCData?.Basophils}</td>
             <td>00 - 02</td>
             <td>%</td>
           </tr>
@@ -207,7 +225,7 @@ export function CompleteBloodCount (){
           </tr>
           <tr>
             <td>Platelet Count</td>
-            <td className="borderline">150000</td>
+            <td className="borderline">{CBCData?.Platelets}</td>
             <td>Borderline 150000 - 410000</td>
             <td>cumm</td>
           </tr>

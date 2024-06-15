@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../shared/Store/store';
 import { login, logout } from '../shared/Store/signInSlice';
@@ -7,6 +7,7 @@ import type { FormProps } from 'antd';
 import { Button, Card, Checkbox, Form, Input, Space } from 'antd';
 import background from '../../public/labs-medical-lab.jpg';
 import { url } from 'inspector';
+import Cookies from 'js-cookie';
 
 type FieldType = {
     username?: string;
@@ -35,12 +36,41 @@ export default function SignIn({clickLogin}:ISignin) {
     const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
         clickLogin();
         let username="sample.com"
+        const token = generateToken();
+        const expireTime = new Date(new Date().getTime() + 60 * 60 * 1000); // Token expires in 1 hour
+
+        Cookies.set('authToken', token, { expires: expireTime });
+
         dispatch(login(username));
         console.log('Success:', values);
+
+    };
+    const generateToken = () => {
+        // Simple token generation. Replace with a more secure method in a real application.
+        return Math.random().toString(36).substr(2);
     };
     const handleLogout = () => {
         dispatch(logout());
       };
+      useEffect(() => {
+        const token = Cookies.get('authToken');
+        if (token) {
+            const tokenExpiry = Cookies.get('authTokenExpiry');
+            if(tokenExpiry){
+                if (new Date(tokenExpiry) > new Date()) {
+                    // Token is valid
+                    console.log('Token is valid');
+                } else {
+                    // Token is expired
+                    dispatch(logout());
+                }
+
+            }
+        } else {
+            // No token found
+            dispatch(logout());
+        }
+    }, []);
     return (
         <>
             <div style={{width:"100%",height:"100vh", display: 'flex', justifyContent: 'center', alignItems: 'center',  backgroundImage: `url('/labs-medical-lab.jpg')`, backgroundSize: 'cover',

@@ -1,11 +1,11 @@
 // EnterForm.js
 import React, { useEffect, useState } from 'react';
-import { Form, Input, Button, DatePicker, TimePicker, Select, Divider } from 'antd';
+import { Form, Input, Button, DatePicker, TimePicker, Select, Divider, Badge } from 'antd';
 import GradientButton from '../shared/UI/Button/gradientButton';
 import { SearchProps } from 'antd/es/input/Search';
 import IEnterForm from '../shared/Interface/All-interface';
-import { AppDispatch } from '../shared/Store/store';
-import { useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from '../shared/Store/store';
+import { useDispatch, useSelector } from 'react-redux';
 import { addData } from '../shared/Store/dataSlice';
 import { PDFPreview } from '../shared/UI/Button/pdfPreviewButton';
 const { Option } = Select;
@@ -13,16 +13,17 @@ const { Option } = Select;
 interface IEnterFormProps {
     id: number,
     createId?: any,
-    saveData?:any,
-    initalData?:IEnterForm[],
+    saveData?: any,
+    initalData?: IEnterForm[],
 
 }
 const { Search } = Input;
-const EnterForm = ({ id, createId,saveData,initalData }: IEnterFormProps) => {
+const EnterForm = ({ id, createId, saveData, initalData }: IEnterFormProps) => {
     const [formData, setFormData] = useState<IEnterForm>();
     const dispatch: AppDispatch = useDispatch();
-    const[disabled,setDisabled]=useState(true);
-
+    const [disabled, setDisabled] = useState(true);
+    const selectedId = useSelector((state: RootState) => state.seletedId);
+  
     const handleFinish = (values: { DATE: { format: (arg0: string) => any; }; time: { format: (arg0: string) => any; }; ReciveData: { format: (arg0: string) => any; }; Receivtime: { format: (arg0: string) => any; }; }) => {
         const formattedValues: any = {
             ...values,
@@ -34,39 +35,48 @@ const EnterForm = ({ id, createId,saveData,initalData }: IEnterFormProps) => {
         console.log(formattedValues);
 
         const newFormData = formattedValues as IEnterForm;
-        newFormData.id=id
-        console.log("new",newFormData);
+        newFormData.id = id
+        console.log("new", newFormData);
         setFormData(newFormData);
         console.log('hit');
         dispatch(addData(newFormData));
-        saveData(newFormData);
+        // saveData(newFormData);
     };
     const onSearch: SearchProps['onSearch'] = (value, _e, info) => console.log(info?.source, value);
-    useEffect(()=>{
-        if(id===0){
-          setDisabled(true);
-        }else{
-            if(id!==0){
-                setDisabled(false);
-            }
-    
+    useEffect(() => {
+
+        if (id === 0) {
+            setDisabled(true);
+        }
+        if (id !== 0) {
+            setDisabled(false);
         }
 
-    },[]);
-    const CreateId=()=>{
+
+
+    }, []);
+    const CreateId = () => {
         createId();
         setDisabled(false);
-        
+
 
     }
+    useEffect(()=>{
+        if(selectedId!==0){
+            setDisabled(false);
+        }
+    },[selectedId]);
+    
+    
+
 
     return (
         <div style={{ width: "90%", margin: "6px auto" }}>
             <div style={{ display: "flex", gap: "4px", margin: "10px 2px " }}>
                 <GradientButton id={id} BtnName={'Add Patient'} clickEvent={CreateId} />
-                <PDFPreview />
+                <PDFPreview id={id} />
                 <GradientButton id={id} BtnName={'Save'} clickEvent={CreateId} />
-                <div style={{width:"100%"}}></div>
+                <div style={{ width: "100%" }}></div>
                 {/* <GradientButton id={id} BtnName={'Name Wi'} /> */}
                 <Search
                     placeholder=" search name wise"
@@ -82,14 +92,14 @@ const EnterForm = ({ id, createId,saveData,initalData }: IEnterFormProps) => {
                 disabled={disabled}
                 onFinish={handleFinish}
             >
-                <div style={{ display: "flex",gap:"4px"}}>
+                <div style={{ display: "flex", gap: "4px" }}>
                     <Form.Item
                         style={{ width: "30%" }}
                         label="Report Date"
                         name="DATE"
                         rules={[{ required: true, message: 'Please select a date!' }]}
                     >
-                        <DatePicker style={{width:"96%"}} />
+                        <DatePicker style={{ width: "96%" }} />
                     </Form.Item>
 
                     <Form.Item
@@ -98,7 +108,7 @@ const EnterForm = ({ id, createId,saveData,initalData }: IEnterFormProps) => {
                         name="time"
                         rules={[{ required: true, message: 'Please select a time!' }]}
                     >
-                        <TimePicker style={{width:"96%"}} />
+                        <TimePicker style={{ width: "96%" }} />
                     </Form.Item>
 
                     <Form.Item
@@ -107,17 +117,17 @@ const EnterForm = ({ id, createId,saveData,initalData }: IEnterFormProps) => {
                         name="LabNO"
                         rules={[{ required: true, message: 'Please input the lab number!' }]}
                     >
-                        <Input type="number" style={{width:"96%"}}  />
+                        <Input type="number" style={{ width: "96%" }} />
                     </Form.Item>
                 </div>
-                <div style={{ display: "flex",gap:"4px"}}>
+                <div style={{ display: "flex", gap: "4px" }}>
                     <Form.Item
                         style={{ width: "30%" }}
                         label="Received Date"
                         name="ReciveData"
                         rules={[{ required: true, message: 'Please select a received date!' }]}
                     >
-                        <DatePicker style={{width:"96%"}} />
+                        <DatePicker style={{ width: "96%" }} />
                     </Form.Item>
                     <Form.Item
                         style={{ width: "30%" }}
@@ -125,7 +135,7 @@ const EnterForm = ({ id, createId,saveData,initalData }: IEnterFormProps) => {
                         name="Receivtime"
                         rules={[{ required: true, message: 'Please select a received time!' }]}
                     >
-                        <TimePicker style={{width:"96%"}}  />
+                        <TimePicker style={{ width: "96%" }} />
                     </Form.Item>
 
                 </div>
@@ -217,9 +227,12 @@ const EnterForm = ({ id, createId,saveData,initalData }: IEnterFormProps) => {
                 </div>
 
                 <Form.Item>
-                    <Button type="primary" htmlType="submit">
+                    <Badge dot size="default">
+                        <GradientButton id={id} BtnName={'Save'} htmlType="submit" disabled={disabled} />
+                    </Badge>
+                    {/* <Button type="primary" htmlType="submit">
                         Save
-                    </Button>
+                    </Button> */}
                 </Form.Item>
             </Form>
 

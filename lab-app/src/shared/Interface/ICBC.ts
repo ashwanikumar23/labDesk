@@ -1,5 +1,6 @@
 export default  interface ICBC {
     Print: boolean,
+    PrintAll:boolean,
     Comments: boolean,
     HB: string;
     TLC: string;
@@ -9,8 +10,10 @@ export default  interface ICBC {
     Gran: string;
     Monocytes: string;
     Mid: string;
+    Mid_1:string;
     Eosinophils: string;
     LymHash: string;
+    MidHash:string;
     Basophils: string;
     GranHash: string;
     TotalRBCCount: string;

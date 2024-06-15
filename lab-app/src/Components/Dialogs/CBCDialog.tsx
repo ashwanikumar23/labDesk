@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Divider,
   Checkbox,
@@ -14,49 +14,89 @@ import {
   Modal,
   Typography,
   Badge,
+  Radio,
+  RadioChangeEvent,
+  Switch,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
 import IEnterForm from "../../shared/Interface/All-interface";
 import Idailog from "../../shared/Interface/Idailog";
 import ICBC from "../../shared/Interface/ICBC";
+import { useDispatch, useSelector } from "react-redux";
+import {updateCBC, valueOfCBC} from '../../shared/Store/dataSlice'
+import { AppDispatch } from "../../shared/Store/store";
+
 
 const { Option } = Select;
 const { Text, Link } = Typography;
 const CBCDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
+  const valueCBC=useSelector(valueOfCBC(id));
+  const dispatch:AppDispatch=useDispatch();
+  const [showColor,setShowColor] = useState("red");
+  console.warn(id,"valueCBC",valueCBC);
+  useEffect(()=>{
+    if(valueCBC){
+      setCBCFormValue(valueCBC);
+      setShowColor("green");
+      console.warn(id,"valueCBC",valueCBC);
+      console.warn(CBCFormValue);
+    }
+  },[valueCBC]);
   const [open, setOpen] = useState(false);
+
   const [openHAEMATOLOGY, setOpenHAEMATOLOGY] = React.useState(false);
   const handleClickOpen = () => {
     setOpenHAEMATOLOGY(true);
   };
 
   const [form] = Form.useForm();
-  const [formData, setFormData] =useState<IEnterForm>(patientData);
-  const [homatology,setHomatology]=useState<ICBC|null>(null);
+  const [CBCFormValue,setCBCFormValue]=useState<ICBC|null>(null);
 
   const onFinish = (values: ICBC) => {
     console.log("Form values:", values);
-    setHomatology(values);
-    if(homatology){
+    setCBCFormValue(values);
+    console.log("FsetCBCFormValu:", values);
+    if(CBCFormValue){
+      console.warn("hiye")
+      CBCFormValue.PrintAll=PRINT==="PRINT-ALL";
+      CBCFormValue.Print= PRINT!=="PRINT-ALL"
+      const body={id: id, data: CBCFormValue}
+      dispatch(updateCBC({id,data:CBCFormValue}));
       patientData.id=id;
-      patientData.CBC=homatology;
-    }else{
-   ///throw alert messages
+      patientData.CBC=CBCFormValue;
     }
-    setFormData(patientData);
-   // console.log(formData);
-    saveDataEvent(formData);
   };
 
+  const [PRINT, setPRINT] = useState('PRINT-ALL');
 
+  const onChange = (e: RadioChangeEvent) => {
+    console.log('radio checked', e.target.value);
+    setPRINT(e.target.value);
+  };
+
+  const [enable, setEnable] = useState(false);
+  const onchangeDLC2=()=>{
+  console.warn(enable);
+  setEnable(prevEnable => {
+    
+    return !prevEnable;});
+  console.warn(enable);
+  }
+
+  // const checkPrice = (_: any, value: { number: number }) => {
+  //   if (value.number > 0) {
+  //     return Promise.resolve();
+  //   }
+   
+  // };
 
   return (
     <>
       {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
         CBC
       </Button> */}
-      <Badge dot size="default">
-      <GradientButton id={0} BtnName={"CBC"} width="150px" clickEvent={() => setOpen(true)} />
-
+      <Badge dot color={showColor} size="default">
+          <GradientButton id={0} BtnName={"CBC"} width="150px" disabled={id===0} clickEvent={() => setOpen(true)} />
       </Badge>
       <Modal
         title="CBC TEST"
@@ -66,7 +106,7 @@ const CBCDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
         footer={null} 
         //onOk={() => setOpen(false)}
        onCancel={() => setOpen(false)}
-        width={600}
+        width={800}
       >
         <div>
           <Form
@@ -77,107 +117,135 @@ const CBCDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
             layout="horizontal"
             initialValues={{ remember: true }}
           >
-            <Row gutter={20}>
-            <Col span={5}></Col>
-              <Col span={15} style={{paddingLeft:'30px'}}>
-                <Form.Item name="HB" label="HB" style={{marginBottom: '7px'}}>
-                  <Space>
-                    <Input /><span>gm/dl</span> 
-                  </Space>
-                </Form.Item>
-                <Form.Item name="TLC" label="TLC" style={{marginBottom: '7px'}}>
-                  <Space>
-                    <Input  /><span>/cumm</span> 
-                  </Space>
-                </Form.Item>
-                <Text code>DLC --:</Text>
-                <Divider style={{margin:"7px 0px"}} />
-                <Space>
-                    <Form.Item name="Polymorphs" label="Polymorphs" style={{marginBottom: '7px'}}>
-                    <Space>
-                        <Input  /><span>%</span> 
+            <Row gutter={24}>
+            <Col span={1}></Col>
+              <Col span={20} style={{paddingLeft:'30px'}}>
+                <div style={{display:"flex"}}>
+                  <div style={{width:'50%'}}>
+                    <Form.Item name="HB" label="HB" style={{marginBottom: '7px'}}>
+                      <Space>
+                        <Input value={CBCFormValue?.HB} /><span>gm/dl</span> 
                       </Space>
                     </Form.Item>
-                    <div style={{width:'50px'}}></div>
-                    <Form.Item name="Lym" label="Lym" style={{marginBottom: '7px'}}>
-                    <Space>
-                        <Input  /><span>%</span> 
+                    <Form.Item name="TLC" label="TLC" style={{marginBottom: '7px'}}>
+                      <Space>
+                        <Input value={CBCFormValue?.TLC}  /><span>/cumm</span> 
                       </Space>
                     </Form.Item>
-                </Space>
+                  </div>
+                  <div style={{width:'50%'}}>
+                    <Radio.Group onChange={onChange} value={PRINT}>
+                      <Radio value={"PRINT"}>PRINT</Radio>
+                      <Radio value={"PRINT-ALL"}>PRINT ALL</Radio>
+                    </Radio.Group>
+                  </div>
+                  
 
-                <Space>
+                </div>
+                <div style={{display:'flex'}}>
+                <Text code style={{width:'60%'}}>DLC --:</Text>
+                <Switch checkedChildren="DLC2" unCheckedChildren="DLC2" checked={enable} onClick={()=>{onchangeDLC2()}} />
+
+                </div>
+                <Divider style={{margin:"7px 0px"}} />
+                <Space size={30}>
+                <Flex gap={2} vertical={true}>
+                <Form.Item  name="Polymorphs" label="Polymorphs" style={{marginBottom: '7px'}}>
+                    <Space>
+                        <Input value={CBCFormValue?.Polymorphs}  /><span>%</span> 
+                      </Space>
+                    </Form.Item>
                     <Form.Item name="Lymphocytes" label="Lymphocytes" style={{marginBottom: '7px'}}>
                     <Space>
-                        <Input  /><span>%</span> 
+                        <Input value={CBCFormValue?.Lymphocytes} /><span>%</span> 
                       </Space>
                     </Form.Item>
-                    <div style={{width:'50px'}}></div>
-                    <Form.Item name="Gran" label="Gran" style={{marginBottom: '7px'}}>
-                    <Space>
-                        <Input  /><span>%</span> 
-                      </Space>
-                    </Form.Item>
-                </Space>
-
+                    <Form.Item name="Monocytes" label="Monocytes" style={{marginBottom: '7px'}}>
                 <Space>
-                <Form.Item name="Monocytes" label="Monocytes" style={{marginBottom: '7px'}}>
-                <Space>
-                    <Input  /><span>%</span> 
+                    <Input value={CBCFormValue?.Monocytes}/><span>%</span> 
                   </Space>
                 </Form.Item>
-                <div style={{width:'50px'}}></div>
-                <Form.Item name="Mid" label="Mid" style={{marginBottom: '7px'}}>
-                <Space>
-                    <Input  /><span>%</span> 
-                  </Space>
-                </Form.Item>
-
-                </Space>
-
-                <Space>
-                  <Form.Item name="Eosinophils" label="Eosinophils" style={{marginBottom: '7px'}}>
+                <Form.Item name="Eosinophils" label="Eosinophils" style={{marginBottom: '7px'}}>
                   <Space>
-                      <Input  /><span>%</span> 
+                      <Input value={CBCFormValue?.Eosinophils} /><span>%</span> 
                     </Space>
                   </Form.Item>
-                  <div style={{width:'50px'}}></div>
-                  <Form.Item name="LymHash" label="Lym" style={{marginBottom: '7px'}}>
-                  <Space>
-                      <Input  /><span>#</span> 
-                    </Space>
-                  </Form.Item>
-
-                </Space>
-
-                <Space>
                   <Form.Item name="Basophils" label="Basophils" style={{marginBottom: '7px'}}>
                   <Space>
-                      <Input  /><span>%</span> 
+                      <Input value={CBCFormValue?.Basophils} /><span>%</span> 
                     </Space>
                   </Form.Item>
-                  <div style={{width:'50px'}}></div>
+                  <Form.Item name="Mid" label="Mid" style={{marginBottom: '7px'}}>
+                  <Space>
+                      <Input value={CBCFormValue?.Mid} /><span>%</span> 
+                    </Space>
+                  </Form.Item>
+
+                </Flex>
+                <Flex gap={2} vertical={true}>
+                <Form.Item name="Lym" label="Lym" style={{marginBottom: '7px'}}>
+                    <Space>
+                        <Input value={CBCFormValue?.Lym} disabled={!enable} /><span>%</span> 
+                      </Space>
+                    </Form.Item>
+                    <Form.Item name="Gran" label="Gran" style={{marginBottom: '7px'}}>
+                    <Space>
+                        <Input value={CBCFormValue?.Gran} disabled={!enable} /><span>%</span> 
+                      </Space>
+                    </Form.Item>
+                    <Form.Item name="Mid_1" label="Mid" style={{marginBottom: '7px'}}>
+                <Space>
+                    <Input value={CBCFormValue?.Mid_1} disabled={!enable} /><span>%</span> 
+                  </Space>
+                </Form.Item>
+                <Form.Item name="LymHash" label="Lym" style={{marginBottom: '7px',}}>
+                  <Space>
+                      <Input value={CBCFormValue?.LymHash} disabled={!enable} /><span>#</span> 
+                    </Space>
+                  </Form.Item>
                   <Form.Item name="GranHash" label="Gran" style={{marginBottom: '7px'}}>
                   <Space>
-                      <Input  /><span>#</span> 
+                      <Input value={CBCFormValue?.GranHash} disabled={!enable} /><span>#</span> 
                     </Space>
                   </Form.Item>
+                  <Form.Item name="MidHash" label="Mid" style={{marginBottom: '7px'}}>
+                  <Space>
+                      <Input value={CBCFormValue?.MidHash} disabled={!enable} /><span>#</span> 
+                    </Space>
+                  </Form.Item>
+
+                </Flex>
+                  
+                    {/* <div style={{width:'5px'}}></div> */}
+                    
+                </Space>
+
+                <Space size={30}>
+                    
+                    
+                </Space>
+
+                <Space size={30}>
+                
+                
 
                 </Space>
 
-                <Space>
-                  <Form.Item name="Mid" label="Mid" style={{marginBottom: '7px'}}>
-                  <Space>
-                      <Input  /><span>%</span> 
-                    </Space>
-                  </Form.Item>
-                  <div style={{width:'50px'}}></div>
-                  <Form.Item name="Mid" label="Mid" style={{marginBottom: '7px'}}>
-                  <Space>
-                      <Input  /><span>#</span> 
-                    </Space>
-                  </Form.Item>
+                <Space size={30}>
+                  
+                  
 
+                </Space>
+
+                <Space size={30}>
+                  
+                  
+
+                </Space>
+
+                <Space size={30}>
+                  
+                  
                 </Space>
                
                 
@@ -185,75 +253,75 @@ const CBCDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
                
                 <Form.Item name="TotalRBCCount" label="Total RBC Count Description" style={{marginBottom: '7px'}}>
                 <Space>
-                    <Input  /><span>million/cumm</span> 
+                    <Input value={CBCFormValue?.TotalRBCCount} /><span>million/cumm</span> 
                   </Space>
                 </Form.Item>
                 <Form.Item name="PCV" label="PCV" style={{marginBottom: '7px'}}>
                 <Space>
-                    <Input  /><span>%</span> 
+                    <Input value={CBCFormValue?.PCV}  /><span>%</span> 
                   </Space>
                 </Form.Item>
                 <Form.Item name="MCV" label="MCV" style={{marginBottom: '7px'}}>
                 <Space>
-                    <Input  /><span>fL</span> 
+                    <Input value={CBCFormValue?.MCV} /><span>fL</span> 
                   </Space>
                 </Form.Item>
                 <Form.Item name="MCH" label="MCH" style={{marginBottom: '7px'}}>
                 <Space>
-                    <Input  /><span>pG</span> 
+                    <Input value={CBCFormValue?.MCH} /><span>pG</span> 
                   </Space>
                 </Form.Item>
                 <Form.Item name="MCHC" label="MCHC" style={{marginBottom: '7px'}}>
                 <Space>
-                    <Input  /><span>%</span> 
+                    <Input value={CBCFormValue?.MCHC} /><span>%</span> 
                   </Space>
                 </Form.Item>
                 <Form.Item name="RDW-CV" label="RDW-CV" style={{marginBottom: '7px'}}>
                 <Space>
-                    <Input  /><span>%</span> 
+                    <Input value={CBCFormValue?.RDW_CV} /><span>%</span> 
                   </Space>
                 </Form.Item>
                 <Form.Item name="RDW-SD" label="RDW-SD" style={{marginBottom: '7px'}}>
                 <Space>
-                    <Input  /><span>fL</span> 
+                    <Input value={CBCFormValue?.RDW_SD} /><span>fL</span> 
                   </Space>
                 </Form.Item>
                 <Form.Item name="Platelets" label="Platelets" style={{marginBottom: '7px'}}>
                 <Space>
-                    <Input  /><span>lakhs/cumm</span> 
+                    <Input value={CBCFormValue?.Platelets}  /><span>lakhs/cumm</span> 
                   </Space>
                 </Form.Item>
                 <Form.Item name="MPV" label="MPV" style={{marginBottom: '7px'}}>
                 <Space>
-                    <Input  /><span>fL</span> 
+                    <Input value={CBCFormValue?.MPV} /><span>fL</span> 
                   </Space>
                 </Form.Item>
                 <Form.Item name="PDW-SD" label="PDW-SD" style={{marginBottom: '7px'}}>
                 <Space>
-                    <Input  /><span></span> 
+                    <Input value={CBCFormValue?.PDW_SD} /><span></span> 
                   </Space>
                 </Form.Item>
 
                 <Form.Item name="PDW-CV" label="PDW-CV" style={{marginBottom: '7px'}}>
                 <Space>
-                    <Input  /><span>%</span> 
+                    <Input value={CBCFormValue?.PDW_CV} /><span>%</span> 
                   </Space>
                 </Form.Item>
                 <Form.Item name="PCT" label="PCT" style={{marginBottom: '7px'}}>
                 <Space>
-                    <Input  /><span>%</span> 
+                    <Input value={CBCFormValue?.PCT} /><span>%</span> 
                   </Space>
                 </Form.Item>
 
-                <Form.Item name="P-LCR" label="P-LCR" style={{marginBottom: '7px'}}>
+                <Form.Item name="P-LCR" label="P_LCR" style={{marginBottom: '7px'}}>
                 <Space>
-                    <Input  /><span>%</span> 
+                    <Input value={CBCFormValue?.P_LCR} /><span>%</span> 
                   </Space>
                 </Form.Item>
 
                 <Form.Item name="P-LCC" label="P-LCC" style={{marginBottom: '7px'}}>
                 <Space>
-                    <Input  /><span></span> 
+                    <Input value={CBCFormValue?.P_LCC} /><span></span> 
                   </Space>
                 </Form.Item>
                 {/* <Form.Item name="BGrouping" label="B. Grouping" style={{marginBottom: '7px'}}>
@@ -423,3 +491,8 @@ const CBCDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
 };
 
 export default CBCDialog;
+
+// const { Option } = Select;
+
+
+

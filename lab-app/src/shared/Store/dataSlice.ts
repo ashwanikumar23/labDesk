@@ -19,6 +19,7 @@ import ISpecial from '../Interface/ISpecial';
 import IStool from '../Interface/IStool';
 import IThyroid from '../Interface/IThyroid';
 import IWADAL from '../Interface/IWADAL';
+import { RootState } from './store';
 
 
 const initialData: IEnterForm[] = [{
@@ -57,11 +58,16 @@ const initialData: IEnterForm[] = [{
 }];
 
 const dataSlice = createSlice({
-  name: 'data',
+  name: 'store',
   initialState: initialData,
   reducers: {
     addData(state, action: PayloadAction<IEnterForm>) {
-      state.push(action.payload);
+      console.warn("IEnterForm state",action.payload);
+      const index = state.findIndex(item => item.id === action.payload.id);
+      if (index === -1) {
+        state.push(action.payload);
+      }
+     
       console.warn("here is store",state);
     },
     saveToLocalStorage(state) {
@@ -180,6 +186,7 @@ const dataSlice = createSlice({
         }
       },
       updateCBC(state, action: PayloadAction<{ id: number; data: ICBC }>) {
+        debugger;
         const index = state.findIndex(item => item.id === action.payload.id);
         if (index !== -1) {
           state[index].CBC = action.payload.data;
@@ -194,6 +201,8 @@ const dataSlice = createSlice({
     },
   });
   
+  export const valueOfCBC=(id:number)=>(state:RootState)=>state.data.find(item=>item.id===id)?.CBC;
+  export const PaitentValue=(id:number)=>(state:RootState)=>state.data.find(item=>item.id===id);
   export const {
     addData,
     saveToLocalStorage,

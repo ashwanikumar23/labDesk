@@ -1,3 +1,14 @@
+@media print {
+   
+
+  }
+
+  @page {
+    size: auto;
+    margin: 10mm;
+  }
+
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -30,11 +41,11 @@ body {
 .header-content h1 {
     font-size: 24px;
     margin: 0;
-    color: #007bff;
+    color: #023047;
 }
 
 .header-content h1 span {
-    color: black;
+    color: #8ecae6;
 }
 
 .header-content p {
@@ -79,7 +90,7 @@ body {
 .cbc-container {
     max-width: 800px;
     margin: 20px auto;
-    padding: 20px;
+    /* padding: 20px; */
     /* border: 1px solid #ddd;
     border-radius: 5px; */
     background-color: #fff;

@@ -21,7 +21,7 @@ interface IButtonProps{
     htmlType?:any
 }
 
-export default function GradientButton({id,clickEvent,BtnName,width,disabled,htmlType}:IButtonProps) {
+export default function CloseButton({id,clickEvent,BtnName,width,disabled,htmlType}:IButtonProps) {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     console.warn(BtnName,disabled);
     return (
@@ -30,16 +30,17 @@ export default function GradientButton({id,clickEvent,BtnName,width,disabled,htm
                 theme={{
                     components: {
                         Button: {
-                            colorPrimary:'#001d3d',
-                            colorPrimaryHover:'#000814',
-                            colorPrimaryActive:'#001d3d',
+                            colorPrimary:'#bde0fe',
+                            colorPrimaryHover:'#219ebc',
+                            colorPrimaryActive:'#219ebc',
+                            colorText:'#023047',
                             lineWidth: 0,
                         },
                     },
                 }}
             >
                 <Button type="primary" size="large" htmlType={htmlType} disabled={disabled!==undefined?disabled:false} onClick={clickEvent} style={{width:`${width|| ''}`,fontSize:'13px'}} >
-                    {BtnName}
+                   <strong style={{color:'#023047'}}>{BtnName}</strong> 
                 </Button>
             </ConfigProvider>
         </>

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Avatar, Button, Divider, List, Skeleton } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import IEnterForm from '../../shared/Interface/All-interface';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../shared/Store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../shared/Store/store';
+import { SelectID } from '../../shared/Store/selectIdSlice';
+import { removeId } from '../../shared/Store/newIdSlice';
 
 
 const count = 3;
@@ -11,9 +13,10 @@ const count = 3;
 interface IPatient{
   patient:IEnterForm[];
 }
-export default function PatientList({patient}:IPatient) {
+export default function PatientList() {
   const ListOfPatient = useSelector((state: RootState) => state.data);
   console.warn("ListOfPatient",ListOfPatient);
+  const dispatch: AppDispatch = useDispatch();
   const [initLoading, setInitLoading] = useState(true);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<IEnterForm[]>();
@@ -52,6 +55,14 @@ export default function PatientList({patient}:IPatient) {
   //     loadMorePatients();
   //   }
   // }, []);
+
+  const clickEditing=(id:any)=>{
+    console.warn(id);
+    dispatch(removeId());
+    dispatch(SelectID(id));
+
+    
+  }
 
   const onLoadMore = () => {
     loadMorePatients();
@@ -100,9 +111,9 @@ export default function PatientList({patient}:IPatient) {
       itemLayout="horizontal"
       loadMore={loadMore}
       dataSource={list}
-      renderItem={(item) => (
-        <List.Item
-          actions={[<Button shape="circle" icon={<EditOutlined />} />]}
+      renderItem={(item,index) => (
+        <List.Item key={index} 
+          actions={[<Button shape="circle" icon={<EditOutlined />} onClick={()=>{clickEditing(item.id)}} />]}
         >
           <Skeleton avatar title={false} loading={initLoading} active>
             <List.Item.Meta

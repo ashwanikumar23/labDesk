@@ -5,10 +5,11 @@ import { useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
 import { MyComponent } from "../../../Pages/PDF/PdfLayout";
 import GradientButton from "./gradientButton";
+import CloseButton from "./closeButton";
 
 
 
-export function PDFPreview(){
+export function PDFPreview({id}:any){
     const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const componentRef = useRef<HTMLDivElement | null>(null);
@@ -42,6 +43,14 @@ export function PDFPreview(){
 //   };
 const handlePrint = useReactToPrint({
     content: () => componentRef.current,
+    pageStyle: `
+    @page {
+      margin: 20mm; /* Adjust the margin as needed */
+    }
+    body {
+      margin: 20mm; /* Ensure the body margin matches the page margin */
+    }
+  `,
   });
 
   const handleOk = () => {
@@ -54,9 +63,6 @@ const handlePrint = useReactToPrint({
 
   return (
     <>
-      {/* <Button type="primary" onClick={showModal}>
-        Preview
-      </Button> */}
       <GradientButton id={0} BtnName={" Preview"} clickEvent={showModal} />
       <Modal
         open={open}
@@ -64,17 +70,19 @@ const handlePrint = useReactToPrint({
         onCancel={handleCancel}
         width={1000}
         footer={[
-          <Button key="back" style={{padding:'30px auto'}} onClick={handleCancel}>
-            Close
-          </Button>,
+          <CloseButton  id={0} BtnName={"back"} clickEvent={handleCancel} />,
+          // <Button key="back" style={{padding:'30px auto'}} onClick={handleCancel}>
+          //   Close
+          // </Button>,
           <GradientButton  id={0} BtnName={"Print"} clickEvent={handlePrint} />,
-          <Button key="download" type="primary" >
-            Download as PDF
-          </Button>,
+          <GradientButton  id={0} BtnName={" Download"} clickEvent={handlePrint} />,
+          // <Button key="download" type="primary" >
+          //   Download as PDF
+          // </Button>,
         ]}
       >
         <div style={{  }}>
-          <MyComponent ref={componentRef} />
+          <MyComponent id={id} ref={componentRef} />
         </div>
       </Modal>
     </>

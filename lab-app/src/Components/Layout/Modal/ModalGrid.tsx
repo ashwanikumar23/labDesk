@@ -56,7 +56,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 interface IModal{
   id:number,
   disabled?:boolean,
-  saveData:any,
+  saveData?:any,
   InitialData: IEnterForm,
 }
 function ModalGrid({id,disabled,saveData,InitialData}:IModal) {
