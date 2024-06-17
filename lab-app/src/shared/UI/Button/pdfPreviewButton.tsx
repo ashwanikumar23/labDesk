@@ -1,6 +1,4 @@
 import { Button, Modal } from "antd";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
 import { useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
 import { MyComponent } from "../../../Pages/PDF/PdfLayout";

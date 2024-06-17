@@ -1,33 +1,39 @@
-const { app, BrowserWindow } = require('electron/main')
+const { app, BrowserWindow, globalShortcut } = require('electron');
 
 const createWindow = () => {
   const win = new BrowserWindow({
-    title:"Lap Desktop",
+    title: "Lap Desktop",
+    fullscreen: false,           // Set the window to full screen
+    autoHideMenuBar: true,      // Hide the menu bar
     width: 1280,
     height: 860,
-    menubar:null,
-  })
+  });
 
- // win.webContents.openDevTools();
-  // const startUrl = url.format({
-  //   pathname: path.join(__dirname, './lab-app/build/index.html'),
-  //   protocol: 'file',
-  // });
-  win.loadFile('./lab-app/build/index.html')
- // win.loadURL(startUrl);
-}
+  win.loadFile('./lab-app/build/index.html');
+  win.loadFile(path.join(__dirname, 'lab-app', 'build', 'index.html'));
+
+  // Disable Window+R
+  globalShortcut.register('CommandOrControl+R', () => {
+    return false;
+  });
+};
+
 app.whenReady().then(() => {
-  createWindow()
+  createWindow();
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow()
+      createWindow();
     }
-  })
-})
+  });
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    app.quit()
+    app.quit();
   }
-})
+});
+
+app.on('will-quit', () => {
+  globalShortcut.unregisterAll();
+});

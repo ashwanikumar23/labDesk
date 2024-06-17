@@ -5,7 +5,7 @@ import { login, logout } from '../shared/Store/signInSlice';
 import "./style.css";
 import type { FormProps } from 'antd';
 import { Button, Card, Checkbox, Form, Input, Space } from 'antd';
-import background from '../../public/labs-medical-lab.jpg';
+import background from './assets/medi.jpg';
 import { url } from 'inspector';
 import Cookies from 'js-cookie';
 
@@ -73,9 +73,9 @@ export default function SignIn({clickLogin}:ISignin) {
     }, []);
     return (
         <>
-            <div style={{width:"100%",height:"100vh", display: 'flex', justifyContent: 'center', alignItems: 'center',  backgroundImage: `url('/labs-medical-lab.jpg')`, backgroundSize: 'cover',
+            <div style={{width:"100%",height:"100vh", display: 'flex', justifyContent: 'center', alignItems: 'center',  backgroundImage: `url('${background}')`, backgroundSize: 'cover',
         backgroundPosition: 'center',}}>
-                <Card className='card-blur' style={{ width: 400, }}>
+                <Card className='card-blur' style={{ width: 400,    border: '1px solid #12346d' }}>
                     <Form
                         name="basic"
                         labelCol={{ span: 8 }}
@@ -103,7 +103,7 @@ export default function SignIn({clickLogin}:ISignin) {
                         </Form.Item>
 
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                            <Button type="primary" htmlType="submit">
+                            <Button type="primary" htmlType="submit" style={{width:"100%"}}>
                                 Submit
                             </Button>
                         </Form.Item>

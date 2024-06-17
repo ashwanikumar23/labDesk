@@ -5,15 +5,47 @@
   "main": "index.js",
   "scripts": {
     "start": "electron .",
+    "create:App": "electron-builder",
+    "packager":"electron-packager . DESKLAB --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/logo.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"DeskLAB App\"",
     "start:watch": "npx electronmon --trace-warnings .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ashwani",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
+    "electron-packager": "^17.1.2",
     "electron": "^29.1.6",
-    "html2canvas": "^1.4.1",
-    "jspdf": "^2.5.1",
-    "react-to-print": "^2.15.1"
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.lapdesk.app",
+    "productName":"lapdesk",
+    "win": {
+      "target" : [
+        "nsis"
+      ],
+      "icon": "icon.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "installerIcon": "icon.ico",
+      "uninstallerIcon": "icon.ico",
+      "uninstallDisplayName": "lapdesk-uninstaller",
+      "license": "license.md",
+      "allowToChangeInstallationDirectory": false
+    },
+    "extraResources": [
+      {
+        "from": "node_modules",
+        "to": "resources/node_modules",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ]
   }
+  
+  
 }
+  
+
