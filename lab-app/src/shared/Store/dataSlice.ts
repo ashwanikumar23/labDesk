@@ -20,10 +20,11 @@ import IStool from '../Interface/IStool';
 import IThyroid from '../Interface/IThyroid';
 import IWADAL from '../Interface/IWADAL';
 import { RootState } from './store';
+import IBIO from '../Interface/IBio';
 
 
 const initialData: IEnterForm[] = [{
-  name: 'sample',
+  name: 'sample 3',
   DATE: '',
   ReciveData: '',
   time: '',
@@ -33,8 +34,10 @@ const initialData: IEnterForm[] = [{
   Age: '',
   Address: '',
   M_no: '',
+  materials: '',
+  Reference: '',
   HAEMATOLOGY: {} as IHAEMATOLOGY, // Initialize with empty object or default values
-    BIO: {} as IBio, // Initialize with empty object or default values
+    BIO: {} as IBIO, // Initialize with empty object or default values
     CULTURE: {} as ICULTURE, // Initialize with empty object or default values
     IRON: {} as IIRON, // Initialize with empty object or default values
     URINE: {} as IURINE, // Initialize with empty object or default values
@@ -66,6 +69,8 @@ const dataSlice = createSlice({
       const index = state.findIndex(item => item.id === action.payload.id);
       if (index === -1) {
         state.push(action.payload);
+      }else{
+        state[index] = action.payload;
       }
      
       console.warn("here is store",state);

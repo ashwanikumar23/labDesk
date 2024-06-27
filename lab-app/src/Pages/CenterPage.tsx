@@ -6,8 +6,9 @@ import { SearchProps } from 'antd/es/input/Search';
 import IEnterForm from '../shared/Interface/All-interface';
 import { AppDispatch, RootState } from '../shared/Store/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { addData } from '../shared/Store/dataSlice';
+import { PaitentValue, addData } from '../shared/Store/dataSlice';
 import { PDFPreview } from '../shared/UI/Button/pdfPreviewButton';
+import moment from 'moment';
 const { Option } = Select;
 
 interface IEnterFormProps {
@@ -19,11 +20,13 @@ interface IEnterFormProps {
 }
 const { Search } = Input;
 const EnterForm = ({ id, createId, saveData, initalData }: IEnterFormProps) => {
-    const [formData, setFormData] = useState<IEnterForm>();
     const dispatch: AppDispatch = useDispatch();
     const [disabled, setDisabled] = useState(true);
+    const [formData, setFormData] = useState<IEnterForm>();
     const selectedId = useSelector((state: RootState) => state.seletedId);
-  
+    const LoadPatientData = useSelector(PaitentValue(selectedId));  
+    const [form] = Form.useForm();
+
     const handleFinish = (values: { DATE: { format: (arg0: string) => any; }; time: { format: (arg0: string) => any; }; ReciveData: { format: (arg0: string) => any; }; Receivtime: { format: (arg0: string) => any; }; }) => {
         const formattedValues: any = {
             ...values,
@@ -32,7 +35,7 @@ const EnterForm = ({ id, createId, saveData, initalData }: IEnterFormProps) => {
             ReciveData: values.ReciveData.format('DD-MM-YYYY'),
             Receivtime: values.Receivtime.format('HH:mm')
         };
-        console.log(formattedValues);
+        console.log("save",formattedValues);
 
         const newFormData = formattedValues as IEnterForm;
         newFormData.id = id
@@ -61,11 +64,22 @@ const EnterForm = ({ id, createId, saveData, initalData }: IEnterFormProps) => {
 
 
     }
-    useEffect(()=>{
-        if(selectedId!==0){
+
+    useEffect(() => {
+        if (selectedId !== 0) {
             setDisabled(false);
         }
-    },[selectedId]);
+        if (LoadPatientData) {
+            setFormData(LoadPatientData);
+            form.setFieldsValue({
+                ...LoadPatientData,
+                DATE: LoadPatientData.DATE ? moment(LoadPatientData.DATE, 'DD-MM-YYYY') : null,
+                time: LoadPatientData.time ? moment(LoadPatientData.time, 'HH:mm') : null,
+                ReciveData: LoadPatientData.ReciveData ? moment(LoadPatientData.ReciveData, 'DD-MM-YYYY') : null,
+                Receivtime: LoadPatientData.Receivtime ? moment(LoadPatientData.Receivtime, 'HH:mm') : null,
+            });
+        }
+    }, [selectedId, LoadPatientData, form]);
     
     
 
@@ -88,6 +102,7 @@ const EnterForm = ({ id, createId, saveData, initalData }: IEnterFormProps) => {
             </div>
             <Divider />
             <Form
+                form={form}
                 layout="vertical"
                 disabled={disabled}
                 onFinish={handleFinish}
@@ -117,7 +132,7 @@ const EnterForm = ({ id, createId, saveData, initalData }: IEnterFormProps) => {
                         name="LabNO"
                         rules={[{ required: true, message: 'Please input the lab number!' }]}
                     >
-                        <Input type="number" style={{ width: "96%" }} />
+                        <Input type="number" value={formData?.LabNO} style={{ width: "96%" }} />
                     </Form.Item>
                 </div>
                 <div style={{ display: "flex", gap: "4px" }}>
@@ -228,11 +243,10 @@ const EnterForm = ({ id, createId, saveData, initalData }: IEnterFormProps) => {
 
                 <Form.Item>
                     <Badge dot size="default">
-                        <GradientButton id={id} BtnName={'Save'} htmlType="submit" disabled={disabled} />
+                        <Button  type="primary" htmlType="submit" >Save</Button>
+                        {/* <GradientButton id={id} BtnName={'Save'} htmlType="submit" disabled={disabled} /> */}
                     </Badge>
-                    {/* <Button type="primary" htmlType="submit">
-                        Save
-                    </Button> */}
+                    
                 </Form.Item>
             </Form>
 
@@ -241,3 +255,5 @@ const EnterForm = ({ id, createId, saveData, initalData }: IEnterFormProps) => {
 };
 
 export default EnterForm;
+
+

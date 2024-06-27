@@ -85,7 +85,9 @@ const handleAddData = () => {
     CBC: {} as ICBC,
     STOOL: {} as IStool,
     id: 111,
-    Receivtime: '13:00'
+    Receivtime: '13:00',
+    materials: 'Ram',
+    Reference: 'Blood'
   };
   dispatch(addData(newData));
 };

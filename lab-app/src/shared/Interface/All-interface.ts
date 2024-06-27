@@ -32,6 +32,8 @@ export default interface IEnterForm {
     Gender: string;
     Age: string;
     Address: string;
+    materials:string;
+    Reference:string;
     M_no: string;
     HAEMATOLOGY?: IHAEMATOLOGY;
     BIO?: IBio;

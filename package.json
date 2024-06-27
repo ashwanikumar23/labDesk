@@ -6,22 +6,22 @@
   "scripts": {
     "start": "electron .",
     "create:App": "electron-builder",
-    "packager":"electron-packager . DESKLAB --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/logo.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"DeskLAB App\"",
+    "packager": "electron-packager . DESKLAB --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/logo.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"DeskLAB App\"",
     "start:watch": "npx electronmon --trace-warnings .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ashwani",
   "license": "ISC",
   "devDependencies": {
-    "electron-packager": "^17.1.2",
     "electron": "^29.1.6",
-    "electron-builder": "^24.13.3"
+    "electron-builder": "^24.13.3",
+    "electron-packager": "^17.1.2"
   },
   "build": {
     "appId": "com.lapdesk.app",
-    "productName":"lapdesk",
+    "productName": "lapdesk",
     "win": {
-      "target" : [
+      "target": [
         "nsis"
       ],
       "icon": "icon.ico"
@@ -43,9 +43,8 @@
         ]
       }
     ]
+  },
+  "dependencies": {
+    "moment": "^2.30.1"
   }
-  
-  
 }
-  
-

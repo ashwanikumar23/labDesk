@@ -70,8 +70,11 @@ function App() {
     STOOL: {} as IStool // Initialize with empty object or default values
     ,
 
+
     id: 0,
-    Receivtime: ''
+    Receivtime: '',
+    materials: '',
+    Reference: ''
   }
 
   return (
