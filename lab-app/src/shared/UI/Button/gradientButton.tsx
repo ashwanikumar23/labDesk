@@ -23,7 +23,6 @@ interface IButtonProps{
 
 export default function GradientButton({id,clickEvent,BtnName,width,disabled,htmlType}:IButtonProps) {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-    console.warn(BtnName,disabled);
     return (
         <>
             <ConfigProvider

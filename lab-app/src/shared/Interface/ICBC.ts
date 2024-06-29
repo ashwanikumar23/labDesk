@@ -1,7 +1,7 @@
 export default  interface ICBC {
-    Print: boolean,
-    PrintAll:boolean,
-    Comments: boolean,
+    Print?: boolean,
+    PrintAll?:boolean,
+    Comments?: boolean,
     HB: string;
     TLC: string;
     Polymorphs: string;

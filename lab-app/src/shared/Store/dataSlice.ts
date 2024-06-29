@@ -86,8 +86,11 @@ const dataSlice = createSlice({
       console.warn("here is store",state);
     },
     updateBIO(state, action: PayloadAction<{ id: number; data: IBio }>) {
+      console.log(action.payload.id);
       const index = state.findIndex(item => item.id === action.payload.id);
+      console.log(index);
       if (index !== -1) {
+        console.log(state,action.payload.data);
         state[index].BIO = action.payload.data;
       }
       console.warn("here is store",state);

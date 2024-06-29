@@ -48,8 +48,8 @@
 
 
 export default interface IBIO {
-        Print?: boolean,
-    PrintAll?:boolean,
+    Print?: boolean,
+    PrintAll?: boolean,
     Comments?: boolean,
     BSugarFasting: string;
     BSugarPP: string;
@@ -65,14 +65,17 @@ export default interface IBIO {
     TotalBilirubin: string;
     ConjBilirubin: string;
     UnConjBilirubin: string;
-    SGOTAST: string;
-    SGPTAST: string;
+    SGOT_AST:string
+    SGPT_AST:string
+
+    // SGOTAST: string;
+    // SGPTAST: string;
     AlkPhosphatase: string;
     SCholestrol: string;
     SHDLCholestrol: string;
     STriglycerides: string;
     SldlChelestrol: string;
-    SVLDLCholeastrol: string;
+    S_VLDLCholeastrol: string;
     SerumTotalLipids: string;
     TotalHDLCholestrol: string;
     SAcidPhosphastase: string;
@@ -87,8 +90,8 @@ export default interface IBIO {
     SSodium: string;
     Potassium: string;
     Chloride: string;
-    SCalCium: string;
-    SPhosphorus: string;
+    S_CalCium: string;
+    S_Phosphorus: string;
     SCopper: string;
     SBicarbonate: string;
     Lipase: string;

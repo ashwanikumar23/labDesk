@@ -29,6 +29,38 @@ import { AppDispatch } from "../../shared/Store/store";
 
 const { Option } = Select;
 const { Text, Link } = Typography;
+const InitialValue: ICBC = {
+  HB: "",
+  TLC: "",
+  Polymorphs: "",
+  Lym: "",
+  Lymphocytes: "",
+  Gran: "",
+  Monocytes: "",
+  Mid: "",
+  Mid_1: "",
+  Eosinophils: "",
+  LymHash: "",
+  MidHash: "",
+  Basophils: "",
+  GranHash: "",
+  TotalRBCCount: "",
+  PCV: "",
+  MCV: "",
+  MCH: "",
+  MCHC: "",
+  RDW_CV: "",
+  RDW_SD: "",
+  Platelets: "",
+  MPV: "",
+  PDW_SD: "",
+  PDW_CV: "",
+  PCT: "",
+  P_LCR: "",
+  P_LCC: ""
+};
+
+
 const CBCDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
   const valueCBC=useSelector(valueOfCBC(id));
   const dispatch:AppDispatch=useDispatch();
@@ -115,7 +147,7 @@ const CBCDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
            // labelCol={{ span: 4 }}
            // wrapperCol={{ span: 14 }}
             layout="horizontal"
-            initialValues={{ remember: true }}
+            //initialValues={{ remember: true }}
           >
             <Row gutter={24}>
             <Col span={1}></Col>
