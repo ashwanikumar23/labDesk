@@ -278,91 +278,100 @@ const CBCDialog = ({ id, disabled, patientData, saveDataEvent }: Idailog) => {
                   {/* <div style={{width:'5px'}}></div> */}
 
                 </Space>
+                <Row gutter={24}>
+                  <Col span={10}>
+                    <Form.Item name="TotalRBCCount" label="Total RBC Count" style={{ marginBottom: '7px' }}>
+                      <FormInputMeasurement units={`million/cumm`} />
+                      {/* <Space>
+                      <Input value={CBCFormValue?.TotalRBCCount} /><span>million/cumm</span>
+                    </Space> */}
+                    </Form.Item>
+                    <Form.Item name="PCV" label="PCV" style={{ marginBottom: '7px' }}>
+                      <FormInputMeasurement units={`%`} />
+                      {/* <Space>
+                      <Input value={CBCFormValue?.PCV} /><span>%</span>
+                    </Space> */}
+                    </Form.Item>
+                    <Form.Item name="MCV" label="MCV" style={{ marginBottom: '7px' }}>
+                      <FormInputMeasurement units={`fL`} />
+                      {/* <Space>
+                      <Input value={CBCFormValue?.MCV} /><span>fL</span>
+                    </Space> */}
+                    </Form.Item>
+                    <Form.Item name="MCH" label="MCH" style={{ marginBottom: '7px' }}>
+                      <FormInputMeasurement units={`pG`} />
+                      {/* <Space>
+                      <Input value={CBCFormValue?.MCH} /><span>pG</span>
+                    </Space> */}
+                    </Form.Item>
+                    <Form.Item name="MCHC" label="MCHC" style={{ marginBottom: '7px' }}>
+                      <FormInputMeasurement units={`%`} />
+                      {/* <Space>
+                      <Input value={CBCFormValue?.MCHC} /><span>%</span>
+                    </Space> */}
+                    </Form.Item>
+                    <Form.Item name="RDW_CV" label="RDW-CV" style={{ marginBottom: '7px' }}>
+                      <FormInputMeasurement units={`%`} />
+                      {/* <Space>
+                      <Input value={CBCFormValue?.RDW_CV} /><span>%</span>
+                    </Space> */}
+                    </Form.Item>
+                    <Form.Item name="RDW_SD" label="RDW-SD" style={{ marginBottom: '7px' }}>
+                      <FormInputMeasurement units={`fL`} />
+                      {/* <Space>
+                      <Input value={CBCFormValue?.RDW_SD} /><span>fL</span>
+                    </Space> */}
+                    </Form.Item>
+                    <Form.Item name="Platelets" label="Platelets" style={{ marginBottom: '7px' }}>
+                      <FormInputMeasurement units={`lakhs/cumm`} />
+                      {/* <Space>
+                      <Input value={CBCFormValue?.Platelets} /><span>lakhs/cumm</span>
+                    </Space> */}
+                    </Form.Item>
+                    <Form.Item name="MPV" label="MPV" style={{ marginBottom: '7px' }}>
+                      <FormInputMeasurement units={`fL`} />
+                      {/* <Space>
+                      <Input value={CBCFormValue?.MPV} /><span>fL</span>
+                    </Space> */}
+                    </Form.Item>
+                    <Form.Item name="PDW_SD" label="PDW-SD" style={{ marginBottom: '7px' }}>
+                      <FormInputMeasurement units={``} />
+                      {/* <Space>
+                      <Input value={CBCFormValue?.PDW_SD} /><span></span>
+                    </Space> */}
+                    </Form.Item>
 
+                    <Form.Item name="PDW_CV" label="PDW-CV" style={{ marginBottom: '7px' }}>
+                      <FormInputMeasurement units={`%`} />
+                      {/* <Space>
+                      <Input value={CBCFormValue?.PDW_CV} /><span>%</span>
+                    </Space> */}
+                    </Form.Item>
+                    <Form.Item name="PCT" label="PCT" style={{ marginBottom: '7px' }}>
+                      <FormInputMeasurement units={`%`} />
+                      {/* <Space>
+                      <Input value={CBCFormValue?.PCT} /><span>%</span>
+                    </Space> */}
+                    </Form.Item>
 
-                <Form.Item name="TotalRBCCount" label="Total RBC Count Description" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`million/cumm`} />
-                  {/* <Space>
-                    <Input value={CBCFormValue?.TotalRBCCount} /><span>million/cumm</span>
-                  </Space> */}
-                </Form.Item>
-                <Form.Item name="PCV" label="PCV" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`%`} />
-                  {/* <Space>
-                    <Input value={CBCFormValue?.PCV} /><span>%</span>
-                  </Space> */}
-                </Form.Item>
-                <Form.Item name="MCV" label="MCV" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`fL`} />
-                  {/* <Space>
-                    <Input value={CBCFormValue?.MCV} /><span>fL</span>
-                  </Space> */}
-                </Form.Item>
-                <Form.Item name="MCH" label="MCH" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`pG`} />
-                  {/* <Space>
-                    <Input value={CBCFormValue?.MCH} /><span>pG</span>
-                  </Space> */}
-                </Form.Item>
-                <Form.Item name="MCHC" label="MCHC" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`%`} />
-                  {/* <Space>
-                    <Input value={CBCFormValue?.MCHC} /><span>%</span>
-                  </Space> */}
-                </Form.Item>
-                <Form.Item name="RDW-CV" label="RDW-CV" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`%`} />
-                  {/* <Space>
-                    <Input value={CBCFormValue?.RDW_CV} /><span>%</span>
-                  </Space> */}
-                </Form.Item>
-                <Form.Item name="RDW-SD" label="RDW-SD" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`fL`} />
-                  {/* <Space>
-                    <Input value={CBCFormValue?.RDW_SD} /><span>fL</span>
-                  </Space> */}
-                </Form.Item>
-                <Form.Item name="Platelets" label="Platelets" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`lakhs/cumm`} />
-                  {/* <Space>
-                    <Input value={CBCFormValue?.Platelets} /><span>lakhs/cumm</span>
-                  </Space> */}
-                </Form.Item>
-                <Form.Item name="MPV" label="MPV" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`fL`} />
-                  {/* <Space>
-                    <Input value={CBCFormValue?.MPV} /><span>fL</span>
-                  </Space> */}
-                </Form.Item>
-                <Form.Item name="PDW-SD" label="PDW-SD" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={``} />
-                  {/* <Space>
-                    <Input value={CBCFormValue?.PDW_SD} /><span></span>
-                  </Space> */}
-                </Form.Item>
+                    <Form.Item name="P_LCR" label="P-LCR" style={{ marginBottom: '7px' }}>
+                      <FormInputMeasurement units={`%`} />
+                      {/* <Space>
+                      <Input value={CBCFormValue?.P_LCR} /><span>%</span>
+                    </Space> */}
+                    </Form.Item>
 
-                <Form.Item name="PDW-CV" label="PDW-CV" style={{ marginBottom: '7px' }}>
-                  <Space>
-                    <Input value={CBCFormValue?.PDW_CV} /><span>%</span>
-                  </Space>
-                </Form.Item>
-                <Form.Item name="PCT" label="PCT" style={{ marginBottom: '7px' }}>
-                  <Space>
-                    <Input value={CBCFormValue?.PCT} /><span>%</span>
-                  </Space>
-                </Form.Item>
+                    <Form.Item name="P_LCC" label="P-LCC" style={{ marginBottom: '7px' }}>
+                      <FormInputMeasurement units={`%`} />
+                      {/* <Space>
+                      <Input value={CBCFormValue?.P_LCC} /><span></span>
+                    </Space> */}
+                    </Form.Item>
 
-                <Form.Item name="P-LCR" label="P_LCR" style={{ marginBottom: '7px' }}>
-                  <Space>
-                    <Input value={CBCFormValue?.P_LCR} /><span>%</span>
-                  </Space>
-                </Form.Item>
+                  </Col>
+                  <Col span={14}></Col>
+                </Row>
 
-                <Form.Item name="P-LCC" label="P-LCC" style={{ marginBottom: '7px' }}>
-                  <Space>
-                    <Input value={CBCFormValue?.P_LCC} /><span></span>
-                  </Space>
-                </Form.Item>
                 {/* <Form.Item name="BGrouping" label="B. Grouping" style={{marginBottom: '7px'}}>
                   <Select >
                     <Option value="option1">Option 1</Option>
