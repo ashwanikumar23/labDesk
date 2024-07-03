@@ -79,7 +79,7 @@ const InitialValue: IBio = {
 const { Option } = Select;
 const BIOModal = ({ id, disabled, patientData, saveDataEvent }: Idailog) => {
   const [open, setOpen] = useState(false);
-  const valueBIO = useSelector(valueOfBIO(id));
+  const valueBIO = useSelector(valueOfBIO(id)) ||InitialValue ;
   const [form] = Form.useForm();
   const [formData, setFormData] = useState<IEnterForm>(patientData);
   const [Bio, setBio] = useState<IBio | null>(null);

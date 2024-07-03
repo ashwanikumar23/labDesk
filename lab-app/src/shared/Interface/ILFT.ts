@@ -1,6 +1,7 @@
 export default  interface ILFT {
-    Print: boolean,
-    Comments: boolean,
+    Print?: boolean,
+    PrintAll?:boolean,
+    Comments?: boolean,
     TotalBilirubin: string;
     ConjBilirubin: string;
     UnConjBilirubin: string;

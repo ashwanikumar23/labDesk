@@ -63,7 +63,7 @@ const InitialValue: ICBC = {
 
 
 const CBCDialog = ({ id, disabled, patientData, saveDataEvent }: Idailog) => {
-  const valueCBC = useSelector(valueOfCBC(id));
+  const valueCBC = useSelector(valueOfCBC(id)) ||InitialValue;
   const dispatch: AppDispatch = useDispatch();
   const [showColor, setShowColor] = useState("red");
   console.warn(id, "valueCBC", valueCBC);
