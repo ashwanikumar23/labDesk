@@ -23,9 +23,11 @@ import IStool from './shared/Interface/IStool';
 import IThyroid from './shared/Interface/IThyroid';
 import IURINE from './shared/Interface/IURINE';
 import IWADAL from './shared/Interface/IWADAL';
-import DesktopLayout from './shared/layoutWraper/destopLayout';
-import { useSelector } from 'react-redux';
-import { RootState } from './shared/Store/store';
+import DesktopLayout from './Pages/layoutWraper/destopLayout';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from './shared/Store/store';
+import Cookies from 'js-cookie';
+import { login, logout } from './shared/Store/signInSlice';
 
 
 
@@ -33,9 +35,27 @@ function App() {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const [sign, setSign] = React.useState(false);
   const [data, setData] = useState([]);
-  const clickLogin=()=>{
-    setSign(true);
+  const dispatch: AppDispatch = useDispatch();
+  const clickLogin=(action:boolean)=>{
+    setSign(action);
   }
+  useEffect(()=>{
+    const token = Cookies.get("authToken");
+    const username = token?.split(" ");
+    console.log(token);
+    if(token && username){
+      setSign(true);
+      dispatch(login(username[0]));
+  
+    }else{
+      setSign(false);
+      dispatch(logout());
+
+    }
+    console.log(token,sign);
+
+
+  },[sign])
 
   const initialData:IEnterForm={
     name: '',

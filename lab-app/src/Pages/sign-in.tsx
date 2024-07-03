@@ -9,6 +9,14 @@ import background from './assets/medi.jpg';
 import { url } from 'inspector';
 import Cookies from 'js-cookie';
 
+const userSign = [{
+    username: 'admin',
+    AccessToken: 'admin123'
+},
+{
+    username: 'lab@Test',
+    AccessToken: 'Test@AccessToken'
+}];
 type FieldType = {
     username?: string;
     AccessToken?: string;
@@ -16,7 +24,7 @@ type FieldType = {
 };
 
 const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-    
+
     console.log('Success:', values);
 };
 
@@ -24,25 +32,31 @@ const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
     console.log('Failed:', errorInfo);
 };
 
-interface ISignin{
-    clickLogin:any
+interface ISignin {
+    clickLogin: any
 }
-export default function SignIn({clickLogin}:ISignin) {
+export default function SignIn({ clickLogin }: ISignin) {
     const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
-  const username = useSelector((state: RootState) => state.auth.username);
-  const dispatch: AppDispatch = useDispatch();
+    const username = useSelector((state: RootState) => state.auth.username);
+    const dispatch: AppDispatch = useDispatch();
 
 
     const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-        clickLogin();
-        let username="sample.com"
-        const token = generateToken();
-        const expireTime = new Date(new Date().getTime() + 60 * 60 * 1000); // Token expires in 1 hour
+        let username = values.username;
+        const AccessToken = values.AccessToken;
+        if(username && AccessToken && userValidation(username,AccessToken) ){
+            clickLogin(true);
+            const token = generateToken();
+            const expireTime = new Date(new Date().getTime() + 5 * 60 * 60 * 1000); // Token expires in 5 hour
+    
+            Cookies.set('authToken', token + " " + username, { expires: expireTime });
+    
+            dispatch(login(username));
+           
+        }
 
-        Cookies.set('authToken', token, { expires: expireTime });
 
-        dispatch(login(username));
-        console.log('Success:', values);
+
 
     };
     const generateToken = () => {
@@ -51,12 +65,12 @@ export default function SignIn({clickLogin}:ISignin) {
     };
     const handleLogout = () => {
         dispatch(logout());
-      };
-      useEffect(() => {
+    };
+    useEffect(() => {
         const token = Cookies.get('authToken');
         if (token) {
             const tokenExpiry = Cookies.get('authTokenExpiry');
-            if(tokenExpiry){
+            if (tokenExpiry) {
                 if (new Date(tokenExpiry) > new Date()) {
                     // Token is valid
                     console.log('Token is valid');
@@ -71,11 +85,19 @@ export default function SignIn({clickLogin}:ISignin) {
             dispatch(logout());
         }
     }, []);
+
+    const userValidation = (username: string, access: string): boolean => {
+        const user = userSign.find(item => item.username.toLowerCase() == username.toLowerCase());
+        return user?.AccessToken === access;
+
+    }
     return (
         <>
-            <div style={{width:"100%",height:"100vh", display: 'flex', justifyContent: 'center', alignItems: 'center',  backgroundImage: `url('${background}')`, backgroundSize: 'cover',
-        backgroundPosition: 'center',}}>
-                <Card className='card-blur' style={{ width: 400,    border: '1px solid #12346d' }}>
+            <div style={{
+                width: "100%", height: "100vh", display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundImage: `url('${background}')`, backgroundSize: 'cover',
+                backgroundPosition: 'center',
+            }}>
+                <Card className='card-blur' style={{ width: 400, border: '1px solid #12346d' }}>
                     <Form
                         name="basic"
                         labelCol={{ span: 8 }}
@@ -103,7 +125,7 @@ export default function SignIn({clickLogin}:ISignin) {
                         </Form.Item>
 
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                            <Button type="primary" htmlType="submit" style={{width:"100%"}}>
+                            <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
                                 Submit
                             </Button>
                         </Form.Item>
@@ -111,9 +133,9 @@ export default function SignIn({clickLogin}:ISignin) {
                 </Card>
 
             </div>
-            
 
-            
+
+
 
         </>
     );
