@@ -1,6 +1,7 @@
 export default  interface IWADAL {
-    Print: boolean,
-    Comments: boolean,
+    PrintAll?:boolean,
+    Print?: boolean,
+    Comments?: boolean,
     STYPHIO: string;
     STYPHIO2: string;
     STYPHIO3: string;
