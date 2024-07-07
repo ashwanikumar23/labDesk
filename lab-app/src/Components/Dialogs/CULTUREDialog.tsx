@@ -33,7 +33,7 @@ const CULTUREDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
   };
 
   const [form] = Form.useForm();
-  const [formData, setFormData] = useState<IEnterForm>(patientData);
+  const [formData, setFormData] = useState<IEnterForm>();
   const [homatology,setHomatology]=useState<ICULTURE|null>(null);
   const dispatch:AppDispatch=useDispatch();
 
@@ -41,8 +41,8 @@ const CULTUREDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
     console.log("Form values:", values);
     setHomatology(values);
     if(homatology){
-      patientData.id=id;
-      patientData.CULTURE=homatology;
+      // patientData.id=id;
+      // patientData.CULTURE=homatology;
       dispatch(updateCULTURE({id,data:homatology}));
     }else{
    ///throw alert messages

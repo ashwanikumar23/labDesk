@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../shared/Store/store';
-import { login, logout } from '../shared/Store/signInSlice';
+import { login, logout, setLabNoAndAddress } from '../shared/Store/signInSlice';
 import "./style.css";
 import type { FormProps } from 'antd';
 import { Button, Card, Checkbox, Form, Input, Space } from 'antd';
@@ -52,6 +52,7 @@ export default function SignIn({ clickLogin }: ISignin) {
             Cookies.set('authToken', token + " " + username, { expires: expireTime });
     
             dispatch(login(username));
+            dispatch(setLabNoAndAddress({labNo:"02",Address:"address is here ",email:'deskLab@gmail.com',phone:'7973279121'}))
            
         }
 

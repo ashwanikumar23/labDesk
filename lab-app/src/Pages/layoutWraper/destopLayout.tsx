@@ -88,8 +88,8 @@ export default function DesktopLayout(props: any) {
             STOOL: {} as IStool,
             id: 111,
             Receivtime: '13:00',
-            materials: 'Ram',
-            Reference: 'Blood'
+            materials: 'Blood',
+            Reference: 'Ram'
         };
         dispatch(addData(newData));
     };

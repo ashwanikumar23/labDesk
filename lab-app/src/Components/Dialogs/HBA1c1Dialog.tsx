@@ -25,15 +25,14 @@ const { Option } = Select;
 const HBA1c1Dialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
-  const [formData, setFormData] = useState<IEnterForm>(patientData);
+  const [formData, setFormData] = useState<IEnterForm>();
   const [homatology,setHomatology]=useState<IHBA1c1|null>(null);
 
   const onFinish = (values: IHBA1c1) => {
     console.log("Form values:", values);
     setHomatology(values);
     if(homatology){
-      patientData.id=id;
-      patientData.HBA1c1=homatology;
+     
     }else{
    ///throw alert messages
     }

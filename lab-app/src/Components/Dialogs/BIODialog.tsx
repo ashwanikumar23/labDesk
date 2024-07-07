@@ -77,11 +77,11 @@ const InitialValue: IBio = {
 
 
 const { Option } = Select;
-const BIOModal = ({ id, disabled, patientData, saveDataEvent }: Idailog) => {
+const BIOModal = ({ id }: Idailog) => {
   const [open, setOpen] = useState(false);
   const valueBIO = useSelector(valueOfBIO(id)) ||InitialValue ;
   const [form] = Form.useForm();
-  const [formData, setFormData] = useState<IEnterForm>(patientData);
+  const [formData, setFormData] = useState<IEnterForm>();
   const [Bio, setBio] = useState<IBio | null>(null);
   const dispatch: AppDispatch = useDispatch();
   const [value, setValue] = useState(1);
@@ -158,8 +158,8 @@ const BIOModal = ({ id, disabled, patientData, saveDataEvent }: Idailog) => {
     values.Print = PRINT !== "PRINT-ALL"
     dispatch(updateBIO({ id, data: values }));
     if (Bio) {
-      patientData.id = id;
-      patientData.BIO = Bio;
+      // patientData.id = id;
+      // patientData.BIO = Bio;
     }
     // setFormData(patientData);
     //console.log(formData);

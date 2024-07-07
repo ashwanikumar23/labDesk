@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Divider,
   Checkbox,
@@ -20,31 +20,44 @@ import GradientButton from "../../shared/UI/Button/gradientButton";
 import Idailog from "../../shared/Interface/Idailog";
 import IEnterForm from "../../shared/Interface/All-interface";
 import IPREG from "../../shared/Interface/IPREG";
-import { useDispatch } from "react-redux";
-import { updatePREG } from "../../shared/Store/dataSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { PaitentValue, updatePREG, valueOfPreg } from "../../shared/Store/dataSlice";
 import { AppDispatch } from "../../shared/Store/store";
 
+const initialValue:IPREG={
+  SampleBroughtFrom: "",
+  ExpectedDate: "",
+  betaHCG: "",
+  CommentsAdvise: ""
+}
+
 const { Option } = Select;
-function PregnancyDilaog({id,disabled,patientData,saveDataEvent}: Idailog){
+function PregnancyDilaog({id}: Idailog){
   const [open, setOpen] = useState(false);
+  let valuePreg = useSelector(valueOfPreg(id));
   const [form] = Form.useForm();
-  const [formData, setFormData] =  useState<IEnterForm>(patientData);
+  const [formData, setFormData] =  useState<IEnterForm>();
   const [homatology,setHomatology]=useState<IPREG|null>(null);
   const dispatch:AppDispatch=useDispatch();
+  const saveddata = useSelector(PaitentValue(id));  
+
+  useEffect(()=>{
+     if(valuePreg && Object.entries(valuePreg).length !== 0){
+
+     }else{
+      valuePreg=initialValue;
+     }
+  },[saveddata]);
 
   const onFinish = (values: IPREG) => {
     console.log("Form values:", values);
     setHomatology(values);
-    if(homatology){
-      patientData.id=id;
-      patientData.PREG=homatology;
-      dispatch(updatePREG({id,data:homatology}));
-    }else{
-   ///throw alert messages
-    }
-    setFormData(patientData);
-    console.log(formData);
-    saveDataEvent(formData);
+    values.PrintAll=true;
+    values.Print = false;
+    values.Comments =false;
+    dispatch(updatePREG({id,data:values}));
+    setOpen(false)
+
   };
 
   const [value, setValue] = useState(1);
@@ -54,13 +67,19 @@ function PregnancyDilaog({id,disabled,patientData,saveDataEvent}: Idailog){
     setValue(e.target.value);
   }; 
 
+  const EventClick = ()=>{
+    setOpen(true);
+    if(valuePreg && Object.entries(valuePreg).length !== 0){
+      const {PrintAll,Print,Comments,...preg}=valuePreg
+      form.setFieldsValue({ ...preg })
+    }
+
+  }
+
     return (
       <>
-      {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
-      PREGNANCY
-      </Button> */}
       <Badge dot size="default">
-      <GradientButton id={0} BtnName={"PREGNANCY"} width="150px" clickEvent={() => setOpen(true)} />
+      <GradientButton id={0} BtnName={"PREGNANCY"} width="150px" clickEvent={() => EventClick()} />
 
       </Badge>
       <Modal
@@ -114,78 +133,17 @@ function PregnancyDilaog({id,disabled,patientData,saveDataEvent}: Idailog){
                   </Select>
                 </Form.Item>
               </Col>
-              {/* <Col span={2}></Col> */}
-              {/* <Col span={8}>
-                <div style={{textAlign:'center',color:"blue"}}><h3 style={{color:'blue'}}>Urine Level</h3></div>
-                <Form.Item name="U1" label="-" style={{marginBottom: '7px'}}>
-                  <Select>
-                    <Option value="option1">Option 1</Option>
-                    <Option value="option2">Option 2</Option>
-                  </Select>
-                </Form.Item>
-                <Form.Item name="U2" label="-" style={{marginBottom: '7px'}}>
-                  <Select>
-                    <Option value="option1">Option 1</Option>
-                    <Option value="option2">Option 2</Option>
-                  </Select>
-                </Form.Item>
-                <Form.Item name="U3" label="-" style={{marginBottom: '7px'}}>
-                  <Select>
-                    <Option value="option1">Option 1</Option>
-                    <Option value="option2">Option 2</Option>
-                  </Select>
-                </Form.Item>
-                <Form.Item name="U4" label="-" style={{marginBottom: '7px'}}>
-                  <Select>
-                    <Option value="option1">Option 1</Option>
-                    <Option value="option2">Option 2</Option>
-                  </Select>
-                </Form.Item>
-                <Form.Item name="U5" label="-" style={{marginBottom: '7px'}}>
-                  <Select>
-                    <Option value="option1">Option 1</Option>
-                    <Option value="option2">Option 2</Option>
-                  </Select>
-                </Form.Item>
-                <Form.Item name="U6" label="-" style={{marginBottom: '7px'}}>
-                  <Select>
-                    <Option value="option1">Option 1</Option>
-                    <Option value="option2">Option 2</Option>
-                  </Select>
-                </Form.Item>
-                <Form.Item name="U7" label="-" style={{marginBottom: '7px'}}>
-                  <Select>
-                    <Option value="option1">Option 1</Option>
-                    <Option value="option2">Option 2</Option>
-                  </Select>
-                </Form.Item>
-              </Col> */}
+              
             </Row>
             <Form.Item style={{marginBottom: '4px'}}>
               <div style={{display:"flex",justifyContent:'end',alignItems:"end",gap:'2px'}}>
-              <Button type="dashed">Cancel</Button>
+              <Button type="dashed" onClick={()=>{setOpen(false)}}>Cancel</Button>
               <Button type="primary" htmlType="submit">
                 Submit
               </Button>
               </div>
             </Form.Item>
           </Form>
-
-          {/* Display the form data in a grid form */}
-          {formData && (
-            <div>
-              <h2>Form Data</h2>
-              <Row gutter={16}>
-                {Object.entries(formData).map(([key, value]) => (
-                  <Col span={8} key={key}>
-                    <p>
-                      <strong>{key}:</strong>
-                    </p>
-                  </Col>
-                ))}
-              </Row>
-            </div>
-          )}
         </div>
       </Modal>
     </>

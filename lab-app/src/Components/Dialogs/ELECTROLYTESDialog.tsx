@@ -29,7 +29,7 @@ const { Option } = Select;
 const ELECTROLYTESDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
-  const [formData, setFormData] = useState<IEnterForm>(patientData);
+  const [formData, setFormData] = useState<IEnterForm>();
   const [homatology,setHomatology]=useState<IElectrolyte|null>(null);
   const dispatch:AppDispatch=useDispatch();
 
@@ -37,8 +37,8 @@ const ELECTROLYTESDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) =>
     console.log("Form values:", values);
     setHomatology(values);
     if(homatology){
-      patientData.id=id;
-      patientData.ELECTROLYTES=homatology;
+      // patientData.id=id;
+      // patientData.ELECTROLYTES=homatology;
       dispatch(updateELECTROLYTES({id,data:homatology}));
     }else{
    ///throw alert messages

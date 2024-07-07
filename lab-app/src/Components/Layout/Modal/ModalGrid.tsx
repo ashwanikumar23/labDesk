@@ -28,7 +28,7 @@ import SEROLOGYDialog from '../../Dialogs/SEROLOGYDialog';
 import FLUIDDialog from '../../Dialogs/FLUIDDialog';
 import SpecialDialog from '../../Dialogs/SpecialDialog';
 import PBFDialog from '../../Dialogs/PBFDialog';
-import { Button } from 'antd';
+import { Button, Flex } from 'antd';
 import IEnterForm from '../../../shared/Interface/All-interface';
 // import PregnancyDilaog from './Dialogs/PregnancyDialog';
 // import Footer from './Footer/Footer';
@@ -245,19 +245,24 @@ function DrugsTestClick(IRONData:any){
   const handleTHYROIDClose = () => {
     setOpenTHYROID(false);
   };
+  const baseStyle: React.CSSProperties = {
+    width: '50%',
+    height: 54,
+  };
   return (
     <>
+
     <div style={{display:"flex", justifyContent:"center", gap:"4px"}}>
       <div style={{ alignItems:"center"}}>
-      <HAEMATOLOGYDialog id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData} />
+      <HAEMATOLOGYDialog id={id} disabled={true} patientData={InitialData} saveDataEvent={saveData} />
       
       </div>
       <div style={{ alignItems:"center"}}>
-      <BIOModal id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData}  />      
+      <BIOModal id={id} disabled={true} patientData={InitialData} saveDataEvent={saveData}  />      
         
       </div>
     </div>
-    <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
+    {/* <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
       <div style={{ alignItems:"center"}}>
       <SEROLOGYDialog />
       
@@ -276,18 +281,18 @@ function DrugsTestClick(IRONData:any){
       <FLUIDDialog id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData} />    
         
       </div>
-    </div>
+    </div> */}
     <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
       <div style={{ alignItems:"center"}}>
       <LFTDialog id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData} />
       
       </div>
       <div style={{ alignItems:"center"}}>
-      <LIPIDDialog />   
+      <RFTDialog  id={id} />   
         
       </div>
     </div>
-    <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
+    {/* <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
       <div style={{ alignItems:"center"}}>
       <SEMENDialog />
       
@@ -296,10 +301,10 @@ function DrugsTestClick(IRONData:any){
       <ELECTROLYTESDialog id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData} />
         
       </div>
-    </div>
+    </div> */}
     <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
       <div style={{ alignItems:"center"}}>
-      <WIDALDialog />
+      <WIDALDialog id={id} />
       
       </div>
       <div style={{ alignItems:"center"}}>
@@ -307,17 +312,17 @@ function DrugsTestClick(IRONData:any){
         
       </div>
     </div>
-    <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
+    {/* <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
       <div style={{ alignItems:"center"}}>
-      <RFTDialog />
+      <LIPIDDialog />
       
       </div>
       <div style={{ alignItems:"center"}}>
       <THYROIDDialog />
         
       </div>
-    </div>
-    <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
+    </div> */}
+    {/* <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
       <div style={{ alignItems:"center"}}>
       <SpecialDialog />
       
@@ -366,16 +371,8 @@ function DrugsTestClick(IRONData:any){
       <HBA1c1Dialog id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData}/>
         
       </div>
-    </div>
+    </div> */}
 
-      {/* <div className='flex  pt'>
-        <GTTDialog />
-        <IronDialog onSaveClick={IRONTestClick}/>
-        <CULTUREDialog />
-        <DRUG_ABUSE onSaveClick={DrugsTestClick} />
-        <HBA1c1Dialog/>
-        <HBA1c2Dialog />
-      </div>  */}
     </>
   );
 

@@ -25,6 +25,7 @@ const EnterForm = ({ id, createId, saveData, initalData }: IEnterFormProps) => {
     const [formData, setFormData] = useState<IEnterForm>();
     const selectedId = useSelector((state: RootState) => state.seletedId);
     const LoadPatientData = useSelector(PaitentValue(selectedId));  
+    const labno = useSelector((state: RootState) => state.auth.labNo);
     const [form] = Form.useForm();
 
     const handleFinish = (values: { DATE: { format: (arg0: string) => any; }; time: { format: (arg0: string) => any; }; ReciveData: { format: (arg0: string) => any; }; Receivtime: { format: (arg0: string) => any; }; }) => {
@@ -73,6 +74,7 @@ const EnterForm = ({ id, createId, saveData, initalData }: IEnterFormProps) => {
             setFormData(LoadPatientData);
             form.setFieldsValue({
                 ...LoadPatientData,
+                LabNO:labno,
                 DATE: LoadPatientData.DATE ? moment(LoadPatientData.DATE, 'DD-MM-YYYY') : null,
                 time: LoadPatientData.time ? moment(LoadPatientData.time, 'HH:mm') : null,
                 ReciveData: LoadPatientData.ReciveData ? moment(LoadPatientData.ReciveData, 'DD-MM-YYYY') : null,

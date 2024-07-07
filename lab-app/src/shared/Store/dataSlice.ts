@@ -21,6 +21,7 @@ import IThyroid from '../Interface/IThyroid';
 import IWADAL from '../Interface/IWADAL';
 import { RootState } from './store';
 import IBIO from '../Interface/IBio';
+import { IKFT } from '../Interface/IKFT';
 
 
 const initialData: IEnterForm[] = [{
@@ -52,6 +53,7 @@ const initialData: IEnterForm[] = [{
     FLUID: {} as IFluid, // Initialize with empty object or default values
     DRUGABUSE: {} as IDRUG, // Initialize with empty object or default values
     LFT: {} as ILFT, // Initialize with empty object or default values
+    KRFT:{} as IKFT,
     SEMEN: {} as ISEROLOGY, // Initialize with empty object or default values
     ELECTROLYTES: {} as IElectrolyte, // Initialize with empty object or default values
     CBC: {} as ICBC, // Initialize with empty object or default values
@@ -116,6 +118,7 @@ const dataSlice = createSlice({
             }
         },
         updateWadal(state, action: PayloadAction<{ id: number; data: IWADAL }>) {
+            debugger;
             const index = state.findIndex(item => item.id === action.payload.id);
             if (index !== -1) {
                 state[index].Wadal = action.payload.data;
@@ -181,6 +184,12 @@ const dataSlice = createSlice({
                 state[index].LFT = action.payload.data;
             }
         },
+        updateKFT(state, action: PayloadAction<{ id: number; data: IKFT }>) {
+            const index = state.findIndex(item => item.id === action.payload.id);
+            if (index !== -1) {
+                state[index].KRFT = action.payload.data;
+            }
+        },
         updateSEMEN(state, action: PayloadAction<{ id: number; data: ISEROLOGY }>) {
             const index = state.findIndex(item => item.id === action.payload.id);
             if (index !== -1) {
@@ -214,6 +223,7 @@ export const valueOfBIO = (id: number) => (state: RootState) => state.data.find(
 export const valueOfWadal = (id: number) => (state: RootState) => state.data.find(item => item.id === id)?.Wadal;
 export const valueOfPreg = (id: number) => (state: RootState) => state.data.find(item => item.id === id)?.PREG;
 export const valueOfLFT = (id: number) => (state: RootState) => state.data.find(item => item.id === id)?.LFT;
+export const valueOFKFT = (id: number) => (state: RootState) => state.data.find(item => item.id === id)?.KRFT;
 export const valueOfHAEMATOLOGY = (id: number) => (state: RootState) => state.data.find(item => item.id === id)?.HAEMATOLOGY;
 
 
@@ -237,6 +247,7 @@ export const {
     updateFLUID,
     updateDRUGABUSE,
     updateLFT,
+    updateKFT,
     updateSEMEN,
     updateELECTROLYTES,
     updateCBC,

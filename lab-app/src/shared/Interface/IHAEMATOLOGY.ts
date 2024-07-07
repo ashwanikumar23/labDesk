@@ -1,6 +1,7 @@
 export default interface IHAEMATOLOGY {
-    Print: boolean,
-    Comments: boolean,
+    Print?: boolean,
+    Comments?: boolean,
+    PrintAll?:boolean,
     HB: string,
     TLC: string,
     Polymorphs: string,

@@ -28,7 +28,7 @@ const { Option } = Select;
 const FLUIDDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
-  const [formData, setFormData] =  useState<IEnterForm>(patientData);
+  const [formData, setFormData] =  useState<IEnterForm>();
   const [homatology,setHomatology]=useState<IFluid|null>(null);
   const dispatch:AppDispatch=useDispatch();
 
@@ -36,8 +36,8 @@ const FLUIDDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
     console.log("Form values:", values);
     setHomatology(values);
     if(homatology){
-      patientData.id=id;
-      patientData.FLUID=homatology;
+      // patientData.id=id;
+      // patientData.FLUID=homatology;
       dispatch(updateFLUID({id,data:homatology}));
     }else{
    ///throw alert messages

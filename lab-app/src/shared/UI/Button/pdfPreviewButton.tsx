@@ -68,7 +68,7 @@ const handlePrint = useReactToPrint({
 
   return (
     <>
-      <GradientButton id={0} BtnName={" Preview"}  clickEvent={showModal} />
+      <GradientButton id={0} BtnName={" Print"}  clickEvent={showModal} />
       <Modal
         open={open}
         title="PRINT"

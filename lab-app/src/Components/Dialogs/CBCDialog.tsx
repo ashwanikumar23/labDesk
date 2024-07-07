@@ -17,6 +17,8 @@ import {
   Radio,
   RadioChangeEvent,
   Switch,
+  notification,
+  NotificationArgsProps,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
 import IEnterForm from "../../shared/Interface/All-interface";
@@ -61,8 +63,11 @@ const InitialValue: ICBC = {
   P_LCC: ""
 };
 
+type NotificationPlacement = NotificationArgsProps['placement'];
 
-const CBCDialog = ({ id, disabled, patientData, saveDataEvent }: Idailog) => {
+const Context = React.createContext({ name: 'Default' });
+
+const CBCDialog = ({ id }: Idailog) => {
   const valueCBC = useSelector(valueOfCBC(id)) ||InitialValue;
   const dispatch: AppDispatch = useDispatch();
   const [showColor, setShowColor] = useState("red");
@@ -87,16 +92,18 @@ const CBCDialog = ({ id, disabled, patientData, saveDataEvent }: Idailog) => {
 
   const onFinish = (values: ICBC) => {
     console.log("Form values:", values);
+    dispatch(updateCBC({ id, data: values }));
     setCBCFormValue(values);
+    openNotification('topRight')
+    setOpen(false);
     console.log("FsetCBCFormValu:", values);
     if (CBCFormValue) {
       console.warn("hiye")
       CBCFormValue.PrintAll = PRINT === "PRINT-ALL";
       CBCFormValue.Print = PRINT !== "PRINT-ALL"
       const body = { id: id, data: CBCFormValue }
-      dispatch(updateCBC({ id, data: CBCFormValue }));
-      patientData.id = id;
-      patientData.CBC = CBCFormValue;
+      // patientData.id = id;
+      // patientData.CBC = CBCFormValue;
     }
   };
 
@@ -116,6 +123,16 @@ const CBCDialog = ({ id, disabled, patientData, saveDataEvent }: Idailog) => {
     });
     console.warn(enable);
   }
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotification = (placement: NotificationPlacement) => {
+    api.info({
+      message: `Notification ${placement}`,
+      description: <Context.Consumer>{({ name }) => `Hello, ${name}!`}</Context.Consumer>,
+      placement,
+    });
+  };
+
 
   const clickEvent = () => {
     setOpen(true);

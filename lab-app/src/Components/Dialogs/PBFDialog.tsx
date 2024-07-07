@@ -28,7 +28,7 @@ const { Option } = Select;
 const PBFDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
-  const [formData, setFormData] =useState<IEnterForm>(patientData);
+  const [formData, setFormData] =useState<IEnterForm>();
   const [homatology,setHomatology]=useState<IPBF|null>(null);
   const dispatch:AppDispatch=useDispatch();
 
@@ -36,8 +36,8 @@ const PBFDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
     console.log("Form values:", values);
     setHomatology(values);
     if(homatology){
-      patientData.id=id;
-      patientData.PBF=homatology;
+      // patientData.id=id;
+      // patientData.PBF=homatology;
       dispatch(updatePBF({id,data:homatology}));
     }else{
    ///throw alert messages

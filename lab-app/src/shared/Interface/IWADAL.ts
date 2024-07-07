@@ -10,6 +10,7 @@ export default  interface IWADAL {
     STYPHIO6: string;
     STYPHIH: string;
     STYPHIH2: string;
+    STYPHIH3: string;
     STYPHIp: string;
     STYPHIH4: string;
     STYPHIH5: string;

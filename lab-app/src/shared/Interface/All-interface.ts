@@ -9,6 +9,7 @@ import IGTT from "./IGTT";
 import IHAEMATOLOGY from "./IHAEMATOLOGY";
 import IHBA1c1 from "./IHBA1c1";
 import IIRON from "./IIRON";
+import { IKFT } from "./IKFT";
 import ILFT from "./ILFT";
 import ILIPID from "./ILIPID";
 import IPBF from "./IPBF";
@@ -55,6 +56,7 @@ export default interface IEnterForm {
     FLUID?: IFluid;
     DRUGABUSE?: IDRUG;
     LFT?: ILFT;
+    KRFT?: IKFT;
     SEMEN?: ISEROLOGY;
     ELECTROLYTES?: IElectrolyte;
     CBC?: ICBC;

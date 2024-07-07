@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Divider,
     Checkbox,
@@ -22,7 +22,7 @@ import ILFT from "../../shared/Interface/ILFT";
 import Idailog from "../../shared/Interface/Idailog";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../shared/Store/store";
-import { updateLFT, valueOfLFT } from "../../shared/Store/dataSlice";
+import { PaitentValue, updateLFT, valueOfLFT } from "../../shared/Store/dataSlice";
 import { FormInputMeasurement } from "../../shared/UI/customComponents/inputMeasurementComponents/formInputMeasurement";
 
 const { Option } = Select;
@@ -40,30 +40,33 @@ const initialValue: ILFT = {
     HbsAg: ""
 }
 
-const LFTDialog = ({ id, disabled, patientData, saveDataEvent }: Idailog) => {
+const LFTDialog = ({ id }: Idailog) => {
     const [open, setOpen] = useState(false);
-    const valueLFT = useSelector(valueOfLFT(id)) || initialValue;
+    let valueLFT = useSelector(valueOfLFT(id));
     const [form] = Form.useForm();
-    const [formData, setFormData] = useState<IEnterForm>(patientData);
+    const [formData, setFormData] = useState<IEnterForm>();
     const [LFTData, setLFTData] = useState<ILFT | null>(null);
+    const saveddata = useSelector(PaitentValue(id));
     const dispatch: AppDispatch = useDispatch();
     const [value, setValue] = useState(1);
     const [PRINT, setPRINT] = useState('PRINT-ALL');
 
+    useEffect(() => {
+        if (valueLFT) {
+
+        } else {
+            valueLFT = initialValue
+        }
+    }, [saveddata]);
 
     const onFinish = (values: ILFT) => {
         console.log("Form values:", values);
         setLFTData(values);
-        if (LFTData) {
-            patientData.id = id;
-            patientData.LFT = LFTData;
-            dispatch(updateLFT({ id, data: LFTData }));
-        } else {
-            ///throw alert messages
-        }
-        setFormData(patientData);
-        // console.log(formData);
-        // saveDataEvent(formData);
+        values.Print = false;
+        values.PrintAll = true;
+        values.Comments = false;
+        dispatch(updateLFT({ id, data: values }));
+        setOpen(false);
     };
 
 
@@ -81,8 +84,8 @@ const LFTDialog = ({ id, disabled, patientData, saveDataEvent }: Idailog) => {
 
         } else {
             form.setFieldsValue({ ...initialValue })
-            
-         }
+
+        }
     }
     return (
         <>
@@ -121,40 +124,40 @@ const LFTDialog = ({ id, disabled, patientData, saveDataEvent }: Idailog) => {
                                     <FormInputMeasurement units={`mg/dl`} />
                                 </Form.Item>
                                 <Form.Item name="ConjBilirubin" label="Conj. Bilirubin" style={{ marginBottom: '7px' }}>
-                                <FormInputMeasurement units={`mg/dl`} />
-                                   
+                                    <FormInputMeasurement units={`mg/dl`} />
+
                                 </Form.Item>
                                 <Form.Item name="UnConjBilirubin" label="UnConj. Bilirubin" style={{ marginBottom: '7px' }}>
-                                <FormInputMeasurement units={`mg/dl`} />
-                                  
+                                    <FormInputMeasurement units={`mg/dl`} />
+
                                 </Form.Item>
                                 <Form.Item name="SGOT" label="SGOT(AST)" style={{ marginBottom: '7px' }}>
-                                <FormInputMeasurement units={`U/L`} />
-                                    
+                                    <FormInputMeasurement units={`U/L`} />
+
                                 </Form.Item>
                                 <Form.Item name="SGPT" label="SGPT(ALT)" style={{ marginBottom: '7px' }}>
-                                <FormInputMeasurement units={`U/L`} />
-                                    
+                                    <FormInputMeasurement units={`U/L`} />
+
                                 </Form.Item>
                                 <Form.Item name="SAlkalinePhosphatase" label="S. Alkaline Phosphatase" style={{ marginBottom: '7px' }}>
-                                <FormInputMeasurement units={`U/L`} />
-                                    
+                                    <FormInputMeasurement units={`U/L`} />
+
                                 </Form.Item>
                                 <Form.Item name="Serum Protien" label="Serum Protien" style={{ marginBottom: '7px' }}>
-                                <FormInputMeasurement units={`mg/dl`} />
-                                   
+                                    <FormInputMeasurement units={`mg/dl`} />
+
                                 </Form.Item>
                                 <Form.Item name="Albumin" label="Albumin" style={{ marginBottom: '7px' }}>
-                                <FormInputMeasurement units={`mg/dl`} />
-                                    
+                                    <FormInputMeasurement units={`mg/dl`} />
+
                                 </Form.Item>
                                 <Form.Item name="Globulin" label="Globulin" style={{ marginBottom: '7px' }}>
-                                <FormInputMeasurement units={`mg/dl`} />
-                                    
+                                    <FormInputMeasurement units={`mg/dl`} />
+
                                 </Form.Item>
                                 <Form.Item name="AGRatio" label="A:G Ratio" style={{ marginBottom: '7px' }}>
-                                <FormInputMeasurement units={``} />
-                                   
+                                    <FormInputMeasurement units={``} />
+
                                 </Form.Item>
                                 <Form.Item name="HbsAg" label="HbsAg" style={{ marginBottom: '7px' }}>
                                     <Select >
@@ -165,31 +168,21 @@ const LFTDialog = ({ id, disabled, patientData, saveDataEvent }: Idailog) => {
                             </Col>
 
                         </Row>
-                        <Form.Item style={{ marginBottom: '4px' }}>
-                            <div style={{ display: "flex", justifyContent: 'end', alignItems: "end", gap: '2px' }}>
-                                <Button type="dashed">Cancel</Button>
-                                <Button type="primary" htmlType="submit">
-                                    Submit
-                                </Button>
-                            </div>
-                        </Form.Item>
-                    </Form>
+                        <Row gutter={24}>
+                            <Col span={12}></Col>
+                            <Col span={12} style={{display:'flex',gap:'5px'}}>
+                            <Button type="dashed" onClick={()=>{setOpen(false)}}>Cancel</Button>
+                                <Form.Item style={{ marginBottom: '4px', display: "flex", justifyContent: 'end', alignItems: "end", gap: '2px' }}>
+                                   
+                                    <Button type="primary" htmlType="submit">
+                                        Submit
+                                    </Button>
 
-                    {/* Display the form data in a grid form */}
-                    {formData && (
-                        <div>
-                            <h2>Form Data</h2>
-                            <Row gutter={16}>
-                                {Object.entries(formData).map(([key, value]) => (
-                                    <Col span={8} key={key}>
-                                        <p>
-                                            <strong>{key}:</strong>
-                                        </p>
-                                    </Col>
-                                ))}
-                            </Row>
-                        </div>
-                    )}
+                                </Form.Item>
+                            </Col>
+                        </Row>
+
+                    </Form>
                 </div>
             </Modal>
         </>

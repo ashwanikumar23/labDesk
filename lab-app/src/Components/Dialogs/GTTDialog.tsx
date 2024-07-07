@@ -30,7 +30,7 @@ const { Option } = Select;
 const GTTDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
-  const [formData, setFormData] = useState<IEnterForm>(patientData);
+  const [formData, setFormData] = useState<IEnterForm>();
   const [homatology,setHomatology]=useState<IGTT|null>(null);
   const dispatch:AppDispatch=useDispatch();
 
@@ -38,8 +38,8 @@ const GTTDialog = ({id,disabled,patientData,saveDataEvent}: Idailog) => {
     console.log("Form values:", values);
     setHomatology(values);
     if(homatology){
-      patientData.id=id;
-      patientData.GTT=homatology;
+      // patientData.id=id;
+      // patientData.GTT=homatology;
       // dispatch(updateGTT({id,data:homatology}));
     }else{
    ///throw alert messages

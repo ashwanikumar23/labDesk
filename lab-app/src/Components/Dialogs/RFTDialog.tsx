@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Divider,
   Checkbox,
@@ -17,16 +17,46 @@ import {
   Badge,
 } from "antd";
 import GradientButton from "../../shared/UI/Button/gradientButton";
+import { PaitentValue, updateKFT, valueOFKFT } from "../../shared/Store/dataSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../shared/Store/store";
+import { IKFT } from "../../shared/Interface/IKFT";
 
+const initialValue:IKFT={
+  RFT_KFT: "",
+  urea: "",
+  Creatinine: "",
+  BUN: "",
+  S_Uric_Acid: "",
+  SerumProtein: "",
+  Albumin: "",
+  Globulin: "",
+  AG_Ratio: "",
+  eGFR: ""
+}
 const { Option } = Select;
 const RFTDialog = (props:any) => {
+  const {id}=props;
   const [open, setOpen] = useState(false);
+  let valueRFT = useSelector(valueOFKFT(id));
+  const saveddata = useSelector(PaitentValue(id));
+  const dispatch: AppDispatch = useDispatch();
   const [form] = Form.useForm();
   const [formData, setFormData] = useState(null);
 
-  const onFinish = (values: any) => {
+  useEffect(() => {
+    if (valueRFT) {
+
+    } else {
+      valueRFT = initialValue
+    }
+}, [saveddata]);
+
+  const onFinish = (values: IKFT) => {
     console.log("Form values:", values);
-    setFormData(values);
+    //setFormData(values);
+    dispatch(updateKFT({ id, data: values }));
+    setOpen(false);
   };
 
   const [value, setValue] = useState(1);
@@ -35,14 +65,25 @@ const RFTDialog = (props:any) => {
     console.log('radio checked', e.target.value);
     setValue(e.target.value);
   };
+  const ClickEvent=()=>{
+    setOpen(true);
+    if (valueRFT && Object.entries(valueRFT).length !== 0) {
+      const { ...LFTValues } = valueRFT
+      form.setFieldsValue({ ...LFTValues })
+     // form.setFieldsValue({ ...LFTValues })
+
+  } else {
+      form.setFieldsValue({ ...initialValue })
+
+  }
+
+  }
 
   return (
     <>
-      {/* <Button className="btn" type="primary" onClick={() => setOpen(true)}>
-        RFT/KFT
-      </Button> */}
+
        <Badge dot size="default">
-      <GradientButton id={0} BtnName={"  RFT/KFT"} width="150px" clickEvent={() => setOpen(true)} />
+      <GradientButton id={0} BtnName={"RFT/KFT"} width="150px" clickEvent={() => ClickEvent()} />
         
        </Badge>
       <Modal
@@ -67,11 +108,11 @@ const RFTDialog = (props:any) => {
            // labelCol={{ span: 4 }}
            // wrapperCol={{ span: 14 }}
             layout="horizontal"
-            initialValues={{ remember: true }}
+           
           >
             <Row gutter={16}>
               <Col span={15}>
-                <Form.Item name="RFT/KFT" label="RFT/KFT" style={{marginBottom: '7px'}}>
+                <Form.Item name="RFT_KFT" label="RFT/KFT" style={{marginBottom: '7px'}}>
                   <Select>
                     <Option value="option1">Option 1</Option>
                     <Option value="option2">Option 2</Option>
@@ -89,7 +130,7 @@ const RFTDialog = (props:any) => {
                 <Form.Item name="S_Uric_Acid" label="Uric Acid" style={{marginBottom: '7px'}}>
                 <Space><Input /><span>mg/dl</span></Space>
                 </Form.Item>
-                <Form.Item name="Serum_Protein" label="Serum Protein" style={{marginBottom: '7px'}}>
+                <Form.Item name="SerumProtein" label="Serum Protein" style={{marginBottom: '7px'}}>
                 <Space><Input /><span>mg/dl</span></Space>
                 </Form.Item>
                 <Form.Item name="Albumin" label="Albumin" style={{marginBottom: '7px'}}>
