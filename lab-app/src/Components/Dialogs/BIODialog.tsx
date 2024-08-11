@@ -77,9 +77,9 @@ const InitialValue: IBio = {
 
 
 const { Option } = Select;
-const BIOModal = ({ id }: Idailog) => {
+const BIOModal = ({ id, Success, Error }: Idailog) => {
   const [open, setOpen] = useState(false);
-  const valueBIO = useSelector(valueOfBIO(id)) ||InitialValue ;
+  const valueBIO = useSelector(valueOfBIO(id)) || InitialValue;
   const [form] = Form.useForm();
   const [formData, setFormData] = useState<IEnterForm>();
   const [Bio, setBio] = useState<IBio | null>(null);
@@ -125,13 +125,13 @@ const BIOModal = ({ id }: Idailog) => {
     setOpen(true);
     // console.log(valueCBC);
     // if(valueCBC &&  Object.entries(valueCBC).length !== 0){
-      console.log('check',valueBIO ,  Object.entries(valueBIO!).length !== 0);
-    if(valueBIO &&  Object.entries(valueBIO).length !== 0){
-      const {PrintAll,Print,Comments,...BIOValues}=valueBIO
+    console.log('check', valueBIO, Object.entries(valueBIO!).length !== 0);
+    if (valueBIO && Object.entries(valueBIO).length !== 0) {
+      const { PrintAll, Print, Comments, ...BIOValues } = valueBIO
       //form.setFieldsValue({ ...InitialValue })
       form.setFieldsValue({ ...valueBIO })
 
-    }else{
+    } else {
       form.setFieldsValue({ ...InitialValue })
 
     }
@@ -157,6 +157,8 @@ const BIOModal = ({ id }: Idailog) => {
     values.PrintAll = PRINT === "PRINT-ALL";
     values.Print = PRINT !== "PRINT-ALL"
     dispatch(updateBIO({ id, data: values }));
+    Success('topRight', `Test Result is Saved Now`)
+    setOpen(false);
     if (Bio) {
       // patientData.id = id;
       // patientData.BIO = Bio;
@@ -167,8 +169,8 @@ const BIOModal = ({ id }: Idailog) => {
   };
   return (
     <>
-      <Badge dot color={(valueBIO && Object.entries(valueBIO).length !== 0)?'green':'red'} size="default">
-        <GradientButton id={0} BtnName={" BIO TEST "} disabled={id===0} width="150px" clickEvent={() => clickEvent()} />
+      <Badge dot color={(valueBIO && Object.entries(valueBIO).length !== 0) ? 'green' : 'red'} size="default">
+        <GradientButton id={0} BtnName={" BIO TEST "} disabled={id === 0} width="150px" clickEvent={() => clickEvent()} />
       </Badge>
       <Modal
         title="BIO TEST"
@@ -234,7 +236,7 @@ const BIOModal = ({ id }: Idailog) => {
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="BUN" label="BUN" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
@@ -247,62 +249,62 @@ const BIOModal = ({ id }: Idailog) => {
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="SerumProtein" label="Serum Protein" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="Albumin" label="Albumin" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="Globulin" label="Globulin" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="AGratio" label="A:G Ratio" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="TotalBilirubin" label="Total Bilirubin" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
                 </Form.Item>
 
                 <Form.Item name="ConjBilirubin" label="Conj Bilirubin" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="UnConjBilirubin" label="UnConj Bilirubin" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="SGOT_AST" label="SGOT (AST)" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`U/L`} />
+                  <FormInputMeasurement units={`U/L`} />
                   {/* <Space>
                     <Input /><span>U/L</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="SGPT_AST" label="SGPT (AST)" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`U/L`} />
+                  <FormInputMeasurement units={`U/L`} />
                   {/* <Space>
                     <Input /><span>U/L</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="AlkPhosphatase" label="Alk. Phosphatase" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`U/L`} />
+                  <FormInputMeasurement units={`U/L`} />
                   {/* <Space>
                     <Input /><span>U/L</span>
                   </Space> */}
@@ -347,79 +349,79 @@ const BIOModal = ({ id }: Idailog) => {
                 {/* <div ><p>CHEMICAL EXAMINATION</p></div> */}
                 {/* <div ><p>MACROSCOPIC EXAMINATION</p></div> */}
                 <Form.Item name="SCholestrol" label="S. Cholestrol" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="SHDLCholestrol" label="S. HDL Cholestrol" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="STriglycerides" label="S. Triglycerides" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="SldlChelestrol" label="S ldl Chelestrol" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="S_VLDLCholeastrol" label="S. VLDL Choleastrol" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="SerumTotalLipids" label="Serum Total Lipids" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="TotalHDLCholestrol" label="Total HDL Cholestrol" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="SAcidPhosphastase" label="SAcidPhosphastase" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="ProstaticFraction" label="Prostatic Fraction" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="SerumAmylase" label="Serum Amylase" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="GGT" label="GTT" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="CK" label="CK" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="CPK_MB" label="CPK_MB" style={{ marginBottom: '7px' }}>
-                   <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
@@ -431,13 +433,13 @@ const BIOModal = ({ id }: Idailog) => {
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="LDH" label="LDH" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="G6PD" label="G6PD" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mg/dl`} />
+                  <FormInputMeasurement units={`mg/dl`} />
                   {/* <Space>
                     <Input /><span>mg/dl</span>
                   </Space> */}
@@ -511,55 +513,55 @@ const BIOModal = ({ id }: Idailog) => {
               </Col>
               <Col span={8} >
                 <Form.Item name="SSodium" label="S. Sodium" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mEq/dl`} />
+                  <FormInputMeasurement units={`mEq/dl`} />
                   {/* <Space>
                     <Input /><span>mEq/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="Potassium" label="Potassium" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mEq/dl`} />
+                  <FormInputMeasurement units={`mEq/dl`} />
                   {/* <Space>
                     <Input /><span>mEq/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="Chloride" label="Chloride" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mEq/dl`} />
+                  <FormInputMeasurement units={`mEq/dl`} />
                   {/* <Space>
                     <Input /><span>mEq/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="S_CalCium" label="S.CalCium" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mEq/dl`} />
+                  <FormInputMeasurement units={`mEq/dl`} />
                   {/* <Space>
                     <Input /><span>mEq/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="S_Phosphorus" label="S.Phosphorus" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mEq/dl`} />
+                  <FormInputMeasurement units={`mEq/dl`} />
                   {/* <Space>
                     <Input /><span>mEq/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="SCopper" label="S.Copper" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mEq/dl`} />
+                  <FormInputMeasurement units={`mEq/dl`} />
                   {/* <Space>
                     <Input /><span>mEq/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="SBicarbonate" label="S.Bicarbonate" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mEq/dl`} /> 
+                  <FormInputMeasurement units={`mEq/dl`} />
                   {/* <Space>
                     <Input /><span>mEq/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="Lipase" label="Lipase" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mEq/dl`} />
+                  <FormInputMeasurement units={`mEq/dl`} />
                   {/* <Space>
                     <Input /><span>mEq/dl</span>
                   </Space> */}
                 </Form.Item>
                 <Form.Item name="GCT" label="GCT" style={{ marginBottom: '7px' }}>
-                <FormInputMeasurement units={`mEq/dl`} />
+                  <FormInputMeasurement units={`mEq/dl`} />
                   {/* <Space>
                     <Input /><span>mEq/dl</span>
                   </Space> */}
@@ -567,31 +569,21 @@ const BIOModal = ({ id }: Idailog) => {
               </Col>
 
             </Row>
-            <Form.Item style={{ marginBottom: '4px' }}>
-              <div style={{ display: "flex", justifyContent: 'end', alignItems: "end", gap: '2px' }}>
-                <Button type="dashed">Cancel</Button>
-                <Button type="primary" htmlType="submit">
-                  Submit
-                </Button>
-              </div>
-            </Form.Item>
+            <Row gutter={24}>
+              <Col span={16}></Col>
+              <Col span={8}>
+                <Form.Item style={{ marginBottom: '4px' }}>
+                  <div style={{ display: "flex", justifyContent: 'end', alignItems: "end", gap: '2px' }}>
+                    <Button type="dashed" onClick={() => { setOpen(false) }}>Cancel</Button>
+                    <Button type="primary" htmlType="submit">
+                      Submit
+                    </Button>
+                  </div>
+                </Form.Item>
+              </Col>
+            </Row>
           </Form>
 
-          {/* Display the form data in a grid form */}
-          {formData && (
-            <div>
-              <h2>Form Data</h2>
-              <Row gutter={16}>
-                {Object.entries(formData).map(([key, value]) => (
-                  <Col span={8} key={key}>
-                    <p>
-                      {/* <strong>{key}:</strong>{formData.} */}
-                    </p>
-                  </Col>
-                ))}
-              </Row>
-            </div>
-          )}
         </div>
       </Modal>
     </>

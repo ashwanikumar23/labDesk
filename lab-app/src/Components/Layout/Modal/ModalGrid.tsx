@@ -58,8 +58,10 @@ interface IModal{
   disabled?:boolean,
   saveData?:any,
   InitialData: IEnterForm,
+  Success:any;
+    Error:any
 }
-function ModalGrid({id,disabled,saveData,InitialData}:IModal) {
+function ModalGrid({id,disabled,saveData,InitialData,Success,Error}:IModal) {
 
   const [Patient, setPatient] = React.useState<any>({});
   const [Name , setName ] = React.useState('');
@@ -254,11 +256,11 @@ function DrugsTestClick(IRONData:any){
 
     <div style={{display:"flex", justifyContent:"center", gap:"4px"}}>
       <div style={{ alignItems:"center"}}>
-      <HAEMATOLOGYDialog id={id} disabled={true} patientData={InitialData} saveDataEvent={saveData} />
+      <HAEMATOLOGYDialog id={id} disabled={true} patientData={InitialData} saveDataEvent={saveData} Success={Success} Error={Error} />
       
       </div>
       <div style={{ alignItems:"center"}}>
-      <BIOModal id={id} disabled={true} patientData={InitialData} saveDataEvent={saveData}  />      
+      <BIOModal id={id} disabled={true} patientData={InitialData} saveDataEvent={saveData} Success={Success} Error={Error}  />      
         
       </div>
     </div>
@@ -284,11 +286,11 @@ function DrugsTestClick(IRONData:any){
     </div> */}
     <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
       <div style={{ alignItems:"center"}}>
-      <LFTDialog id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData} />
+      <LFTDialog id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData} Success={Success} Error={Error} />
       
       </div>
       <div style={{ alignItems:"center"}}>
-      <RFTDialog  id={id} />   
+      <RFTDialog  id={id} Success={Success} Error={Error} />   
         
       </div>
     </div>
@@ -304,11 +306,11 @@ function DrugsTestClick(IRONData:any){
     </div> */}
     <div style={{display:"flex", justifyContent:"center", gap:"4px", margin:"5px 0px"}}>
       <div style={{ alignItems:"center"}}>
-      <WIDALDialog id={id} />
+      <WIDALDialog id={id} Success={Success} Error={Error} />
       
       </div>
       <div style={{ alignItems:"center"}}>
-      <CBCDialog id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData} />
+      <CBCDialog id={id} disabled={disabled} patientData={InitialData} saveDataEvent={saveData} Success={Success} Error={Error} />
         
       </div>
     </div>

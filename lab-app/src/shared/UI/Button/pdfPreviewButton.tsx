@@ -75,7 +75,7 @@ const handlePrint = useReactToPrint({
         onCancel={handleCancel}
         width={1000}
         footer={[
-          <CloseButton  id={0} BtnName={"back"} clickEvent={handleCancel} />,
+          <CloseButton  id={0} BtnName={"Cancel"} clickEvent={handleCancel} />,
           <GradientButton  id={0} BtnName={"Print"} clickEvent={handlePrint} />,
           <GradientButton  id={0} BtnName={" Download"} clickEvent={handlePrint} />,
           // <Button key="download" type="primary" >

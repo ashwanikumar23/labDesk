@@ -27,7 +27,7 @@ import { FormInputMeasurement } from "../../shared/UI/customComponents/inputMeas
 
 const { Option } = Select;
 const initialValue: ILFT = {
-    TotalBilirubin: "8",
+    TotalBilirubin: "",
     ConjBilirubin: "",
     UnConjBilirubin: "",
     SGOT: "",
@@ -40,15 +40,16 @@ const initialValue: ILFT = {
     HbsAg: ""
 }
 
-const LFTDialog = ({ id }: Idailog) => {
+const LFTDialog = ({ id,Success,Error }: Idailog) => {
     const [open, setOpen] = useState(false);
     let valueLFT = useSelector(valueOfLFT(id));
     const [form] = Form.useForm();
     const [formData, setFormData] = useState<IEnterForm>();
     const [LFTData, setLFTData] = useState<ILFT | null>(null);
-    const saveddata = useSelector(PaitentValue(id));
     const dispatch: AppDispatch = useDispatch();
     const [value, setValue] = useState(1);
+    const saveddata = useSelector(PaitentValue(id));
+    const [showColor, setShowColor] = useState("red");
     const [PRINT, setPRINT] = useState('PRINT-ALL');
 
     useEffect(() => {
@@ -59,6 +60,16 @@ const LFTDialog = ({ id }: Idailog) => {
         }
     }, [saveddata]);
 
+    useEffect(() => {
+        if (valueLFT && Object.entries(valueLFT).length !== 0) {
+            setShowColor("green");
+        } else {
+            setShowColor("Red");
+        }
+
+    }, [saveddata]);
+
+
     const onFinish = (values: ILFT) => {
         console.log("Form values:", values);
         setLFTData(values);
@@ -66,6 +77,7 @@ const LFTDialog = ({ id }: Idailog) => {
         values.PrintAll = true;
         values.Comments = false;
         dispatch(updateLFT({ id, data: values }));
+        Success('topRight',`Test Result is Saved Now`)
         setOpen(false);
     };
 
@@ -89,8 +101,8 @@ const LFTDialog = ({ id }: Idailog) => {
     }
     return (
         <>
-            <Badge dot size="default">
-                <GradientButton id={0} BtnName={"LFT"} width="150px" clickEvent={() => clickEvent()} />
+            <Badge dot color={showColor} size="default">
+                <GradientButton id={0} BtnName={"LFT"} width="150px" disabled={id === 0} clickEvent={() => clickEvent()} />
 
             </Badge>
             <Modal

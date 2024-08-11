@@ -5,5 +5,7 @@ export default interface Idailog{
     disabled?:boolean,
     patientData?:IEnterForm,
     saveDataEvent?:any
+    Success:any;
+    Error:any;
   }
   

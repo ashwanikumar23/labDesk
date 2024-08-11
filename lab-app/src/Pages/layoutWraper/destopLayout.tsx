@@ -48,6 +48,7 @@ interface ILayout {
 const resposiveHeight = '100vh';
 
 export default function DesktopLayout(props: any) {
+    const {Success,Error}=props;
     console.warn("store->", props);
     const { InitialData, clickLogin } = props
     const [id, setId] = useState(0);
@@ -114,6 +115,8 @@ export default function DesktopLayout(props: any) {
         console.log(id);
         dispatch(addNewID(id));
         setDisabled(false);
+        Success('topRight',`Now you can add New Paitent`)
+        
     }
     const newid = useSelector((state: RootState) => state.newId);
     const oldid = useSelector((state: RootState) => state.seletedId);
@@ -131,7 +134,7 @@ export default function DesktopLayout(props: any) {
                 <div className="demo-logo-vertical" />
                 <div style={{ textAlign: "center", color: "#222b53", height: "50px", width: "100%", fontWeight: "600", padding: "10px 0px " }}><strong>LAB DESK</strong></div>
                 {/* Add Manu */}
-                <PatientList />
+                <PatientList Success={Success} Error={Error} />
                 <Divider style={{ margin: "5px 0px", padding: "0px 0px" }} />
                 <RightSideCard />
                 <div style={{ display: 'flex', justifyContent: 'center', justifyItems: 'center', alignItems: 'center', width: '100%',position:'sticky',bottom:0 }}>
@@ -143,10 +146,10 @@ export default function DesktopLayout(props: any) {
             <Layout style={{ backgroundColor: '#f1f1fa' }}>
                 <div style={{ display: "flex", height: "100vh" }}>
                     <div style={{ width: "70%" }}>
-                        <EnterForm id={ID} createId={createID} />
+                        <EnterForm id={ID} createId={createID} Success={Success} Error={Error} />
                     </div>
                     <div style={{ width: "30%" }}>
-                        <SideCard id={ID} disabled={disabled} InitialData={InitialData} />
+                        <SideCard id={ID} disabled={disabled} InitialData={InitialData} Success={Success} Error={Error} />
                     </div>
 
                 </div>

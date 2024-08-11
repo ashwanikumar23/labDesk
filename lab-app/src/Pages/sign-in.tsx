@@ -33,27 +33,37 @@ const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
 };
 
 interface ISignin {
-    clickLogin: any
+    clickLogin: any;
+    Success:any;
+    Error:any
+
 }
-export default function SignIn({ clickLogin }: ISignin) {
+export default function SignIn({Success,Error,clickLogin}: ISignin) {
+  
     const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
     const username = useSelector((state: RootState) => state.auth.username);
     const dispatch: AppDispatch = useDispatch();
 
 
     const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-        let username = values.username;
-        const AccessToken = values.AccessToken;
-        if(username && AccessToken && userValidation(username,AccessToken) ){
-            clickLogin(true);
-            const token = generateToken();
-            const expireTime = new Date(new Date().getTime() + 5 * 60 * 60 * 1000); // Token expires in 5 hour
-    
-            Cookies.set('authToken', token + " " + username, { expires: expireTime });
-    
-            dispatch(login(username));
-            dispatch(setLabNoAndAddress({labNo:"02",Address:"address is here ",email:'deskLab@gmail.com',phone:'7973279121'}))
-           
+        let username = values.username || '';
+        const AccessToken = values.AccessToken ||"gfgf";
+        if(!userValidation(username,AccessToken)){
+            Error('topRight',`Invalid username and access token`)
+        }else{
+            if(username && AccessToken && userValidation(username,AccessToken) ){
+                clickLogin(true);
+                const token = generateToken();
+                const expireTime = new Date(new Date().getTime() + 5 * 60 * 60 * 1000); // Token expires in 5 hour
+        
+                Cookies.set('authToken', token + " " + username, { expires: expireTime });
+        
+                dispatch(login(username));
+                dispatch(setLabNoAndAddress({labNo:"02",Address:"address is here ",email:'deskLab@gmail.com',phone:'7973279121'}))
+                Success('topRight',`${username} is Login Now`)
+               
+            }
+
         }
 
 

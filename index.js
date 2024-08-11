@@ -7,8 +7,15 @@ const createWindow = () => {
     autoHideMenuBar: true,      // Hide the menu bar
     width: 1280,
     height: 860,
+    // icon: path.join(__dirname, 'icon.ico'), // Set the window icon
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: true
+    }
   });
 
+  // win.webContents.openDevTools();
   win.loadFile('./lab-app/build/index.html');
   win.loadFile(path.join(__dirname, 'lab-app', 'build', 'index.html'));
 

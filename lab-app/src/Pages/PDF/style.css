@@ -6,6 +6,7 @@
   @page {
     size: auto;
     margin: 10mm;
+    font-size: small;
   }
 
 
@@ -14,6 +15,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: white;
+    font-size:'11px';
 }
 
 .header-container {

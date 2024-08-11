@@ -16,10 +16,12 @@ interface IEnterFormProps {
     createId?: any,
     saveData?: any,
     initalData?: IEnterForm[],
+    Success:any;
+    Error:any
 
 }
 const { Search } = Input;
-const EnterForm = ({ id, createId, saveData, initalData }: IEnterFormProps) => {
+const EnterForm = ({ id, createId, Success, Error }: IEnterFormProps) => {
     const dispatch: AppDispatch = useDispatch();
     const [disabled, setDisabled] = useState(true);
     const [formData, setFormData] = useState<IEnterForm>();
@@ -44,6 +46,7 @@ const EnterForm = ({ id, createId, saveData, initalData }: IEnterFormProps) => {
         setFormData(newFormData);
         console.log('hit');
         dispatch(addData(newFormData));
+        Success('topRight',`Paitent is saved Now`)
         // saveData(newFormData);
     };
     const onSearch: SearchProps['onSearch'] = (value, _e, info) => console.log(info?.source, value);
@@ -223,11 +226,12 @@ const EnterForm = ({ id, createId, saveData, initalData }: IEnterFormProps) => {
                         name="Reference"
                         rules={[{ required: true, message: 'Please input the address!' }]}
                     >
-                        <Select>
+                         <Input />
+                        {/* <Select>
                             <Option value="Ram">DR Ram</Option>
                             <Option value="Krishan">DR Krishan</Option>
 
-                        </Select>
+                        </Select> */}
                     </Form.Item>
                     <Form.Item
                         style={{ width: "50%", padding: "0px 2px" }}
@@ -235,11 +239,12 @@ const EnterForm = ({ id, createId, saveData, initalData }: IEnterFormProps) => {
                         name="materials"
                         rules={[{ required: true, message: 'Please input the mobile number!' }]}
                     >
-                        <Select>
+                         <Input />
+                        {/* <Select>
                             <Option value="Blood">Blood</Option>
                             <Option value="Blood1">Blood1</Option>
 
-                        </Select>
+                        </Select> */}
                     </Form.Item>
                 </div>
 

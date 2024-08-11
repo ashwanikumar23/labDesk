@@ -11,9 +11,11 @@ import { removeId } from '../../shared/Store/newIdSlice';
 const count = 3;
 
 interface IPatient{
-  patient:IEnterForm[];
+  // patient:IEnterForm[];
+  Success:any;
+    Error:any
 }
-export default function PatientList() {
+export default function PatientList({Success,Error}:IPatient) {
   const ListOfPatient = useSelector((state: RootState) => state.data);
   console.warn("ListOfPatient",ListOfPatient);
   const dispatch: AppDispatch = useDispatch();
@@ -60,6 +62,7 @@ export default function PatientList() {
     console.warn(id);
     dispatch(removeId());
     dispatch(SelectID(id));
+    Success('topRight',`Paitent is selected For Edit`)
 
     
   }

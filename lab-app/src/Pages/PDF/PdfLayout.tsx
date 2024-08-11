@@ -75,8 +75,12 @@ export const MyComponent = React.forwardRef((props: any, ref: any) => {
           </div>
           <div style={{ width: '33%', padding: '2px 5px' }}>
             <div>Registered on: {Paitient?.DATE}</div>
-            <div>Collected on:{Paitient?.DATE}, {Paitient?.time}</div>
-            <div>Reported on: {Paitient?.ReciveData}, {Paitient?.Receivtime}</div>
+            <div>Collected on:{Paitient?.DATE},
+               {/* {Paitient?.time} */}
+               </div>
+            <div>Reported on: {Paitient?.ReciveData},
+               {/* {Paitient?.Receivtime} */}
+               </div>
           </div>
 
         </div>
